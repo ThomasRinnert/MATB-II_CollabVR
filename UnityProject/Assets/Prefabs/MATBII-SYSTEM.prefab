@@ -1,0 +1,598 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1586193292413869110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1586193292413869105}
+  - component: {fileID: 1586193292413869106}
+  - component: {fileID: 1586193292413869104}
+  - component: {fileID: 1764619956870573993}
+  - component: {fileID: 5840502977521918823}
+  m_Layer: 0
+  m_Name: MATBII-SYSTEM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1586193292413869105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586193292413869110}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1586193292413869106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586193292413869110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 1586193292413869104}
+  sceneViewId: 450
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &1586193292413869104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586193292413869110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832602a56f73840449bbd9efc016d561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SYSMON_timeLimit: 20
+  COMM_timeLimit: 40
+  COMM_transmissions:
+  - name: OTHER_COM1_118-325
+    isNASA504: 0
+    radio: 2
+    frequency: 118.325
+    clip: {fileID: 8300000, guid: 72ab3ba9310bdfa46915d95cf2ca1a2d, type: 3}
+  - name: OTHER_COM1_120-825
+    isNASA504: 0
+    radio: 2
+    frequency: 120.825
+    clip: {fileID: 8300000, guid: 9e233064e56d63c4ba102be3aa9de0f9, type: 3}
+  - name: OTHER_COM1_124-350
+    isNASA504: 0
+    radio: 2
+    frequency: 124.35
+    clip: {fileID: 8300000, guid: f3d06a5a1fc8dac4398a7b0fe99deeb6, type: 3}
+  - name: OTHER_COM1_126-175
+    isNASA504: 0
+    radio: 2
+    frequency: 126.175
+    clip: {fileID: 8300000, guid: 70d748c5eec71d64b8c55cb4deb2349d, type: 3}
+  - name: OTHER_COM1_127-725
+    isNASA504: 0
+    radio: 2
+    frequency: 127.725
+    clip: {fileID: 8300000, guid: 4a446962cc4f86446beb808d7e82162e, type: 3}
+  - name: OTHER_COM1_128-525
+    isNASA504: 0
+    radio: 2
+    frequency: 128.525
+    clip: {fileID: 8300000, guid: dcb067bfa40c77143b1e5a5b4a534f3f, type: 3}
+  - name: OTHER_COM1_130-875
+    isNASA504: 0
+    radio: 2
+    frequency: 130.875
+    clip: {fileID: 8300000, guid: 8cf92d6790c8ac944a33be262a7a1dfc, type: 3}
+  - name: OTHER_COM1_132-950
+    isNASA504: 0
+    radio: 2
+    frequency: 132.95
+    clip: {fileID: 8300000, guid: 74391d237af01314ea5e7714c0be13ce, type: 3}
+  - name: OTHER_COM1_134-175
+    isNASA504: 0
+    radio: 2
+    frequency: 134.175
+    clip: {fileID: 8300000, guid: 2336b793fe3f3f640bdc409ed81ce88e, type: 3}
+  - name: OTHER_COM1_135-225
+    isNASA504: 0
+    radio: 2
+    frequency: 135.225
+    clip: {fileID: 8300000, guid: 0bdaa4bdb89d39d4a8e21cdd664a19e6, type: 3}
+  - name: OTHER_COM2_118-275
+    isNASA504: 0
+    radio: 3
+    frequency: 118.275
+    clip: {fileID: 8300000, guid: 392e23b754f5d6b4e83b782692277f25, type: 3}
+  - name: OTHER_COM2_120-775
+    isNASA504: 0
+    radio: 3
+    frequency: 120.775
+    clip: {fileID: 8300000, guid: 857b659c610e04045a9bc90940567da2, type: 3}
+  - name: OTHER_COM2_124-500
+    isNASA504: 0
+    radio: 3
+    frequency: 124.5
+    clip: {fileID: 8300000, guid: b80355a77a4da774aa6a98a65ea3d2de, type: 3}
+  - name: OTHER_COM2_126-025
+    isNASA504: 0
+    radio: 3
+    frequency: 126.025
+    clip: {fileID: 8300000, guid: 37aa7505dd4e35341a123f891834fb72, type: 3}
+  - name: OTHER_COM2_127-675
+    isNASA504: 0
+    radio: 3
+    frequency: 127.675
+    clip: {fileID: 8300000, guid: bd34e1d5c467ddb4687bc231cb7bbb7b, type: 3}
+  - name: OTHER_COM2_128-475
+    isNASA504: 0
+    radio: 3
+    frequency: 128.475
+    clip: {fileID: 8300000, guid: 127e78d4aad3c8b4ba2ccace129be479, type: 3}
+  - name: OTHER_COM2_130-725
+    isNASA504: 0
+    radio: 3
+    frequency: 130.725
+    clip: {fileID: 8300000, guid: c8ecc340422337742a82dec15481dd07, type: 3}
+  - name: OTHER_COM2_132-800
+    isNASA504: 0
+    radio: 3
+    frequency: 132.8
+    clip: {fileID: 8300000, guid: e4ae31b732751844a93d73fb4d3d219c, type: 3}
+  - name: OTHER_COM2_134-025
+    isNASA504: 0
+    radio: 3
+    frequency: 134.025
+    clip: {fileID: 8300000, guid: 631b78ee518b18649b0123f75ef2f9e5, type: 3}
+  - name: OTHER_COM2_135-175
+    isNASA504: 0
+    radio: 3
+    frequency: 135.175
+    clip: {fileID: 8300000, guid: 297aea129dad15943b55ffeb11eeb2d0, type: 3}
+  - name: OTHER_NAV1_108-350
+    isNASA504: 0
+    radio: 0
+    frequency: 108.35
+    clip: {fileID: 8300000, guid: 077e25094459cbb4e8f8d17affe13b84, type: 3}
+  - name: OTHER_NAV1_109-250
+    isNASA504: 0
+    radio: 0
+    frequency: 109.25
+    clip: {fileID: 8300000, guid: 6322f106dad6a2c45a5e2e46cf2f0917, type: 3}
+  - name: OTHER_NAV1_110-400
+    isNASA504: 0
+    radio: 0
+    frequency: 110.4
+    clip: {fileID: 8300000, guid: 899a32421aeed2f459b5637d114b6236, type: 3}
+  - name: OTHER_NAV1_111-950
+    isNASA504: 0
+    radio: 0
+    frequency: 111.95
+    clip: {fileID: 8300000, guid: f188af16baf476e49a0542d0b1048034, type: 3}
+  - name: OTHER_NAV1_112-150
+    isNASA504: 0
+    radio: 0
+    frequency: 112.15
+    clip: {fileID: 8300000, guid: 3f58be876026c224c864d41d09a4a902, type: 3}
+  - name: OTHER_NAV1_113-000
+    isNASA504: 0
+    radio: 0
+    frequency: 113
+    clip: {fileID: 8300000, guid: 4972ffce15dc4084f951592fdc9d9c0a, type: 3}
+  - name: OTHER_NAV1_114-500
+    isNASA504: 0
+    radio: 0
+    frequency: 114.5
+    clip: {fileID: 8300000, guid: 7431eb73f5c3fb04ab865c4b37b05bf3, type: 3}
+  - name: OTHER_NAV1_115-750
+    isNASA504: 0
+    radio: 0
+    frequency: 115.75
+    clip: {fileID: 8300000, guid: 3214f4bea55ade440bb83b657ef24d84, type: 3}
+  - name: OTHER_NAV1_116-450
+    isNASA504: 0
+    radio: 0
+    frequency: 116.45
+    clip: {fileID: 8300000, guid: 828a8e80c6f87d04f967616150f35199, type: 3}
+  - name: OTHER_NAV1_117-650
+    isNASA504: 0
+    radio: 0
+    frequency: 117.65
+    clip: {fileID: 8300000, guid: 41a2aaf98aec55545be25b0da6b6f2ab, type: 3}
+  - name: OTHER_NAV2_108-750
+    isNASA504: 0
+    radio: 1
+    frequency: 108.75
+    clip: {fileID: 8300000, guid: b31e916e4e4168447b257d13e1512e08, type: 3}
+  - name: OTHER_NAV2_109-650
+    isNASA504: 0
+    radio: 1
+    frequency: 109.65
+    clip: {fileID: 8300000, guid: f57340fc475001e468158865741eee8d, type: 3}
+  - name: OTHER_NAV2_110-800
+    isNASA504: 0
+    radio: 1
+    frequency: 110.8
+    clip: {fileID: 8300000, guid: 626f71f3593ded64d8bbc861f5854c52, type: 3}
+  - name: OTHER_NAV2_111-350
+    isNASA504: 0
+    radio: 1
+    frequency: 111.35
+    clip: {fileID: 8300000, guid: 4237d849068e51c4aaaff4a33e245396, type: 3}
+  - name: OTHER_NAV2_112-550
+    isNASA504: 0
+    radio: 1
+    frequency: 112.55
+    clip: {fileID: 8300000, guid: d165f97527ebfe14682c7f03a7edb553, type: 3}
+  - name: OTHER_NAV2_113-400
+    isNASA504: 0
+    radio: 1
+    frequency: 113.4
+    clip: {fileID: 8300000, guid: 1b0a1f487f605b944a4f83cebe9e1c97, type: 3}
+  - name: OTHER_NAV2_114-900
+    isNASA504: 0
+    radio: 1
+    frequency: 114.9
+    clip: {fileID: 8300000, guid: b117e57e3ea6a8542bcc1a24bb1edc39, type: 3}
+  - name: OTHER_NAV2_115-050
+    isNASA504: 0
+    radio: 1
+    frequency: 115.05
+    clip: {fileID: 8300000, guid: fd12a9a1fd247eb4fa125768d7e39f21, type: 3}
+  - name: OTHER_NAV2_116-850
+    isNASA504: 0
+    radio: 1
+    frequency: 116.85
+    clip: {fileID: 8300000, guid: 87cdef9e9305178458eb3f0ccb672b6e, type: 3}
+  - name: OTHER_NAV2_117-950
+    isNASA504: 0
+    radio: 1
+    frequency: 117.95
+    clip: {fileID: 8300000, guid: fd7e4761587a2134286ca97bf673e5da, type: 3}
+  - name: OWN_COM1_124-575
+    isNASA504: 1
+    radio: 2
+    frequency: 124.575
+    clip: {fileID: 8300000, guid: fcb47ad24c8337d4eb6facc04496a462, type: 3}
+  - name: OWN_COM1_125-500
+    isNASA504: 1
+    radio: 2
+    frequency: 125.5
+    clip: {fileID: 8300000, guid: 84b627c6bbf03af4da2d011cd6f25f3b, type: 3}
+  - name: OWN_COM1_125-550
+    isNASA504: 1
+    radio: 2
+    frequency: 125.55
+    clip: {fileID: 8300000, guid: 992a9fa666d3c3947adbf7135b6057fd, type: 3}
+  - name: OWN_COM1_126-450
+    isNASA504: 1
+    radio: 2
+    frequency: 126.45
+    clip: {fileID: 8300000, guid: be03f14d2c3144347a3282b0a416ac4d, type: 3}
+  - name: OWN_COM1_126-525
+    isNASA504: 1
+    radio: 2
+    frequency: 126.525
+    clip: {fileID: 8300000, guid: f2cd57ba7b2d16144be140b1503b061c, type: 3}
+  - name: OWN_COM1_127-500
+    isNASA504: 1
+    radio: 2
+    frequency: 127.5
+    clip: {fileID: 8300000, guid: 2d374b2ae6178a9438ffe8cadc3fa449, type: 3}
+  - name: OWN_COM1_127-550
+    isNASA504: 1
+    radio: 2
+    frequency: 127.55
+    clip: {fileID: 8300000, guid: 87845533fd285df479e44cd83ffd3d4e, type: 3}
+  - name: OWN_COM1_128-475
+    isNASA504: 1
+    radio: 2
+    frequency: 128.475
+    clip: {fileID: 8300000, guid: 531a76e0a9bdb044186d9718d08eb2ce, type: 3}
+  - name: OWN_COM1_128-575
+    isNASA504: 1
+    radio: 2
+    frequency: 128.575
+    clip: {fileID: 8300000, guid: 36ec1c093db8c6a41b66a2006cff7c72, type: 3}
+  - name: OWN_COM1_129-450
+    isNASA504: 1
+    radio: 2
+    frequency: 129.45
+    clip: {fileID: 8300000, guid: 228af9ae3a6549e4389ac68850170895, type: 3}
+  - name: OWN_COM2_124-450
+    isNASA504: 1
+    radio: 3
+    frequency: 124.45
+    clip: {fileID: 8300000, guid: 9742c97ff1349bd4db72a62d62a134a7, type: 3}
+  - name: OWN_COM2_125-500
+    isNASA504: 1
+    radio: 3
+    frequency: 125.5
+    clip: {fileID: 8300000, guid: 7cc29e43ea5bbb84c8c961ab05e02245, type: 3}
+  - name: OWN_COM2_125-575
+    isNASA504: 1
+    radio: 3
+    frequency: 125.575
+    clip: {fileID: 8300000, guid: a35dba91f58fb4d42a72412932c87236, type: 3}
+  - name: OWN_COM2_126-475
+    isNASA504: 1
+    radio: 3
+    frequency: 126.475
+    clip: {fileID: 8300000, guid: 2aed51742dd8fca438ded1e1c770b2c0, type: 3}
+  - name: OWN_COM2_126-550
+    isNASA504: 1
+    radio: 3
+    frequency: 126.55
+    clip: {fileID: 8300000, guid: 3440c7e3ab9069c46b82efd5f7e0d1ac, type: 3}
+  - name: OWN_COM2_127-500
+    isNASA504: 1
+    radio: 3
+    frequency: 127.5
+    clip: {fileID: 8300000, guid: 774fcf5362e87a84abdec444f8c80931, type: 3}
+  - name: OWN_COM2_127-525
+    isNASA504: 1
+    radio: 3
+    frequency: 127.525
+    clip: {fileID: 8300000, guid: 895e39477a35b2641be80c66dfce5c7e, type: 3}
+  - name: OWN_COM2_128-525
+    isNASA504: 1
+    radio: 3
+    frequency: 128.525
+    clip: {fileID: 8300000, guid: d4b02d1f1da64f14182bf37bca0bfe7c, type: 3}
+  - name: OWN_COM2_128-550
+    isNASA504: 1
+    radio: 3
+    frequency: 128.55
+    clip: {fileID: 8300000, guid: 622ecc3ca4b51a24e803a68e7e124daf, type: 3}
+  - name: OWN_COM2_129-575
+    isNASA504: 1
+    radio: 3
+    frequency: 129.575
+    clip: {fileID: 8300000, guid: 3603528ebf3b80a4f87de147318744bb, type: 3}
+  - name: OWN_NAV1_110-650
+    isNASA504: 1
+    radio: 0
+    frequency: 110.65
+    clip: {fileID: 8300000, guid: 973b639887f230345a43f831656fe97a, type: 3}
+  - name: OWN_NAV1_111-500
+    isNASA504: 1
+    radio: 0
+    frequency: 111.5
+    clip: {fileID: 8300000, guid: 8a0cc28f2ec472b46a7985da69a0b056, type: 3}
+  - name: OWN_NAV1_111-600
+    isNASA504: 1
+    radio: 0
+    frequency: 111.6
+    clip: {fileID: 8300000, guid: 44c19ed0b17ce9c40b2b5452d37b2d11, type: 3}
+  - name: OWN_NAV1_112-450
+    isNASA504: 1
+    radio: 0
+    frequency: 112.45
+    clip: {fileID: 8300000, guid: e628d84fcb44a0d40a2e7ebd6fe33da3, type: 3}
+  - name: OWN_NAV1_112-550
+    isNASA504: 1
+    radio: 0
+    frequency: 112.55
+    clip: {fileID: 8300000, guid: 52cdc2a215570d143953e1d4e4a40025, type: 3}
+  - name: OWN_NAV1_113-500
+    isNASA504: 1
+    radio: 0
+    frequency: 113.5
+    clip: {fileID: 8300000, guid: e25f538cf182a794da719cd1f88445a1, type: 3}
+  - name: OWN_NAV1_113-600
+    isNASA504: 1
+    radio: 0
+    frequency: 113.6
+    clip: {fileID: 8300000, guid: 04a10fe0f0c3cbf4fa7daba4b4b9436f, type: 3}
+  - name: OWN_NAV1_114-450
+    isNASA504: 1
+    radio: 0
+    frequency: 114.45
+    clip: {fileID: 8300000, guid: 2fa790373a27fc2489e0aa4e285836b9, type: 3}
+  - name: OWN_NAV1_114-650
+    isNASA504: 1
+    radio: 0
+    frequency: 114.65
+    clip: {fileID: 8300000, guid: 8a1abd4ed4eeee54abb78603cd7d1d93, type: 3}
+  - name: OWN_NAV1_115-400
+    isNASA504: 1
+    radio: 0
+    frequency: 115.4
+    clip: {fileID: 8300000, guid: 123ca0cc88b8aab4a809560f600f6631, type: 3}
+  - name: OWN_NAV2_110-500
+    isNASA504: 1
+    radio: 1
+    frequency: 110.5
+    clip: {fileID: 8300000, guid: 1d830264b50775b4a82d156b7143dccf, type: 3}
+  - name: OWN_NAV2_111-400
+    isNASA504: 1
+    radio: 1
+    frequency: 111.4
+    clip: {fileID: 8300000, guid: 9828bdaf48997294396025d896311d00, type: 3}
+  - name: OWN_NAV2_111-650
+    isNASA504: 1
+    radio: 1
+    frequency: 111.65
+    clip: {fileID: 8300000, guid: d60fadf32efdc6d4e8302a567eb4a455, type: 3}
+  - name: OWN_NAV2_112-450
+    isNASA504: 1
+    radio: 1
+    frequency: 112.45
+    clip: {fileID: 8300000, guid: fe73b3f776d0ea34b9dfa188583e1c48, type: 3}
+  - name: OWN_NAV2_112-600
+    isNASA504: 1
+    radio: 1
+    frequency: 112.6
+    clip: {fileID: 8300000, guid: 5a708752f43b5bb4d93daa1cdcdb29a3, type: 3}
+  - name: OWN_NAV2_113-500
+    isNASA504: 1
+    radio: 1
+    frequency: 113.5
+    clip: {fileID: 8300000, guid: 385deafd5b1bc734896ac8c89b85827d, type: 3}
+  - name: OWN_NAV2_113-550
+    isNASA504: 1
+    radio: 1
+    frequency: 113.55
+    clip: {fileID: 8300000, guid: 37fb63cf2f2cbbf4595f0887b03077b9, type: 3}
+  - name: OWN_NAV2_114-450
+    isNASA504: 1
+    radio: 1
+    frequency: 114.45
+    clip: {fileID: 8300000, guid: dc0e920f07fa5374b8a6efd1a589d92b, type: 3}
+  - name: OWN_NAV2_114-600
+    isNASA504: 1
+    radio: 1
+    frequency: 114.6
+    clip: {fileID: 8300000, guid: 3722c11280192d14a92358330cea49b0, type: 3}
+  - name: OWN_NAV2_115-650
+    isNASA504: 1
+    radio: 1
+    frequency: 115.65
+    clip: {fileID: 8300000, guid: 021fc35d4c60ea64b97f0769687f700a, type: 3}
+  TRACK_speed: 2
+  TRACK_duration: 40
+  RESMAN_objective: 2500
+  RESMAN_duration: 40
+  RESMAN_pumpFailChance: 0.5
+  RESMAN_speedFactor: 2
+  interfaces:
+  - {fileID: 0}
+  sessionID: 0
+  logSessionFolder: 
+  elapsedTime: 0
+  started: 0
+--- !u!114 &1764619956870573993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586193292413869110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d660eb93f42f8ac4490424b752c5a7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planning: {fileID: 11400000, guid: 39c471b9f4d642d4bbddb5ef6a0797fb, type: 2}
+  A_B_AB: {fileID: 11400000, guid: 8d0075ec8b0b3554bbc330f8ebb31446, type: 2}
+  B_AB_A: {fileID: 11400000, guid: 91108f5c79322ae47acc572490f2f48a, type: 2}
+  AB_A_B: {fileID: 11400000, guid: 149c4a9d30f81c947b3660b913b91829, type: 2}
+  AB_B_A: {fileID: 11400000, guid: a25c80f8c57e8a94cb3a365bb452cfa4, type: 2}
+  B_A_AB: {fileID: 11400000, guid: 8d9707130e40e4e458d0fa1e3c760def, type: 2}
+  A_AB_B: {fileID: 11400000, guid: 02aad6f6bee281c4fa01d31cbf9be404, type: 2}
+--- !u!114 &5840502977521918823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586193292413869110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2beea6195cae146823e79e067b750f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips: []
+  audio_1: {fileID: 8300000, guid: 72ab3ba9310bdfa46915d95cf2ca1a2d, type: 3}
+  audio_2: {fileID: 8300000, guid: 9e233064e56d63c4ba102be3aa9de0f9, type: 3}
+  audio_3: {fileID: 8300000, guid: f3d06a5a1fc8dac4398a7b0fe99deeb6, type: 3}
+  audio_4: {fileID: 8300000, guid: 70d748c5eec71d64b8c55cb4deb2349d, type: 3}
+  audio_5: {fileID: 8300000, guid: 4a446962cc4f86446beb808d7e82162e, type: 3}
+  audio_6: {fileID: 8300000, guid: dcb067bfa40c77143b1e5a5b4a534f3f, type: 3}
+  audio_7: {fileID: 8300000, guid: 8cf92d6790c8ac944a33be262a7a1dfc, type: 3}
+  audio_8: {fileID: 8300000, guid: 74391d237af01314ea5e7714c0be13ce, type: 3}
+  audio_9: {fileID: 8300000, guid: 2336b793fe3f3f640bdc409ed81ce88e, type: 3}
+  audio_10: {fileID: 8300000, guid: 0bdaa4bdb89d39d4a8e21cdd664a19e6, type: 3}
+  audio_11: {fileID: 8300000, guid: 392e23b754f5d6b4e83b782692277f25, type: 3}
+  audio_12: {fileID: 8300000, guid: 857b659c610e04045a9bc90940567da2, type: 3}
+  audio_13: {fileID: 8300000, guid: b80355a77a4da774aa6a98a65ea3d2de, type: 3}
+  audio_14: {fileID: 8300000, guid: 37aa7505dd4e35341a123f891834fb72, type: 3}
+  audio_15: {fileID: 8300000, guid: bd34e1d5c467ddb4687bc231cb7bbb7b, type: 3}
+  audio_16: {fileID: 8300000, guid: 127e78d4aad3c8b4ba2ccace129be479, type: 3}
+  audio_17: {fileID: 8300000, guid: c8ecc340422337742a82dec15481dd07, type: 3}
+  audio_18: {fileID: 8300000, guid: e4ae31b732751844a93d73fb4d3d219c, type: 3}
+  audio_19: {fileID: 8300000, guid: 631b78ee518b18649b0123f75ef2f9e5, type: 3}
+  audio_20: {fileID: 8300000, guid: 297aea129dad15943b55ffeb11eeb2d0, type: 3}
+  audio_21: {fileID: 8300000, guid: 077e25094459cbb4e8f8d17affe13b84, type: 3}
+  audio_22: {fileID: 8300000, guid: 6322f106dad6a2c45a5e2e46cf2f0917, type: 3}
+  audio_23: {fileID: 8300000, guid: 899a32421aeed2f459b5637d114b6236, type: 3}
+  audio_24: {fileID: 8300000, guid: f188af16baf476e49a0542d0b1048034, type: 3}
+  audio_25: {fileID: 8300000, guid: 3f58be876026c224c864d41d09a4a902, type: 3}
+  audio_26: {fileID: 8300000, guid: 4972ffce15dc4084f951592fdc9d9c0a, type: 3}
+  audio_27: {fileID: 8300000, guid: 7431eb73f5c3fb04ab865c4b37b05bf3, type: 3}
+  audio_28: {fileID: 8300000, guid: 3214f4bea55ade440bb83b657ef24d84, type: 3}
+  audio_29: {fileID: 8300000, guid: 828a8e80c6f87d04f967616150f35199, type: 3}
+  audio_30: {fileID: 8300000, guid: 41a2aaf98aec55545be25b0da6b6f2ab, type: 3}
+  audio_31: {fileID: 8300000, guid: b31e916e4e4168447b257d13e1512e08, type: 3}
+  audio_32: {fileID: 8300000, guid: f57340fc475001e468158865741eee8d, type: 3}
+  audio_33: {fileID: 8300000, guid: 626f71f3593ded64d8bbc861f5854c52, type: 3}
+  audio_34: {fileID: 8300000, guid: 4237d849068e51c4aaaff4a33e245396, type: 3}
+  audio_35: {fileID: 8300000, guid: d165f97527ebfe14682c7f03a7edb553, type: 3}
+  audio_36: {fileID: 8300000, guid: 1b0a1f487f605b944a4f83cebe9e1c97, type: 3}
+  audio_37: {fileID: 8300000, guid: b117e57e3ea6a8542bcc1a24bb1edc39, type: 3}
+  audio_38: {fileID: 8300000, guid: fd12a9a1fd247eb4fa125768d7e39f21, type: 3}
+  audio_39: {fileID: 8300000, guid: 87cdef9e9305178458eb3f0ccb672b6e, type: 3}
+  audio_40: {fileID: 8300000, guid: fd7e4761587a2134286ca97bf673e5da, type: 3}
+  audio_41: {fileID: 8300000, guid: fcb47ad24c8337d4eb6facc04496a462, type: 3}
+  audio_42: {fileID: 8300000, guid: 84b627c6bbf03af4da2d011cd6f25f3b, type: 3}
+  audio_43: {fileID: 8300000, guid: 992a9fa666d3c3947adbf7135b6057fd, type: 3}
+  audio_44: {fileID: 8300000, guid: be03f14d2c3144347a3282b0a416ac4d, type: 3}
+  audio_45: {fileID: 8300000, guid: f2cd57ba7b2d16144be140b1503b061c, type: 3}
+  audio_46: {fileID: 8300000, guid: 2d374b2ae6178a9438ffe8cadc3fa449, type: 3}
+  audio_47: {fileID: 8300000, guid: 87845533fd285df479e44cd83ffd3d4e, type: 3}
+  audio_48: {fileID: 8300000, guid: 531a76e0a9bdb044186d9718d08eb2ce, type: 3}
+  audio_49: {fileID: 8300000, guid: 36ec1c093db8c6a41b66a2006cff7c72, type: 3}
+  audio_50: {fileID: 8300000, guid: 228af9ae3a6549e4389ac68850170895, type: 3}
+  audio_51: {fileID: 8300000, guid: 9742c97ff1349bd4db72a62d62a134a7, type: 3}
+  audio_52: {fileID: 8300000, guid: 7cc29e43ea5bbb84c8c961ab05e02245, type: 3}
+  audio_53: {fileID: 8300000, guid: a35dba91f58fb4d42a72412932c87236, type: 3}
+  audio_54: {fileID: 8300000, guid: 2aed51742dd8fca438ded1e1c770b2c0, type: 3}
+  audio_55: {fileID: 8300000, guid: 3440c7e3ab9069c46b82efd5f7e0d1ac, type: 3}
+  audio_56: {fileID: 8300000, guid: 774fcf5362e87a84abdec444f8c80931, type: 3}
+  audio_57: {fileID: 8300000, guid: 895e39477a35b2641be80c66dfce5c7e, type: 3}
+  audio_58: {fileID: 8300000, guid: d4b02d1f1da64f14182bf37bca0bfe7c, type: 3}
+  audio_59: {fileID: 8300000, guid: 622ecc3ca4b51a24e803a68e7e124daf, type: 3}
+  audio_60: {fileID: 8300000, guid: 3603528ebf3b80a4f87de147318744bb, type: 3}
+  audio_61: {fileID: 8300000, guid: 973b639887f230345a43f831656fe97a, type: 3}
+  audio_62: {fileID: 8300000, guid: 8a0cc28f2ec472b46a7985da69a0b056, type: 3}
+  audio_63: {fileID: 8300000, guid: 44c19ed0b17ce9c40b2b5452d37b2d11, type: 3}
+  audio_64: {fileID: 8300000, guid: e628d84fcb44a0d40a2e7ebd6fe33da3, type: 3}
+  audio_65: {fileID: 8300000, guid: 52cdc2a215570d143953e1d4e4a40025, type: 3}
+  audio_66: {fileID: 8300000, guid: e25f538cf182a794da719cd1f88445a1, type: 3}
+  audio_67: {fileID: 8300000, guid: 04a10fe0f0c3cbf4fa7daba4b4b9436f, type: 3}
+  audio_68: {fileID: 8300000, guid: 2fa790373a27fc2489e0aa4e285836b9, type: 3}
+  audio_69: {fileID: 8300000, guid: 8a1abd4ed4eeee54abb78603cd7d1d93, type: 3}
+  audio_70: {fileID: 8300000, guid: 123ca0cc88b8aab4a809560f600f6631, type: 3}
+  audio_71: {fileID: 8300000, guid: 1d830264b50775b4a82d156b7143dccf, type: 3}
+  audio_72: {fileID: 8300000, guid: 9828bdaf48997294396025d896311d00, type: 3}
+  audio_73: {fileID: 8300000, guid: d60fadf32efdc6d4e8302a567eb4a455, type: 3}
+  audio_74: {fileID: 8300000, guid: fe73b3f776d0ea34b9dfa188583e1c48, type: 3}
+  audio_75: {fileID: 8300000, guid: 5a708752f43b5bb4d93daa1cdcdb29a3, type: 3}
+  audio_76: {fileID: 8300000, guid: 385deafd5b1bc734896ac8c89b85827d, type: 3}
+  audio_77: {fileID: 8300000, guid: 37fb63cf2f2cbbf4595f0887b03077b9, type: 3}
+  audio_78: {fileID: 8300000, guid: dc0e920f07fa5374b8a6efd1a589d92b, type: 3}
+  audio_79: {fileID: 8300000, guid: 3722c11280192d14a92358330cea49b0, type: 3}
+  audio_80: {fileID: 8300000, guid: 021fc35d4c60ea64b97f0769687f700a, type: 3}

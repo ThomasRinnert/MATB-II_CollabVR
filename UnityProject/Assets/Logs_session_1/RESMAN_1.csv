@@ -1,0 +1,60 @@
+Time, User ID, Task, Event, Sucess, Tank A, Tank B, Tank C, Tank E, Pump A->B, Pump B->A, Pump C->A, Pump D->A, Pump D->C, Pump E->B, Pump F->B, Pump F->E, time spend in optimal range, ratio (%)
+0.0, [], RESMAN, Beginning of task, True, 2499,2499,1500,1500,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,0.04,100.00
+3.7, VR_U3, RESMAN, Pump activated, True, 2399,2399,1500,1500,Inactive,Inactive,Inactive,Active: 10,Inactive,Inactive,Inactive,Inactive,3.79,100.00
+8.6, VR_U3, RESMAN, Pump activated, True, 2367,2269,1500,1500,Inactive,Inactive,Inactive,Active: 10,Inactive,Inactive,Active: 10,Inactive,8.68,100.00
+12.7, VR_U3, RESMAN, Pump activated, True, 2340,2242,1500,1500,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 13.33,Active: 10,Inactive,12.74,100.00
+19.2, VR_U3, RESMAN, Pump activated, True, 2297,2371,1500,1328,Inactive,Inactive,Active: 13.33,Active: 10,Inactive,Active: 13.33,Active: 10,Inactive,19.20,100.00
+23.3, VR_U3, RESMAN, Pump activated, True, 2381,2455,1388,1216,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Active: 13.33,Active: 10,Inactive,23.39,100.00
+29.9, [], RESMAN, Update, True, 2514,2588,1344,1039,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Active: 13.33,Active: 10,Inactive,30.05,100.00
+39.1, VR_U3, RESMAN, Pump activated, True, 2697,2772,1283,794,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Active: 13.33,Active: 10,Active: 10,39.22,100.00
+40.0, [], RESMAN, End of task, True, 2714,2789,1277,788,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Active: 13.33,Active: 10,Active: 10,40.07,99.89
+40.0, [], RESMAN, Update, True, 2715,2789,1277,788,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Active: 13.33,Active: 10,Active: 10,40.12,100.00
+42.6, VR_U3, RESMAN, Pump deactivated, True, 2740,2814,1269,780,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Active: 13.33,Inactive,Active: 10,42.65,100.00
+43.6, VR_U3, RESMAN, Pump deactivated, True, 2750,2814,1265,777,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Inactive,Inactive,Active: 10,43.65,100.00
+44.7, VR_U3, RESMAN, Pump activated, True, 2761,2799,1261,788,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Inactive,Active: 10,Active: 10,44.78,100.00
+50.5, VR_U3, RESMAN, Pump deactivated, True, 2818,2780,1243,845,Inactive,Inactive,Inactive,Active: 10,Active: 10,Inactive,Active: 10,Active: 10,50.45,100.00
+65.0, [], RESMAN, Update, True, 2769,2732,1389,991,Inactive,Inactive,Inactive,Active: 10,Active: 10,Inactive,Active: 10,Active: 10,65.12,100.00
+80.1, [], RESMAN, Update, True, 2628,2682,1539,1141,Inactive,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 10,Active: 10,80.13,100.00
+100.0, [], RESMAN, Beginning of task, True, 2363,2615,1738,1340,Inactive,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 10,Active: 10,100.01,100.00
+102.4, VR_U3, RESMAN, Pump activated, True, 2298,2599,1787,1389,Inactive,Inactive,Inactive,Active: 10,Active: 10,Inactive,Active: 10,Active: 10,102.44,100.00
+113.0, VR_U3, RESMAN, Pump activated, True, 2228,2528,1999,1602,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Inactive,Active: 10,Active: 10,113.08,100.00
+118.8, VR_U3, RESMAN, Pump deactivated, True, 2343,2490,1961,1717,Inactive,Inactive,Active: 13.33,Active: 10,Inactive,Inactive,Active: 10,Active: 10,118.86,100.00
+125.3, VR_U3, RESMAN, Pump activated, True, 2474,2446,1787,1848,Inactive,Inactive,Active: 13.33,Active: 10,Inactive,Active: 13.33,Active: 10,Active: 10,125.40,100.00
+130.0, [], RESMAN, Update, True, 2566,2485,1664,1871,Inactive,Inactive,Active: 13.33,Active: 10,Inactive,Inactive,Active: 10,Active: 10,130.01,100.00
+133.0, VR_U3, RESMAN, Pump deactivated, True, 2627,2465,1582,1932,Inactive,Inactive,Inactive,Active: 10,Inactive,Inactive,Active: 10,Active: 10,133.06,100.00
+140.0, [], RESMAN, End of task, True, 2581,2418,1582,2000,Inactive,Inactive,Inactive,Active: 10,Inactive,Inactive,Active: 10,Inactive,140.04,99.97
+140.0, [], RESMAN, Update, True, 2580,2418,1582,2000,Inactive,Inactive,Inactive,Active: 10,Inactive,Inactive,Active: 10,Inactive,140.07,100.00
+149.9, [], RESMAN, Beginning of task, True, 2547,2385,1582,2000,Inactive,Inactive,Inactive,Active: 10,Inactive,Inactive,Active: 10,Inactive,150.03,100.00
+150.7, VR_U3, RESMAN, Pump activated, True, 2542,2380,1582,2000,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 13.33,Active: 10,Inactive,150.76,100.00
+155.0, [], RESMAN, Update, True, 2514,2465,1582,1886,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 13.33,Active: 10,Inactive,155.03,100.00
+159.3, VR_U3, RESMAN, Pump activated, True, 2485,2552,1582,1771,Inactive,Inactive,Inactive,Active: 10,Active: 10,Active: 13.33,Active: 10,Inactive,159.37,100.00
+162.7, VR_U3, RESMAN, Pump activated, True, 2463,2619,1649,1682,Inactive,Inactive,Inactive,Active: 10,Active: 10,Active: 13.33,Active: 10,Active: 10,162.70,100.00
+169.9, [], RESMAN, Update, True, 2414,2765,1796,1633,Inactive,Inactive,Inactive,Active: 10,Active: 10,Active: 13.33,Active: 10,Active: 10,170.03,100.00
+170.7, VR_U3, RESMAN, Pump activated, True, 2410,2779,1809,1629,Inactive,Active: 6.66,Inactive,Active: 10,Active: 10,Active: 13.33,Active: 10,Active: 10,170.70,100.00
+182.9, VR_U3, RESMAN, Pump deactivated, True, 2491,2861,2000,1547,Inactive,Active: 6.66,Inactive,Active: 10,Inactive,Inactive,Active: 10,Active: 10,182.97,100.00
+184.0, VR_U3, RESMAN, Pump deactivated, True, 2499,2839,2000,1569,Inactive,Active: 6.66,Inactive,Active: 10,Inactive,Inactive,Inactive,Active: 10,184.07,100.00
+184.7, VR_U3, RESMAN, Pump activated, True, 2504,2809,2000,1584,Inactive,Active: 6.66,Inactive,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,184.80,100.00
+185.0, [], RESMAN, Update, True, 2505,2806,2000,1582,Inactive,Active: 6.66,Inactive,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,185.03,100.00
+189.9, VR_U3, RESMAN, Pump deactivated, True, 2538,2741,2000,1549,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,189.94,100.00
+190.0, [], RESMAN, Update, True, 2537,2741,2000,1549,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,190.03,100.00
+190.0, [], RESMAN, End of task, True, 2537,2741,2000,1549,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,190.03,99.97
+190.0, [], RESMAN, Update, True, 2537,2741,2000,1549,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,190.08,100.00
+199.9, [], RESMAN, Beginning of task, True, 2504,2741,2000,1515,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,200.01,100.00
+204.9, [], RESMAN, Update, True, 2471,2741,2000,1482,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,205.02,100.00
+215.0, [], RESMAN, Update, True, 2404,2741,2000,1416,Inactive,Inactive,Inactive,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,215.02,100.00
+222.3, VR_U3, RESMAN, Pump activated, True, 2355,2741,2000,1367,Inactive,Inactive,Active: 13.33,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,222.34,100.00
+240.0, [], RESMAN, End of task, True, 2709,2741,1529,1249,Inactive,Inactive,Active: 13.33,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,240.02,99.98
+240.0, [], RESMAN, Update, True, 2709,2741,1528,1249,Inactive,Inactive,Active: 13.33,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,240.06,100.00
+249.9, [], RESMAN, Beginning of task, True, 2809,2741,1395,1216,Inactive,Inactive,Active: 13.33,Active: 10,Inactive,Active: 13.33,Inactive,Active: 10,250.03,100.00
+254.4, VR_U3, RESMAN, Pump deactivated, True, 2899,2741,1275,1186,Inactive,Inactive,Active: 13.33,Inactive,Inactive,Active: 13.33,Inactive,Active: 10,254.53,100.00
+255.1, VR_U3, RESMAN, Pump deactivated, True, 2899,2741,1257,1181,Inactive,Inactive,Inactive,Inactive,Inactive,Active: 13.33,Inactive,Active: 10,255.22,100.00
+259.3, VR_U3, RESMAN, Pump activated, True, 2791,2741,1257,1154,Active: 6.66,Inactive,Inactive,Inactive,Inactive,Active: 13.33,Inactive,Active: 10,259.28,100.00
+262.2, VR_U3, RESMAN, Pump deactivated, True, 2676,2779,1257,1135,Active: 6.66,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Active: 10,262.16,100.00
+263.7, VR_U3, RESMAN, Pump activated, True, 2615,2759,1257,1165,Active: 6.66,Inactive,Inactive,Inactive,Active: 10,Inactive,Inactive,Active: 10,263.68,100.00
+269.2, VR_U3, RESMAN, Pump activated, True, 2390,2684,1369,1278,Active: 6.66,Inactive,Inactive,Active: 10,Active: 10,Inactive,Inactive,Active: 10,269.31,100.00
+273.6, VR_U3, RESMAN, Pump activated, True, 2304,2626,1456,1364,Active: 6.66,Inactive,Inactive,Active: 10,Active: 10,Inactive,Active: 10,Active: 10,273.62,100.00
+274.9, [], RESMAN, Update, True, 2275,2636,1484,1392,Active: 6.66,Inactive,Inactive,Active: 10,Active: 10,Inactive,Active: 10,Active: 10,275.03,100.00
+280.0, VR_U3, RESMAN, Pump activated, True, 2176,2669,1583,1492,Active: 6.66,Inactive,Active: 13.33,Active: 10,Active: 10,Inactive,Active: 10,Active: 10,280.02,100.00
+280.0, VR_U3, RESMAN, Pump deactivated, True, 2176,2669,1583,1492,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Inactive,Active: 10,Active: 10,280.02,100.00
+280.0, VR_U3, RESMAN, Pump activated, True, 2176,2669,1583,1492,Inactive,Inactive,Active: 13.33,Active: 10,Active: 10,Active: 13.33,Active: 10,Active: 10,280.02,100.00
+280.0, VR_U3, RESMAN, Pump activated, True, 2176,2669,1583,1492,Inactive,Active: 6.66,Active: 13.33,Active: 10,Active: 10,Active: 13.33,Active: 10,Active: 10,280.02,100.00

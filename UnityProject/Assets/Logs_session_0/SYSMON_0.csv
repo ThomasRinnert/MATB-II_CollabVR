@@ -1,0 +1,73 @@
+Time, User ID, Task, Event, Sucess, Response Time (Critical Time)
+17.5, [ ], SYSMON, Scale, False, 7.7455(7.7621)
+17.6, [ ], SYSMON, Scale, False, 7.7455(7.7750)
+17.6, [ ], SYSMON, Scale, False, 7.7455(7.7947)
+17.7, [ ], SYSMON, Scale, False, 7.7455(7.8032)
+22.0, [ ], SYSMON, Normally ON Light, False, 20.0152
+22.0, [ ], SYSMON, Normally OFF Light, False, 20.0152
+39.1, [ ], SYSMON, Scale, False, 7.5245(7.5517)
+39.1, [ ], SYSMON, Scale, False, 7.5245(7.5721)
+39.5, [ ], SYSMON, Scale, False, 7.7578(7.7699)
+39.6, [ ], SYSMON, Scale, False, 7.7578(7.7966)
+43.8, VR_U3, SYSMON, Normally OFF Light, True, 19.8206
+44.0, [ ], SYSMON, Normally ON Light, False, 20.0275
+47.7, VR_U3, SYSMON, Normally OFF Light, True, 1.6484
+49.5, VR_U3, SYSMON, Scale, True, 3.4901(0.0000)
+50.5, VR_U3, SYSMON, Scale, True, 4.5074(0.0000)
+52.1, VR_U3, SYSMON, Scale, True, 6.0466(0.0000)
+55.3, VR_U3, SYSMON, Scale, True, 7.5242(1.7686)
+66.1, [ ], SYSMON, Normally ON Light, False, 20.0231
+69.8, VR_U3, SYSMON, Normally ON Light, True, 1.7763
+78.5, VR_U3, SYSMON, Scale, True, 7.7550(2.7762)
+79.6, VR_U3, SYSMON, Scale, True, 7.5186(4.0541)
+82.2, VR_U3, SYSMON, Scale, True, 7.7550(6.4918)
+83.1, [ ], SYSMON, Scale, False, 7.5186(7.5314)
+84.1, VR_U3, SYSMON, Normally OFF Light, True, 16.1105
+91.4, VR_U3, SYSMON, Normally ON Light, True, 1.4215
+92.3, VR_U3, SYSMON, Normally OFF Light, True, 2.2590
+93.3, VR_U3, SYSMON, Scale, True, 3.3072(0.0000)
+93.5, VR_U3, SYSMON, Scale, True, 3.4860(0.0000)
+95.4, VR_U3, SYSMON, Scale, True, 5.3522(0.0000)
+96.7, VR_U3, SYSMON, Scale, True, 6.6785(0.0000)
+140.5, VR_U3, SYSMON, Scale, True, 7.7492(2.7379)
+142.3, VR_U3, SYSMON, Scale, True, 7.7492(4.5285)
+144.6, VR_U3, SYSMON, Scale, True, 7.7492(6.7541)
+145.1, [ ], SYSMON, Scale, False, 7.5057(7.5153)
+149.2, VR_U3, SYSMON, Normally ON Light, True, 19.1068
+149.8, VR_U3, SYSMON, Normally OFF Light, True, 19.7003
+161.9, VR_U3, SYSMON, Scale, True, 1.8466(0.0000)
+163.1, VR_U3, SYSMON, Scale, True, 3.0220(0.0000)
+163.9, VR_U3, SYSMON, Scale, True, 3.8837(0.0000)
+165.5, VR_U3, SYSMON, Scale, True, 5.4697(0.0000)
+166.5, VR_U3, SYSMON, Normally OFF Light, True, 6.4468
+167.3, VR_U3, SYSMON, Normally ON Light, True, 7.2146
+194.0, VR_U3, SYSMON, Normally ON Light, True, 1.9805
+195.0, VR_U3, SYSMON, Normally OFF Light, True, 3.0010
+196.4, VR_U3, SYSMON, Scale, True, 4.3449(0.0000)
+197.2, VR_U3, SYSMON, Scale, True, 5.1741(0.0000)
+198.0, VR_U3, SYSMON, Scale, True, 5.9482(0.0000)
+200.3, VR_U3, SYSMON, Scale, True, 7.7484(0.5320)
+229.1, [ ], SYSMON, Scale, False, 7.5148(7.5503)
+229.2, [ ], SYSMON, Scale, False, 7.5148(7.5237)
+229.2, [ ], SYSMON, Scale, False, 7.5148(7.5281)
+229.8, [ ], SYSMON, Scale, False, 7.7564(7.7954)
+234.1, [ ], SYSMON, Normally ON Light, False, 20.0135
+234.1, [ ], SYSMON, Normally OFF Light, False, 20.0135
+237.6, VR_U3, SYSMON, Scale, True, 1.5842(0.0000)
+238.2, VR_U3, SYSMON, Scale, True, 2.1346(0.0000)
+239.7, VR_U3, SYSMON, Scale, True, 3.7143(0.0000)
+240.2, VR_U3, SYSMON, Scale, True, 4.1664(0.0000)
+241.4, VR_U3, SYSMON, Normally ON Light, True, 5.3813
+243.1, VR_U3, SYSMON, Normally OFF Light, True, 7.1231
+259.3, VR_U3, SYSMON, Scale, True, 1.2541(0.0000)
+260.7, VR_U3, SYSMON, Scale, True, 2.7000(0.0000)
+261.4, VR_U3, SYSMON, Scale, True, 3.3485(0.0000)
+263.8, VR_U3, SYSMON, Normally ON Light, True, 5.7854
+264.6, VR_U3, SYSMON, Normally OFF Light, True, 6.5556
+273.0, [ ], SYSMON, Scale, False, 7.5127(7.5193)
+280.1, VR_U3, SYSMON, Scale, True, 0.0000(0.0000)
+280.1, VR_U3, SYSMON, Scale, True, 0.0000(0.0000)
+280.1, VR_U3, SYSMON, Scale, True, 0.0000(0.0000)
+280.1, VR_U3, SYSMON, Scale, True, 0.0000(0.0000)
+280.1, VR_U3, SYSMON, Normally OFF Light, True, 0.0000
+280.1, VR_U3, SYSMON, Normally ON Light, True, 0.0000

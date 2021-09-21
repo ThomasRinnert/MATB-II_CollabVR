@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 218ad9324f8f68a4cad62600f5ba7bfd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - desktopPrefab: {fileID: 3543135218289199578, guid: 162c92261b4c0fe40a9529f0638270e7,
+      type: 3}
+  - VRPrefab: {fileID: 3490104607153154075, guid: 216ff2c3d7872264886ca67c2d33a75f,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

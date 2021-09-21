@@ -1,0 +1,6 @@
+Time, User ID, Task, Event, Sucess, Tank A, Tank B, Tank C, Tank E, Pump A->B, Pump B->A, Pump C->A, Pump D->A, Pump D->C, Pump E->B, Pump F->B, Pump F->E
+20.0, [], RESMAN, Beginning of task, True, 1304,1300,1500,1500,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive
+30.0, [], RESMAN, Update, True, 1096,1087,1500,1500,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive
+35.0, [], RESMAN, Update, True, 1090,1080,1500,1500,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive
+45.0, [], RESMAN, Update, True, 882,867,1500,1500,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive
+50.0, [], RESMAN, Update, True, 875,861,1500,1500,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive,Inactive

@@ -1,0 +1,4 @@
+Time, User ID, Task, Event, Sucess, Response Time / Missed Target
+10.0, [ ], TRACK, MANUAL MODE, True, 
+27.0, [ ], TRACK, TARGET, False, 15.0094
+42.0, [ ], TRACK, TARGET, False, 15.0150

@@ -1,0 +1,10 @@
+Time, User ID, Task, Event, Sucess, Inner zone time ratio (%)
+10.0, [ ], TRACK, MANUAL MODE, True, 
+50.1, [ ], TRACK, MANUAL MODE, False, 26.90
+60.0, [ ], TRACK, MANUAL MODE, True, 
+100.1, [ ], TRACK, MANUAL MODE, False, 63.95
+110.0, [ ], TRACK, MANUAL MODE, True, 
+150.1, [ ], TRACK, MANUAL MODE, False, 46.43
+210.0, [ ], TRACK, MANUAL MODE, True, 
+250.1, [ ], TRACK, MANUAL MODE, False, 50.10
+260.1, [ ], TRACK, MANUAL MODE, True, 

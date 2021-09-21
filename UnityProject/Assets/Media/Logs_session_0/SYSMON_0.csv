@@ -1,0 +1,6 @@
+Time, User ID, Task, Event, Sucess, Response Time (Critical Time)
+2.0, [ ], SYSMON, Scale, False, 7.5218(7.5380)
+2.1, [ ], SYSMON, Scale, False, 7.5218(7.5370)
+2.1, [ ], SYSMON, Scale, False, 7.5218(7.5380)
+7.0, [ ], SYSMON, Normally ON Light, False, 20.0125
+7.0, [ ], SYSMON, Normally OFF Light, False, 20.0125

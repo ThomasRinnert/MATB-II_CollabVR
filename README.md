@@ -10,6 +10,8 @@ Choose an identifier and press LAUNCH.
 
 When a new user is connecting, his camera becomes the main one, to get back to your point of view, press X on a keyboard or press a rear trigger on a VR controller.
 
+Using VR controller, the bindings of 4 actions are required with SteamVR: Teleport, GrabPinch, GrabGrip (boolean actions) and Stick (2d vector)
+
 The recorded data can be found in the MATB-II-VR_Data/Logs_session_0 folder.
 
 Whith two users, each can take the responsibility of two tasks.

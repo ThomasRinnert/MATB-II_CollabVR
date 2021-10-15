@@ -17,6 +17,16 @@ TagManager:
   - TankFToTankE
   - Crosshair
   - Cursor
+  - Slider1
+  - Slider2
+  - Slider3
+  - Slider4
+  - Sldier5
+  - Slider6
+  - Slider7
+  - Slider8
+  - Slider9
+  - Slider10
   layers:
   - Default
   - TransparentFX

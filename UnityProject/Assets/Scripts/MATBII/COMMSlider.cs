@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Photon.Pun;
+﻿using Photon.Pun;
 using UnityEngine;
 
-public class COMMSlider : MonoBehaviour, Interactive
+public class COMMSlider : Interactive
 {
     [SerializeField] public COMMRadio radio;
     [SerializeField] public float freqMin = 108.000f;
@@ -24,13 +22,14 @@ public class COMMSlider : MonoBehaviour, Interactive
     public bool isPressed() { return pressing; }
 
     private bool clicked = false;
-    public void Click()
+    override public void Click()
     {
         if(pressing) clicked = true;
     }
-    public void Release()
+    override public void Release()
     {
         clicked = false;
+        ComputeFrequency(author.NickName);
     }
 
     private Photon.Realtime.Player author = null;
@@ -74,7 +73,6 @@ public class COMMSlider : MonoBehaviour, Interactive
         if (other.tag == "LeftHand" || other.tag == "RightHand"  || other.tag == "Cursor")
         {
             pressing = false;
-            //ComputeFrequency(other.GetComponentInParent<Photon.Pun.PhotonView>().Owner.NickName);
             outline.enabled = false;
         }
     }

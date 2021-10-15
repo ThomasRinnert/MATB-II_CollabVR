@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Interaction\AvatarScale.cs" />
      <Compile Include="Assets\Scripts\Interaction\CursorDriver.cs" />
      <Compile Include="Assets\Scripts\Interaction\CursorTool.cs" />
      <Compile Include="Assets\Scripts\Interaction\Interactive.cs" />
@@ -61,6 +62,7 @@
      <Compile Include="Assets\Scripts\MATBII\COMMAudioFiles.cs" />
      <Compile Include="Assets\Scripts\MATBII\COMMRadio.cs" />
      <Compile Include="Assets\Scripts\MATBII\COMMSlider.cs" />
+     <Compile Include="Assets\Scripts\MATBII\COMMValidation.cs" />
      <Compile Include="Assets\Scripts\MATBII\MATBIIInterface.cs" />
      <Compile Include="Assets\Scripts\MATBII\MATBIISystem.cs" />
      <Compile Include="Assets\Scripts\MATBII\RESMANPumpButton.cs" />
@@ -70,6 +72,8 @@
      <Compile Include="Assets\Scripts\MATBII\TASKPlanner.cs" />
      <Compile Include="Assets\Scripts\MATBII\TASKPlanning.cs" />
      <Compile Include="Assets\Scripts\MATBII\TRACKTarget.cs" />
+     <Compile Include="Assets\Scripts\MATBII\WRSSlider.cs" />
+     <Compile Include="Assets\Scripts\MATBII\WRSValidation.cs" />
      <Compile Include="Assets\Scripts\Percomix\ActionHistory.cs" />
      <Compile Include="Assets\Scripts\Percomix\ActivityWarning.cs" />
      <Compile Include="Assets\Scripts\Percomix\AggregativeUserBoard.cs" />
@@ -90,6 +94,7 @@
      <Compile Include="Assets\Scripts\Photon\PlayerManagerDesktop.cs" />
      <Compile Include="Assets\Scripts\Photon\PlayerManagerVR.cs" />
      <Compile Include="Assets\Scripts\Photon\PlayerNameInputField.cs" />
+     <Compile Include="Assets\Scripts\RandomGenerator.cs" />
      <None Include="Assets\Demo\3DCharacterDummy\Readme.txt" />
  <Reference Include="Unity.ProBuilder">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>

@@ -53,10 +53,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene(0);
     }
 
-    void Start()
+    void Awake()
     {
         Instance = this;
-
+    }
+    
+    void Start()
+    {
         PhotonNetwork.LogLevel = PunLogLevel.Full;
 
         //string userPrefab = PlayerPrefs.GetString("UserPrefab", "DesktopUser");
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 GameObject player = PhotonNetwork.Instantiate(prefab.name, spawnOffset, Quaternion.identity, 0);
+                player.name = PhotonNetwork.NickName;
             }
             else
             {

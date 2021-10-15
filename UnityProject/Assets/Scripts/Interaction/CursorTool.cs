@@ -5,13 +5,43 @@ using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
 
-public class CursorTool : MonoBehaviour
+public class CursorTool : MonoBehaviourPun, IPunObservable
 {
     private bool caught ;
     private Interactive target ;
     //public Interactive interactiveObjectToInstanciate ;
     void Start () {
         caught = false ;
+    }
+    
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(displayed);
+        }
+        else
+        {
+            bool display = (bool) stream.ReceiveNext();
+            if (display != displayed)
+            {
+                displayed = display;
+                Cursor_ShowHide();
+                // photonView.RPC("Cursor_ShowHide", RpcTarget.All);
+                // PhotonNetwork.SendAllOutgoingCommands();
+            }
+        }
+    }
+    
+    private bool displayed = true;
+    public void Display(bool display)
+    {
+        displayed = display;
+        Cursor_ShowHide();
+    }
+    [PunRPC] public void Cursor_ShowHide()
+    {
+        GetComponent<Renderer>().enabled = displayed;
     }
     
     public void Catch()
@@ -40,7 +70,7 @@ public class CursorTool : MonoBehaviour
     {
         object[] content = new object[] {author, x, y};
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-        PhotonNetwork.RaiseEvent(MATBIISystem.TRACK_TargetMove, content, raiseEventOptions, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent((byte) MATBIISystem.PhotonEventCodes.TRACK_TargetMove, content, raiseEventOptions, SendOptions.SendReliable);
     }
 
     public void CreateInteractiveCube () {

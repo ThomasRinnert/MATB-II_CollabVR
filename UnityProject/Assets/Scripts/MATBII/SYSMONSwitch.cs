@@ -4,7 +4,7 @@ using ExitGames.Client.Photon;
 using Photon.Realtime;
 using Photon.Pun;
 
-public class SYSMONSwitch : MonoBehaviour, Interactive
+public class SYSMONSwitch : Interactive
 {
     [SerializeField]
     public bool normallyON = true;
@@ -55,13 +55,13 @@ public class SYSMONSwitch : MonoBehaviour, Interactive
         m.color = normallyON ? Color.green : Color.gray;
     }
 
-    public void Click()
+    override public void Click()
     {
         if(!pressing) return;
         object[] content = new object[] {author.GetComponentInParent<PhotonView>().Owner.NickName, normallyON};
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-        PhotonNetwork.RaiseEvent(MATBIISystem.SYSMON_SwitchPressed, content, raiseEventOptions, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent((byte) MATBIISystem.PhotonEventCodes.SYSMON_SwitchPressed, content, raiseEventOptions, SendOptions.SendReliable);
         pressing = false;
     }
-    public void Release() {}
+    override public void Release() {}
 }

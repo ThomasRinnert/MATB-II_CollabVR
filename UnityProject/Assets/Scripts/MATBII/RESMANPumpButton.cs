@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
-public class RESMANPumpButton : MonoBehaviour, Interactive
+public class RESMANPumpButton : Interactive
 {
     [SerializeField] private MATBIISystem.RESMAN_Pump pumpID;
     [SerializeField] private GameObject arrow;
@@ -65,13 +65,13 @@ public class RESMANPumpButton : MonoBehaviour, Interactive
         }
     }
 
-    public void Click()
+    override public void Click()
     {
         if (!pressing) return;
         object[] content = new object[] {author.GetComponentInParent<PhotonView>().Owner.NickName, (int)pumpID};
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-        PhotonNetwork.RaiseEvent(MATBIISystem.RESMAN_PumpChanged, content, raiseEventOptions, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent((byte) MATBIISystem.PhotonEventCodes.RESMAN_PumpChanged, content, raiseEventOptions, SendOptions.SendReliable);
         pressing = false;
     }
-    public void Release() {}
+    override public void Release() {}
 }

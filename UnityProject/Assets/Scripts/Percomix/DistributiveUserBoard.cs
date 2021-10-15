@@ -9,16 +9,18 @@ public class DistributiveUserBoard : UserBoard
     {
         gameObject.SetActive(false);
         player_manager = GetComponentInParent<PlayerManager>();
+        if (player_manager != null) player = player_manager.player;
+        GetComponentInChildren<UserID>().Init();
     }
 
-    void LateUpdate()
+    void Update()
     {
         if (player_manager == null)
         {
             player_manager = PlayerManager.LocalPlayerInstance;
+            player = player_manager.player;
             GetComponentInChildren<UserID>().Init();
         }
-        
         if (!photonView) return;
         if (!photonView.IsMine && Camera.current != null)
         {
@@ -26,8 +28,23 @@ public class DistributiveUserBoard : UserBoard
         }
     }
 
-    public void Activate(bool active)
+    public void Activate(bool active, bool force = false)
     {
+        if (player_manager == null)
+        {
+            player_manager = PlayerManager.LocalPlayerInstance;
+            if (player_manager != null) player = player_manager.player;
+            GetComponentInChildren<UserID>().Init();
+        }
+        if (!force && player_manager.NickName.Contains("XP")) active = false;
         gameObject.SetActive(active);
+    }
+
+    public void Init()
+    {
+        player_manager = GetComponentInParent<PlayerManager>();
+        if (player_manager == null) player_manager = PlayerManager.LocalPlayerInstance;
+        if (player_manager != null) player = player_manager.player;
+        GetComponentInChildren<UserID>().Init();
     }
 }

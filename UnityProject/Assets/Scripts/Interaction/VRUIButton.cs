@@ -3,16 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class VRUIButton : MonoBehaviour
+public class VRUIButton : Interactive
 {
     [Header("Events")]
-    [SerializeField] UnityEvent clicked;
+    [SerializeField] protected UnityEvent clicked;
+    
+    private bool pressing = false;
+    public bool isPressed() { return pressing; }
+
+    public Outline outline;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
-        if (clicked == null) clicked = new UnityEvent();
-        //clicked.AddListener(Ping);
+        if (clicked == null)
+        {
+            clicked = new UnityEvent();
+            clicked.AddListener(()=>{print("No event on " + gameObject.name);});
+        }
+        outline = GetComponent<Outline>();
+        if (outline != null) outline.enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        outline = GetComponent<Outline>();
+        if (outline != null) outline.enabled = false;
+        pressing = false;
     }
 
     // Update is called once per frame
@@ -25,13 +42,28 @@ public class VRUIButton : MonoBehaviour
     {
         if (other.tag == "LeftHand" || other.tag == "RightHand")
         {
-            clicked.Invoke();
+            pressing = true;
+            if (outline != null) outline.enabled = true;
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        //...
+        if (other.tag == "LeftHand" || other.tag == "RightHand")
+        {
+            pressing = false;
+            if (outline != null) outline.enabled = false;
+        }
     }
 
+    override public void Click()
+    {
+        if (!pressing) return;
+        clicked.Invoke();
+    }
+
+    override public void Release()
+    {
+        // ...
+    }
 }

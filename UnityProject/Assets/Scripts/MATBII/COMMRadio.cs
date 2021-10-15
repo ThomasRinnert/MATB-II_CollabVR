@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class COMMRadio : MonoBehaviour
 {
-    [SerializeField] private TextMesh display;
+    [SerializeField] private TextMeshPro display;
     [SerializeField] private COMMSlider channel;
     [SerializeField] private COMMSlider subchannel;
     [SerializeField] private MATBIISystem.COMM_Radio radio;
@@ -28,7 +29,7 @@ public class COMMRadio : MonoBehaviour
         {
             object[] content = new object[] {author, (int)radio, frequency};
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-            PhotonNetwork.RaiseEvent(MATBIISystem.COMM_RadioChanged, content, raiseEventOptions, SendOptions.SendReliable);
+            PhotonNetwork.RaiseEvent((byte) MATBIISystem.PhotonEventCodes.COMM_RadioChanged, content, raiseEventOptions, SendOptions.SendReliable);
         }
     }
 

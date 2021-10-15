@@ -14,13 +14,23 @@ public class PlayerManagerVR : PlayerManager, IPunObservable
     {
         if (stream.IsWriting)
         {
-            //...
+            stream.SendNext(this.workload_cog);
+            stream.SendNext(this.workload_phys);
+            stream.SendNext(this.scale);
         }
         else
         {
-            //...
+            workload_cog = (int) stream.ReceiveNext();
+            workload_phys = (int) stream.ReceiveNext();
+            Vector3 scale = (Vector3) stream.ReceiveNext();
+            if (scale != this.scale)
+            {
+                GetComponentInChildren<AvatarScale>().Resize(scale);
+                this.scale = scale;
+            }
         }
     }
+    public Vector3 scale;
     
     [SerializeField]
     public Vector3 cameraPositionOffset;
@@ -29,10 +39,13 @@ public class PlayerManagerVR : PlayerManager, IPunObservable
     [SerializeField]
     //public InputDevice device;
     public SteamVR_Action_Boolean SteamVR_bool = null;
-    public SteamVR_Action_Vector2 joystick = null;
 
-    [SerializeField]
-    SteamVR_Behaviour_Pose[] hands;
+    [SerializeField] SteamVR_Behaviour_Pose[] hands;
+    [SerializeField] SteamVR_PlayArea playArea;
+
+    [SerializeField] Transform HandLTarget;
+    [SerializeField] Transform HandRTarget;
+    [SerializeField] Transform HeadTarget;
 
     /// <summary>
     /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
@@ -75,6 +88,7 @@ public class PlayerManagerVR : PlayerManager, IPunObservable
             {
                 hand.enabled = true;
             }
+            playArea.enabled = true;
         }
         if (photonView.IsMine)
         {
@@ -93,6 +107,17 @@ public class PlayerManagerVR : PlayerManager, IPunObservable
 
             //device = UnityEngine.XR.InputDevices.GetDeviceAtXRNode(UnityEngine.XR.XRNode.LeftHand);
         }
+        else
+        {
+            HandLTarget.SetParent(this.transform, true);
+            HandRTarget.SetParent(this.transform, true);
+            HeadTarget.SetParent(this.transform, true);
+        }
+    }
+    
+    void OnDestroy()
+    {
+        if (GameManager.Instance != null) GameManager.Instance.players.Remove(this); 
     }
 
     #if UNITY_5_4_OR_NEWER

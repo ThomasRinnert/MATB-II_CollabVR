@@ -1,7 +1,8 @@
+using Photon.Pun;
 using UnityEngine;
 
-public interface Interactive
+public abstract class Interactive: MonoBehaviourPun
 {
-    void Click();
-    void Release();
+    abstract public void Click();
+    abstract public void Release();
 }

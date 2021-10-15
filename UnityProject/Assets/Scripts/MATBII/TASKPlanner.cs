@@ -5,12 +5,13 @@ using Photon.Pun;
 
 public enum Scenario : int
 {
-    A_B_AB = 0,
-    B_AB_A = 1,
-    AB_A_B = 2,
-    AB_B_A = 3,
-    B_A_AB = 4,
-    A_AB_B = 5
+    Training = 0,
+    A_B_AB = 1,
+    B_AB_A = 2,
+    AB_A_B = 3,
+    AB_B_A = 4,
+    B_A_AB = 5,
+    A_AB_B = 6
 }
 
 public class TASKPlanner : MonoBehaviourPun
@@ -25,6 +26,7 @@ public class TASKPlanner : MonoBehaviourPun
     private int WrkLd_index;
 
     [Header("Scenario variants")]
+    [SerializeField] public TASKPlanning Training;
     [SerializeField] public TASKPlanning A_B_AB;
     [SerializeField] public TASKPlanning B_AB_A;
     [SerializeField] public TASKPlanning AB_A_B;
@@ -38,6 +40,7 @@ public class TASKPlanner : MonoBehaviourPun
     {
         mb2 = MATBIISystem.Instance;
         scenarii = new Dictionary<Scenario, TASKPlanning>();
+        scenarii.Add(Scenario.Training, Training);
         scenarii.Add(Scenario.A_B_AB, A_B_AB);
         scenarii.Add(Scenario.B_AB_A, B_AB_A);
         scenarii.Add(Scenario.AB_A_B, AB_A_B);
@@ -49,18 +52,25 @@ public class TASKPlanner : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        if (!mb2.started || !photonView.IsMine) return;
+        if (!mb2.started || !photonView.IsMine || mb2.training) return;
 
         if (SYSMON_index < planning.SYSMON_Tasks.Count)
         {
             if (planning.SYSMON_Tasks[SYSMON_index].startTime < mb2.elapsedTime)
             {
+                bool[] tasks = {planning.SYSMON_Tasks[SYSMON_index].parameters.NormallyON,
+                    planning.SYSMON_Tasks[SYSMON_index].parameters.NormallyOFF,
+                    planning.SYSMON_Tasks[SYSMON_index].parameters.scale1,
+                    planning.SYSMON_Tasks[SYSMON_index].parameters.scale2,
+                    planning.SYSMON_Tasks[SYSMON_index].parameters.scale3,
+                    planning.SYSMON_Tasks[SYSMON_index].parameters.scale4};
+
                 bool[] directions = {Random.Range(float.MinValue, float.MaxValue) > 0.0f,
                     Random.Range(float.MinValue, float.MaxValue) > 0.0f,
                     Random.Range(float.MinValue, float.MaxValue) > 0.0f,
                     Random.Range(float.MinValue, float.MaxValue) > 0.0f};
 
-                mb2.photonView.RPC ("SYSMON_Start", RpcTarget.All, directions);
+                mb2.photonView.RPC ("SYSMON_Start", RpcTarget.All, tasks, directions);
                 PhotonNetwork.SendAllOutgoingCommands();
                 SYSMON_index++;
             }
@@ -69,7 +79,7 @@ public class TASKPlanner : MonoBehaviourPun
         {
             if (planning.COMM_Tasks[COMM_index].startTime < mb2.elapsedTime)
             {
-                mb2.photonView.RPC ("COMM_Start", RpcTarget.All, Random.Range(40, mb2.COMM_transmissions.Count));
+                mb2.photonView.RPC ("COMM_Start", RpcTarget.All, Random.Range(0, mb2.COMM_transmissions.Count));
                 PhotonNetwork.SendAllOutgoingCommands();
                 COMM_index++;
             }
@@ -79,7 +89,7 @@ public class TASKPlanner : MonoBehaviourPun
             if (planning.TRACK_Tasks[TRACK_index].startTime < mb2.elapsedTime)
             {
                 mb2.photonView.RPC ("TRACK_Start", RpcTarget.All, Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
-                    PhotonNetwork.SendAllOutgoingCommands();
+                PhotonNetwork.SendAllOutgoingCommands();
                 TRACK_index++;
             }
         }
@@ -104,10 +114,11 @@ public class TASKPlanner : MonoBehaviourPun
 
         if (SYSMON_index >= planning.SYSMON_Tasks.Count && COMM_index >= planning.COMM_Tasks.Count && TRACK_index >= planning.TRACK_Tasks.Count && RESMAN_index >= planning.RESMAN_Tasks.Count)
         {
-            mb2.started = false;
+            //mb2.started = false;
         }
     }
 
+    [ContextMenu("FORCE START")]
     public void StartTasks()
     {
         if(mb2.started) return;

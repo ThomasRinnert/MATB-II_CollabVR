@@ -27,25 +27,18 @@ public class AggregativeUserBoard : MonoBehaviour
             {
                 Destroy(panel.transform.GetChild(i).gameObject);
             }
+            var index = 0;
             for (int p = 0; p < PhotonNetwork.PlayerList.Length /*GameManager.Instance.players.Count*/; p++)
             {
                 if (PhotonNetwork.PlayerList[p].NickName.Contains("XP")) continue;
                 
                 GameObject line = Instantiate(AggregativeLinePrefab, panel.transform, false);
-                line.transform.localPosition = new Vector3(0, -p, 0);
-
+                UserBoard b = line.GetComponent<UserBoard>();
                 Photon.Realtime.Player player = PhotonNetwork.PlayerList[p];
-                foreach (var pm in GameManager.Instance.players)
-                {
-                    if (pm.NickName == player.NickName)
-                    {
-                        UserBoard b = line.GetComponent<UserBoard>();
-                        b.player_manager = pm; //GameManager.Instance.players[p];
-                        b.player = player;
-                    }
-                }
-
+                b.player = player;
                 line.GetComponentInChildren<UserID>().Init();
+                line.transform.localPosition = new Vector3(0, -index, 0);
+                index++;
             }
         }
     }

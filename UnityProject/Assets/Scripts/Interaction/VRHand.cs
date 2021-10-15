@@ -22,7 +22,7 @@ public class VRHand : MonoBehaviourPun
 
     private string author;
     private bool caught = false;
-    private Interactive target = null;
+    [SerializeField] private Interactive target = null;
 
     void Start()
     {
@@ -44,10 +44,12 @@ public class VRHand : MonoBehaviourPun
 
     public void stick(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 axis, Vector2 delta)
     {
+        if (!click1.state && !click2.state) return;
+
         if (author == null) author = "?! VR Hands error ?!";
         object[] content = new object[] {author, axis.x, axis.y};
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-        PhotonNetwork.RaiseEvent(MATBIISystem.TRACK_TargetMove, content, raiseEventOptions, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent((byte) MATBIISystem.PhotonEventCodes.TRACK_TargetMove, content, raiseEventOptions, SendOptions.SendReliable);
     }
 
     public void Catch(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)

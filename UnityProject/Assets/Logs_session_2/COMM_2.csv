@@ -1,6 +1,0 @@
-Time, User ID, Task, Event, Sucess, Target Channel, Target Frequency, Modified Channel, Modified Frequency, Response Time, Completion Time
-50.0, [ ], COMM, Radio, False, COM2, 125.500, [ ], [ ], 40.0355, 0.0000
-72.0, Dsktp_mai, COMM, Radio, True, COM2, 125.500, COM2, 125.500, 7.8556, 4.1643
-125.6, Dsktp_mai, COMM, Radio, True, NAV1, 113.600, NAV1, 113.600, 0.0000, 15.5903
-181.5, Dsktp_mai, COMM, Radio, True, NAV1, 111.500, NAV1, 111.500, 0.0000, 21.5064
-224.9, Dsktp_mai, COMM, Radio, True, COM2, 128.550, COM2, 128.550, 0.0000, 14.9290

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1586193292413869104}
   - component: {fileID: 1764619956870573993}
   - component: {fileID: 5840502977521918823}
+  - component: {fileID: 2279238463536090741}
   m_Layer: 0
   m_Name: MATBII-SYSTEM
   m_TagString: Untagged
@@ -54,7 +55,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1586193292413869104}
-  sceneViewId: 450
+  sceneViewId: 504
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &1586193292413869104
@@ -71,6 +72,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SYSMON_timeLimit: 20
   COMM_timeLimit: 40
+  COMM_radioNames:
+  - NAV1
+  - NAV2
+  - COM1
+  - COM2
   COMM_transmissions:
   - name: OTHER_COM1_118-325
     isNASA504: 0
@@ -472,18 +478,27 @@ MonoBehaviour:
     radio: 1
     frequency: 115.65
     clip: {fileID: 8300000, guid: 021fc35d4c60ea64b97f0769687f700a, type: 3}
-  TRACK_speed: 2
+  COMM_onGoingTransmission:
+    name: 
+    isNASA504: 0
+    radio: 0
+    frequency: 0
+    clip: {fileID: 0}
+  TRACK_speed: 3
   TRACK_duration: 40
   RESMAN_objective: 2500
   RESMAN_duration: 40
-  RESMAN_pumpFailChance: 0.5
   RESMAN_speedFactor: 2
+  RESMAN_pumpFailMin: 5
+  RESMAN_pumpFailMax: 20
+  RESMAN_pumpTimeLimit: 2
   interfaces:
   - {fileID: 0}
   sessionID: 0
   logSessionFolder: 
   elapsedTime: 0
   started: 0
+  training: 1
 --- !u!114 &1764619956870573993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planning: {fileID: 11400000, guid: 39c471b9f4d642d4bbddb5ef6a0797fb, type: 2}
+  Training: {fileID: 11400000, guid: 54b5abef1a3c0924c8686dfd33caf524, type: 2}
   A_B_AB: {fileID: 11400000, guid: 8d0075ec8b0b3554bbc330f8ebb31446, type: 2}
   B_AB_A: {fileID: 11400000, guid: 91108f5c79322ae47acc572490f2f48a, type: 2}
   AB_A_B: {fileID: 11400000, guid: 149c4a9d30f81c947b3660b913b91829, type: 2}
@@ -596,3 +612,17 @@ MonoBehaviour:
   audio_78: {fileID: 8300000, guid: dc0e920f07fa5374b8a6efd1a589d92b, type: 3}
   audio_79: {fileID: 8300000, guid: 3722c11280192d14a92358330cea49b0, type: 3}
   audio_80: {fileID: 8300000, guid: 021fc35d4c60ea64b97f0769687f700a, type: 3}
+--- !u!114 &2279238463536090741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586193292413869110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae4e685a1909a2c449eac33555835236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BG: 1
+  seed: 2647454208

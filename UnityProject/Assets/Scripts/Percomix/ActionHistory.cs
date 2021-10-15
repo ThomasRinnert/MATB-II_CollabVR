@@ -19,10 +19,12 @@ public class ActionHistory : MonoBehaviour
             if (leftHalf)
             {
                 if (warning is WarningTarget || warning is WarningTank) warning.gameObject.SetActive(false);
+                else warning.gameObject.SetActive(true);
             }
             else
             {
                 if (warning is WarningLights || warning is WarningScales || warning is WarningRadio) warning.gameObject.SetActive(false);
+                else warning.gameObject.SetActive(true);
             }
         }
     }

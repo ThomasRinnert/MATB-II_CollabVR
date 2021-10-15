@@ -24,7 +24,7 @@ public class CursorDriver : MonoBehaviourPun
             gameObject.tag = "Untagged";
         }
     }
-    
+
     void Update () {
         if (photonView.IsMine  || ! PhotonNetwork.IsConnected) {
             if (Input.GetButtonDown ("Fire1"))  {
@@ -49,31 +49,31 @@ public class CursorDriver : MonoBehaviourPun
                 cursor.transform.position = point ;
             }
             
-            if (Input.GetKeyDown("[1]")) {
+            if (Input.GetKey("[1]")) {
                 cursor.fakeAxis( -1.0f, -1.0f, playerManager.NickName);
             }
-            if (Input.GetKeyDown("[2]")) {
+            if (Input.GetKey("[2]")) {
                 cursor.fakeAxis( .0f, -1.0f, playerManager.NickName);
             }
-            if (Input.GetKeyDown("[3]")) {
+            if (Input.GetKey("[3]")) {
                 cursor.fakeAxis( 1.0f, -1.0f, playerManager.NickName);
             }
-            if (Input.GetKeyDown("[4]")) {
+            if (Input.GetKey("[4]")) {
                 cursor.fakeAxis( -1.0f, .0f, playerManager.NickName);
             }
-            if (Input.GetKeyDown("[5]")) {
+            if (Input.GetKey("[5]")) {
                 cursor.fakeAxis( .0f, .0f, playerManager.NickName);
             }
-            if (Input.GetKeyDown("[6]")) {
+            if (Input.GetKey("[6]")) {
                 cursor.fakeAxis( 1.0f, .0f, playerManager.NickName);
             }
-            if (Input.GetKeyDown("[7]")) {
+            if (Input.GetKey("[7]")) {
                 cursor.fakeAxis( -1.0f, 1.0f, playerManager.NickName);
             }
-            if (Input.GetKeyDown("[8]")) {
+            if (Input.GetKey("[8]")) {
                 cursor.fakeAxis( .0f, 1.0f, playerManager.NickName);
             }
-            if (Input.GetKeyDown("[9]")) {
+            if (Input.GetKey("[9]")) {
                 cursor.fakeAxis( 1.0f, 1.0f, playerManager.NickName);
             }
         }

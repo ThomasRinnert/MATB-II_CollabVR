@@ -1,6 +1,1 @@
 Time, User ID, Task, Event, Sucess, Target Channel, Target Frequency, Modified Channel, Modified Frequency, Response Time, Completion Time
-38.6, VR_U3, COMM, Radio, True, NAV1, 113.600, NAV1, 113.600, 23.1291, 5.4405
-100.1, VR_U3, COMM, Radio, False, NAV1, 115.4000, NAV1, 115,45, 0.0000, 40.0351
-128.5, VR_U3, COMM, Radio, True, COM2, 124.450, COM2, 124.450, 10.2218, 8.2252
-232.7, VR_U3, COMM, Radio, True, COM1, 128.475, COM1, 128.475, 0.0000, 22.7032
-279.0, VR_U3, COMM, Radio, True, COM1, 127.500, COM1, 127.500, 0.0000, 18.9986

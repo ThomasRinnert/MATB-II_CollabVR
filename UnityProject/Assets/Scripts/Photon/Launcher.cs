@@ -18,9 +18,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField]
     private string SceneToLoad;
 
-    [Tooltip("Scene to load as first player")]
     [SerializeField]
     private bool isVR;
+    [SerializeField]
+    private bool isXP;
+    public void setXP(bool b) {isXP = b; return;}
 
     [Tooltip("The Ui Panel to let the user enter name, connect and play")]
     [SerializeField]
@@ -98,7 +100,10 @@ public class Launcher : MonoBehaviourPunCallbacks
         string PlayerName = PlayerPrefs.GetString("PlayerName", "U4");
         PlayerPrefs.SetString("UserPrefab", isVR ? "VRUser" : "DesktopUser");
         */
-        PhotonNetwork.NickName = (isVR ? "VR_" : "Dsktp_") + PhotonNetwork.NickName;
+
+        if (isXP) PhotonNetwork.NickName = "XP_" + PhotonNetwork.NickName;
+        else if (isVR) PhotonNetwork.NickName = "VR_" + PhotonNetwork.NickName;
+        else PhotonNetwork.NickName = "Dsktp_" + PhotonNetwork.NickName;
         
         // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
         if (PhotonNetwork.IsConnected)

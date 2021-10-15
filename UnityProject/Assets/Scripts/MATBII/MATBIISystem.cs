@@ -60,6 +60,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
 
     private bool[] SYSMON_Scales_active = {false, false, false, false};
     public bool isSYSMON_Scales_active() { return SYSMON_Scales_active[0] || SYSMON_Scales_active[1] || SYSMON_Scales_active[2] || SYSMON_Scales_active[3]; }
+    public bool isSYSMON_Scales_active(int index) { return (index < 4) ? SYSMON_Scales_active[index] : false; }
     private bool[] SYSMON_Scales_upward = {true, true, true, true};
     private float[] SYSMON_Scales_timers = {0.0f, 0.0f, 0.0f, 0.0f};
     public float[] getSYSMON_Scales_timers() { return SYSMON_Scales_timers; }
@@ -74,7 +75,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     public float COMM_timeLimit = 20.0f; // Failure condition
 
     public enum COMM_Radio : int { NAV1 = 0, NAV2 = 1, COM1 = 2, COM2 = 3 }
-    private string[] COMM_radioNames = {"NAV1", "NAV2", "COM1", "COM2"};
+    public string[] COMM_radioNames = {"NAV1", "NAV2", "COM1", "COM2"};
     private float[] COMM_MIN_frequencies = {108.000f, 108.000f, 118.000f, 118.000f};
     private float[] COMM_MAX_frequencies = {118.000f, 118.000f, 136.000f, 136.000f};
     private float[] COMM_increments = {0.050f, 0.050f, 0.025f, 0.025f};
@@ -93,7 +94,9 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
 
     private bool COMM_TASK_active = false; //redundant with COMM_onGoingTransmission != null ?
     public bool isCOMM_TASK_active() { return COMM_TASK_active; }
+    [SerializeField]
     private AudioTransmission COMM_onGoingTransmission = null;
+    public AudioTransmission getCOMM_onGoingTransmission(){return COMM_onGoingTransmission;}
     private Coroutine COMM_playing = null;
     
     private float[] COMM_frequencies = {108.0f, 108.0f, 118.0f, 118.0f};
@@ -138,15 +141,21 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     public float RESMAN_objective = 2500.0f;
     [SerializeField] [Tooltip("Duration of the task")] [Range(0.0f, 120.0f)]
     public float RESMAN_duration = 30.0f;
-    [SerializeField] [Tooltip("Probability of pump failure")] [Range(0.0f, 10.0f)]
-    public float RESMAN_pumpFailChance = 1.0f;
     [SerializeField] [Tooltip("Factor applied to flow/consumption rates")] [Range(1.0f, 5.0f)]
     public float RESMAN_speedFactor = 2.0f;
+    //[SerializeField] [Tooltip("Mean time before pump failure")] [Range(0.0f, 20.0f)]
+    //public float RESMAN_pumpFail = 1.0f;
+    [SerializeField] [Tooltip("Min time before pump failure")] [Range(0.0f, 20.0f)]
+    public float RESMAN_pumpFailMin = 5.0f;
+    [SerializeField] [Tooltip("Max time before pump failure")] [Range(0.0f, 20.0f)]
+    public float RESMAN_pumpFailMax = 20.0f;
+    [SerializeField] [Tooltip("Time to restore a pump failure")] [Range(0.0f, 10.0f)]
+    public float RESMAN_pumpTimeLimit = 2.0f;
 
     //[SerializeField] [Tooltip("Fuel consumption of tank A")] [Range(1.0f, 15.0f)]
-    private float RESMAN_tankAConsumption = 13.33f; // NASA default: 800/min
+    private float RESMAN_tankAConsumption = 12.0f; // NASA default: 800/min = 13.33f
     //[SerializeField] [Tooltip("Fuel consumption of tank B")] [Range(1.0f, 15.0f)]
-    private float RESMAN_tankBConsumption = 13.33f; // NASA default: 800/min
+    private float RESMAN_tankBConsumption = 12.0f; // NASA default: 800/min = 13.33f
     private Dictionary<RESMAN_Pump, float> RESMAN_PumpRates = new Dictionary<RESMAN_Pump, float>()
     {
         [RESMAN_Pump.AToB] =  6.66f, // = NASA default: 400/min
@@ -171,6 +180,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
 
     private RESMAN_PumpState[] RESMAN_pumpStates = {RESMAN_PumpState.Inactive, RESMAN_PumpState.Inactive, RESMAN_PumpState.Inactive, RESMAN_PumpState.Inactive, RESMAN_PumpState.Inactive, RESMAN_PumpState.Inactive, RESMAN_PumpState.Inactive, RESMAN_PumpState.Inactive};
     private float[] RESMAN_pumpTimers = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+    private float[] RESMAN_pumpFails = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
     #endregion
 
     [SerializeField] public List<MATBIIInterface> interfaces;
@@ -179,13 +189,20 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     public System.Globalization.CultureInfo strFormat = System.Globalization.CultureInfo.InvariantCulture;
     public double elapsedTime;
     public bool started = false;
+    public bool training = true;
+    private RandomGenerator RNG;
 
     // Photon Events code
-    public const byte SYSMON_SwitchPressed = 1;
-    public const byte SYSMON_ScalePressed = 2;
-    public const byte COMM_RadioChanged = 3;
-    public const byte TRACK_TargetMove = 4;
-    public const byte RESMAN_PumpChanged = 5;
+    public enum PhotonEventCodes : byte
+    {
+        SYSMON_SwitchPressed,
+        SYSMON_ScalePressed,
+        COMM_RadioChanged,
+        COMM_Validation,
+        TRACK_TargetMove,
+        RESMAN_PumpChanged,
+        WRS_Validation,
+    }
 
     // IPunObservable callback
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -257,7 +274,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     {
         byte eventCode = photonEvent.Code;
         
-        if (eventCode == SYSMON_SwitchPressed)
+        if (eventCode == (byte) PhotonEventCodes.SYSMON_SwitchPressed)
         {
             if (!SYSMON_TASK_active) return;
 
@@ -280,13 +297,18 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
             return;
         }
 
-        if (eventCode == SYSMON_ScalePressed)
+        if (eventCode == (byte) PhotonEventCodes.SYSMON_ScalePressed)
         {
-            if (!SYSMON_TASK_active) return;
-
             object[] data = (object[])photonEvent.CustomData;
             string author = (data != null) ? (string)data[0] : "[ ]";
             int index = (int)data[1];
+
+            if (!SYSMON_Scales_active[index])
+            { 
+                // photonView.RPC("SYSMON_scale_Reset", RpcTarget.All, index);
+                // PhotonNetwork.SendAllOutgoingCommands();
+                return;
+            }
             
             if (SYSMON_Scales_active[index] && photonView.IsMine)
             {
@@ -297,7 +319,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
             return;
         }
         
-        if (eventCode == COMM_RadioChanged)
+        if (eventCode == (byte) PhotonEventCodes.COMM_RadioChanged)
         {
             object[] data = (object[])photonEvent.CustomData;
             string author = (data != null) ? (string)data[0] : "[ ]";
@@ -318,30 +340,132 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
             COMM_latestModif[r] = author;
 
             // if (author == PhotonNetwork.LocalPlayer.NickName) ?
+
             if (photonView.IsMine)
             {
                 photonView.RPC("COMM_SetFrequency", RpcTarget.All, r, frequency);
                 PhotonNetwork.SendAllOutgoingCommands();
 
-                //Success
-                if (COMM_onGoingTransmission.radio == r && COMM_onGoingTransmission.frequency == frequency && COMM_onGoingTransmission.isNASA504)
-                {
-                    photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.COMM, COMM_latestModif[r].ToString(), "Radio", true,
-                        COMM_radioNames[COMM_onGoingTransmission.radio] + ", " + 
-                        COMM_onGoingTransmission.frequency.ToString("0.000", strFormat) + ", " + 
-                        COMM_radioNames[r] + ", " + 
-                        frequency.ToString("0.000", strFormat) + ", " + 
-                        COMM_responseTimer.ToString("0.0000", strFormat) + ", " + 
-                        COMM_completionTimer.ToString("0.0000", strFormat));
-                    photonView.RPC("COMM_Reset", RpcTarget.All);
-                    PhotonNetwork.SendAllOutgoingCommands();
-                }
+                //if (COMM_onGoingTransmission.radio == r && COMM_onGoingTransmission.frequency == frequency && COMM_onGoingTransmission.isNASA504) ?
             }
             return;
         }
 
-        if (eventCode == TRACK_TargetMove)
+        if (eventCode == (byte) PhotonEventCodes.COMM_Validation)
         {
+            if (!COMM_TASK_active) return;
+
+            object[] data = (object[])photonEvent.CustomData;
+            string author = (data != null) ? (string)data[0] : "[ ]";
+
+            int r = (int) COMM_onGoingTransmission.radio;
+            float freq = COMM_onGoingTransmission.frequency;
+            bool success = false; string type = "";
+            string modifiedByUser = author + " [ "; string modifiedRadios = "[ "; string modifiedFrequencies = "[ ";
+            for (int i = 0; i < COMM_latestModif.Length; i++)
+            {
+                if (COMM_latestModif[i] != "none")
+                {
+                    modifiedByUser += COMM_latestModif[i].ToString(strFormat) + " ";
+                    modifiedRadios += COMM_radioNames[i].ToString(strFormat) + " ";
+                    modifiedFrequencies += COMM_frequencies[i].ToString(strFormat) + " ";
+                }
+            }
+            modifiedByUser += "]"; modifiedRadios += "]"; modifiedFrequencies += "]";
+
+            // COMM Transmission was not adressed to users ("NASA 504")
+            if (!COMM_onGoingTransmission.isNASA504)
+            {
+                type = "Radio (Not adressed to NASA 504)"; success = !COMM_responded;
+            }
+
+            // Failure
+            else if (COMM_responseTimer + COMM_completionTimer > COMM_timeLimit // Time limit
+                    || COMM_latestModif[r] == "none"                            // No one changed the target radio
+                    || COMM_frequencies[r] != freq)                             // Wrong channel on target radio
+            {
+                type = "Radio"; success = false;
+            }
+
+            // Success
+            else if (COMM_frequencies[r] == freq)
+            {
+                type = "Radio"; success = true;
+            }
+
+            photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.COMM, modifiedByUser, type, success,
+                COMM_radioNames[r] + ", " + 
+                freq.ToString("0.000", strFormat) + ", " + 
+                modifiedRadios + ", " + 
+                modifiedFrequencies + ", " + 
+                COMM_responseTimer.ToString("0.0000", strFormat) + ", " + 
+                COMM_completionTimer.ToString("0.0000", strFormat));
+            photonView.RPC("COMM_Reset", RpcTarget.All);
+            PhotonNetwork.SendAllOutgoingCommands();
+            return;
+        }
+
+        if (eventCode == (byte) PhotonEventCodes.WRS_Validation)
+        {
+            if (!COMM_TASK_active) return;
+
+            object[] data = (object[])photonEvent.CustomData;
+            string author = (data != null) ? (string)data[0] : "[ ]";
+
+            //mental
+            //physical
+
+            int r = (int) COMM_onGoingTransmission.radio;
+            float freq = COMM_onGoingTransmission.frequency;
+            bool success = false; string type = "";
+            string modifiedByUser = author + " [ "; string modifiedRadios = "[ "; string modifiedFrequencies = "[ ";
+            for (int i = 0; i < COMM_latestModif.Length; i++)
+            {
+                if (COMM_latestModif[i] != "none")
+                {
+                    modifiedByUser += COMM_latestModif[i].ToString(strFormat) + " ";
+                    modifiedRadios += COMM_radioNames[i].ToString(strFormat) + " ";
+                    modifiedFrequencies += COMM_frequencies[i].ToString(strFormat) + " ";
+                }
+            }
+            modifiedByUser += "]"; modifiedRadios += "]"; modifiedFrequencies += "]";
+
+            // COMM Transmission was not adressed to users ("NASA 504")
+            if (!COMM_onGoingTransmission.isNASA504)
+            {
+                type = "Radio (Not adressed to NASA 504)"; success = !COMM_responded;
+            }
+
+            // Failure
+            else if (COMM_responseTimer + COMM_completionTimer > COMM_timeLimit // Time limit
+                    || COMM_latestModif[r] == "none"                            // No one changed the target radio
+                    || COMM_frequencies[r] != freq)                             // Wrong channel on target radio
+            {
+                type = "Radio"; success = false;
+            }
+
+            // Success
+            else if (COMM_frequencies[r] == freq)
+            {
+                type = "Radio"; success = true;
+            }
+
+            photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.COMM, modifiedByUser, type, success,
+                COMM_radioNames[r] + ", " + 
+                freq.ToString("0.000", strFormat) + ", " + 
+                modifiedRadios + ", " + 
+                modifiedFrequencies + ", " + 
+                COMM_responseTimer.ToString("0.0000", strFormat) + ", " + 
+                COMM_completionTimer.ToString("0.0000", strFormat));
+            photonView.RPC("COMM_Reset", RpcTarget.All);
+            PhotonNetwork.SendAllOutgoingCommands();
+            return;
+        }
+
+        if (eventCode == (byte) PhotonEventCodes.TRACK_TargetMove)
+        {
+            if (!TRACK_TASK_active) return;
+
             object[] data = (object[])photonEvent.CustomData;
             if (data == null) return;
 
@@ -357,7 +481,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
             return;
         }
 
-        if (eventCode == RESMAN_PumpChanged)
+        if (eventCode == (byte) PhotonEventCodes.RESMAN_PumpChanged)
         {
             object[] data = (object[])photonEvent.CustomData;
             string author = (data != null) ? (string)data[0] : "[ ]";
@@ -376,19 +500,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
             return;
         }
 
-        if (eventCode == 201 || eventCode == 206) { return; /* Serialized data */ }
-
-        if (eventCode == 253)
-        {
-            /*
-            Event code 253 is for PropertiesChanged event.
-            You get this event when another remote player has changed a room or player property (with the broadcast option "on" which is the default behaviour).
-            You can implement PUN callbacks:
-            - void OnPhotonCustomRoomPropertiesChanged (Hashtable propertiesThatChanged)
-            - void OnPhotonPlayerPropertiesChanged (object[] playerAndUpdatedProps)
-            */
-            return;
-        }
+        if (eventCode >= 200) { return; /* Photon internal events */ }
 
         Debug.LogWarning("Unhandled EventData from photon... event code: " + eventCode.ToString());
         return;
@@ -401,6 +513,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
 
     void Start()
     {
+        RNG = GetComponent<RandomGenerator>();
         CreateLogFiles();
 
         //COMM_LoadAudioResources();
@@ -426,7 +539,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     void Update()
     {
         if (!started || !photonView.IsMine) return;
-
+        
         elapsedTime += Time.deltaTime;
 
         if(SYSMON_TASK_active) { UpdateSYSMON(); }
@@ -530,7 +643,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
                 else SYSMON_Scales_timers[s] += Time.deltaTime;
                 
                 //Failure
-                if (SYSMON_Scales_criticalTimers[s] > SYSMON_Scales_timers[s])
+                if (SYSMON_Scales_criticalTimers[s] + SYSMON_Scales_timers[s] > SYSMON_timeLimit)
                 {
                     photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.SYSMON, "[ ]", "Scale", false, SYSMON_Scales_timers[s].ToString("0.0000", strFormat) + "(" + SYSMON_Scales_criticalTimers[s].ToString("0.0000", strFormat) + ")");
                     photonView.RPC("SYSMON_scale_Reset", RpcTarget.All, s);
@@ -542,13 +655,13 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     }
 
     [PunRPC]
-    public void SYSMON_Start(bool[] direction, PhotonMessageInfo info)
+    public void SYSMON_Start(bool[] tasks, bool[] direction, PhotonMessageInfo info)
     {
         SYSMON_TASK_active = true;
 
-        SYSMON_normallyON_Start();
-        SYSMON_normallyOFF_Start();
-        for (int i = 0; i < 4; i++) SYSMON_scale_Start(i,direction[i]);
+        if (tasks[0]) SYSMON_normallyON_Start();
+        if (tasks[1]) SYSMON_normallyOFF_Start();
+        for (int i = 0; i < 4; i++) { if (tasks[2+i]) SYSMON_scale_Start(i,direction[i]); }
     }
 
     [PunRPC]
@@ -567,9 +680,10 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         if (SYSMON_NormallyON_active && photonView.IsMine)
         {
             photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.SYSMON, "[ ]", "Normally ON Light", false, SYSMON_NormallyON_timer.ToString("0.0000", strFormat));
-            photonView.RPC("SYSMON_normallyON_Reset", RpcTarget.All);
             PhotonNetwork.SendAllOutgoingCommands();
         }
+        if (SYSMON_NormallyON_active) SYSMON_normallyON_Reset();
+        
         SYSMON_TASK_active = true;
         SYSMON_NormallyON_active = true;
         SYSMON_NormallyON_timer = 0.0f;
@@ -598,9 +712,9 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         if (SYSMON_NormallyOFF_active && photonView.IsMine)
         {
             photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.SYSMON, "[ ]", "Normally OFF Light", false, SYSMON_NormallyOFF_timer.ToString("0.0000", strFormat));
-            photonView.RPC("SYSMON_normallyOFF_Reset", RpcTarget.All);
             PhotonNetwork.SendAllOutgoingCommands();
         }
+        if (SYSMON_NormallyOFF_active) SYSMON_normallyOFF_Reset();
         SYSMON_TASK_active = true;
         SYSMON_NormallyOFF_active = true;
         SYSMON_NormallyOFF_timer = 0.0f;
@@ -629,9 +743,9 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         if (SYSMON_Scales_active[scale] && photonView.IsMine)
         {
             photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.SYSMON, "[ ]", "Scale", false, SYSMON_Scales_timers[scale].ToString("0.0000", strFormat) + "(" + SYSMON_Scales_criticalTimers[scale].ToString("0.0000", strFormat) + ")");
-            photonView.RPC("SYSMON_scale_Reset", RpcTarget.All, scale);
             PhotonNetwork.SendAllOutgoingCommands();
         }
+        if (SYSMON_Scales_active[scale]) SYSMON_scale_Reset(scale);
 
         SYSMON_TASK_active = true;
         SYSMON_Scales_active[scale] = true;
@@ -665,8 +779,8 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
 
         if (COMM_responseTimer + COMM_completionTimer > COMM_timeLimit)
         {
-            photonView.RPC("COMM_Reset", RpcTarget.All);
-            PhotonNetwork.SendAllOutgoingCommands();
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+            PhotonNetwork.RaiseEvent((byte) MATBIISystem.PhotonEventCodes.COMM_Validation, new object[] {"None"}, raiseEventOptions, SendOptions.SendReliable);
         }
     }
 
@@ -724,6 +838,8 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         COMM_onGoingTransmission = COMM_transmissions[index];
 
         COMM_playing = StartCoroutine(COMM_Play());
+
+        foreach (var i in interfaces) { i.COMM_Validate.gameObject.SetActive(true); }
     }
 
     [PunRPC]
@@ -740,68 +856,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
             COMM_playing = null;
         }
 
-        string modifiedByUser = "[ "; string modifiedRadios = "[ "; string modifiedFrequencies = "[ ";
-        for (int i = 0; i < COMM_latestModif.Length; i++)
-        {
-            if (COMM_latestModif[i] != "none")
-            {
-                modifiedByUser += COMM_latestModif[i].ToString(strFormat) + " ";
-                modifiedRadios += COMM_radioNames[i].ToString(strFormat) + " ";
-                modifiedFrequencies += COMM_frequencies[i].ToString(strFormat) + " ";
-            }
-        }
-        modifiedByUser += "]"; modifiedRadios += "]"; modifiedFrequencies += "]";
-
-        //COMM Transmission was not adressed to users ("NASA 504")
-        //Success: If no one changed any radio
-        if(!COMM_onGoingTransmission.isNASA504 && photonView.IsMine)
-        {
-            photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.COMM, modifiedByUser, "Radio (Not adressed to NASA 504)", !COMM_responded,
-                COMM_radioNames[COMM_onGoingTransmission.radio] + ", " + 
-                COMM_onGoingTransmission.frequency.ToString("0.000", strFormat) + ", " + 
-                modifiedRadios + ", " + 
-                modifiedFrequencies + ", " + 
-                COMM_responseTimer.ToString("0.0000", strFormat) + ", " + 
-                COMM_completionTimer.ToString("0.0000", strFormat));
-            PhotonNetwork.SendAllOutgoingCommands();
-        }
-
-        //Failure: No one changed the target radio
-        else if (COMM_latestModif[COMM_onGoingTransmission.radio] == "none" && photonView.IsMine)
-        {
-            photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.COMM, modifiedByUser, "Radio", false,
-                COMM_radioNames[COMM_onGoingTransmission.radio] + ", " + 
-                COMM_onGoingTransmission.frequency.ToString("0.000", strFormat) + ", " + 
-                modifiedRadios + ", " + 
-                modifiedFrequencies + ", " + 
-                COMM_responseTimer.ToString("0.0000", strFormat) + ", " + 
-                COMM_completionTimer.ToString("0.0000", strFormat));
-            PhotonNetwork.SendAllOutgoingCommands();
-        }
-
-        //Failure: Wrong channel on target radio
-        else if(COMM_frequencies[COMM_onGoingTransmission.radio] != COMM_onGoingTransmission.frequency && photonView.IsMine)
-        {
-            photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.COMM, COMM_latestModif[COMM_onGoingTransmission.radio], "Radio", false,
-                COMM_radioNames[COMM_onGoingTransmission.radio] + ", " + 
-                COMM_onGoingTransmission.frequency.ToString("0.0000", strFormat) + ", " + 
-                COMM_radioNames[COMM_onGoingTransmission.radio] + ", " + 
-                COMM_frequencies[COMM_onGoingTransmission.radio].ToString() + ", " + 
-                COMM_responseTimer.ToString("0.0000", strFormat) + ", " + 
-                COMM_completionTimer.ToString("0.0000", strFormat));
-            PhotonNetwork.SendAllOutgoingCommands();
-        }
-
-        /* Should not be needed
-        // Reset all interfaces
-        for (int radio = 0; radio < COMM_frequencies.Length; radio++)
-        {
-            foreach (var i in interfaces)
-            {
-                i.COMM_radios[radio].SetFrequency(COMM_frequencies[radio]);
-            }
-        }
-        */
+        foreach (var i in interfaces) { i.COMM_Validate.gameObject.SetActive(false); }
 
         // Reset internal values
         COMM_TASK_active = false;
@@ -837,11 +892,6 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
                     break;
                 }
             }
-            if (TRACK_timer % 5.0f < 0.01f && photonView.IsMine) // maybe rework the periodicity
-            {
-                photonView.RPC("TRACK_newdDirection", RpcTarget.All, Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
-                PhotonNetwork.SendAllOutgoingCommands();
-            }
         }
         else
         {
@@ -872,8 +922,17 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         if (photonView.IsMine)
         {
             photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.TRACK, "[ ]", "MANUAL MODE", true, "");
-            photonView.RPC("TRACK_newdDirection", RpcTarget.All, x, y);
             PhotonNetwork.SendAllOutgoingCommands();
+            StartCoroutine(TRACK_Coroutine());
+        }
+    }
+    public IEnumerator TRACK_Coroutine()
+    {
+        while (TRACK_TASK_active)
+        {
+            photonView.RPC("TRACK_newDirection", RpcTarget.All, Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+            PhotonNetwork.SendAllOutgoingCommands();
+            yield return new WaitForSeconds(5.0f);
         }
     }
 
@@ -903,16 +962,19 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     }
 
     [PunRPC]
-    private void TRACK_newdDirection(float dirX, float dirY)
+    private void TRACK_newDirection(float dirX, float dirY)
     {
-        float posX = 0.0f; float x = (dirX + 1.0f) / 2.0f; // float x = Random.Range(0.0f, 1.0f);
-        float posY = 0.0f; float y = (dirY + 1.0f) / 2.0f; // float y = Random.Range(0.0f, 1.0f);
+        // float posX = 0.0f; 
+        // float posY = 0.0f;
+        float x = (dirX + 1.0f) / 2.0f; // float x = Random.Range(0.0f, 1.0f);
+        float y = (dirY + 1.0f) / 2.0f; // float y = Random.Range(0.0f, 1.0f);
         foreach (var i in interfaces)
         {
-            Bounds b = i.TRACK_targetContainer.bounds;
-            posX = i.TRACK_target.inInnerZone() ? x * (b.max.x - b.min.x) + b.min.x : i.TRACK_target.transform.position.x;
-            posY = i.TRACK_target.inInnerZone() ? y * (b.max.y - b.min.y) + b.min.y : i.TRACK_target.transform.position.y;
-            i.TRACK_target.Move(new Vector3(posX, posY,  i.TRACK_target.transform.position.z), new Vector3(dirX, dirY, 0), TRACK_speed);
+            // Bounds b = i.TRACK_targetContainer.bounds;
+            // posX = i.TRACK_target.inInnerZone() ? x * (b.size.x) + b.min.x : i.TRACK_target.transform.position.x;
+            // posY = i.TRACK_target.inInnerZone() ? y * (b.size.y) + b.min.y : i.TRACK_target.transform.position.y;
+            // Vector3 position = new Vector3(posX, posY,  i.TRACK_target.transform.position.z);
+            i.TRACK_target.Move(i.TRACK_target.transform.position, new Vector3(dirX, dirY, 0), TRACK_speed);
         }
     }
 
@@ -989,13 +1051,13 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
                 }
             }
 
-            // Failure - should we log these events ? change probability law for something else (eg. exponetial law)
-            if (Random.Range(0.0f, 100.0f) < RESMAN_pumpFailChance && elapsedTime % 1.0f < 0.01f && RESMAN_pumpStates[p] == RESMAN_PumpState.Active) // RESMAN_pumpTimers[p] > RESMAN_pumpTimeLimit
+            // Failure - should we log these events ?
+            if (RESMAN_pumpStates[p] == RESMAN_PumpState.Active && RESMAN_pumpTimers[p] > RESMAN_pumpFails[p])
             {
                 photonView.RPC("RESMAN_changePump", RpcTarget.All, p, RESMAN_PumpState.Failed);
                 PhotonNetwork.SendAllOutgoingCommands();
             }
-            else if (RESMAN_pumpTimers[p] > 2.0f && RESMAN_pumpStates[p] == RESMAN_PumpState.Failed)
+            else if (RESMAN_pumpStates[p] == RESMAN_PumpState.Failed && RESMAN_pumpTimers[p] > RESMAN_pumpTimeLimit)
             {
                 photonView.RPC("RESMAN_changePump", RpcTarget.All, p, RESMAN_PumpState.Inactive);
                 PhotonNetwork.SendAllOutgoingCommands();
@@ -1044,6 +1106,13 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         //RESMAN_ResetPumps();
     }
 
+    [PunRPC]
+    public void RESMAN_Refuel()
+    {
+        RESMAN_Reset();
+        RESMAN_tanks = new float[]{2500.0f, 2500.0f, 1500.0f, float.MaxValue, 1500.0f, float.MaxValue};
+    }
+
     private void RESMAN_ResetPumps()
     {
         for (int i = 0; i < 8; i ++) { RESMAN_changePump(i, RESMAN_PumpState.Inactive); }
@@ -1054,6 +1123,24 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     {
         RESMAN_pumpStates[pump] = state;
         RESMAN_pumpTimers[pump] = 0.0f;
+        
+        if (state == RESMAN_PumpState.Active)
+        {
+            /*
+            Exponential distribution
+                PDF:	lambda * e^{- lambda x}
+                CDF:	1 - e^{- lambda x}}
+                Mean:   1/ lambda = RESMAN_pumpFail
+                => lifespan = - (ln (1 - CDF(x))) / lambda
+            double u = RNG.MRG32k3a();
+            double s = RESMAN_pumpFail;
+            double l = RESMAN_TASK_active ? (s / RESMAN_speedFactor) : s;
+            RESMAN_pumpFails[pump] = (float) (- System.Math.Log(1.0-u) * l);
+            */
+
+            RESMAN_pumpFails[pump] = Random.Range(RESMAN_pumpFailMin, RESMAN_pumpFailMax);
+        }
+
         foreach (var i in interfaces)
         {
             if (state == RESMAN_PumpState.Active) i.RESMAN_PumpButtons[pump].Activate();
@@ -1152,8 +1239,8 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         foreach (var i in interfaces)
         {
             //i.Workload.Activate();
-            return;
         }
+        started = true;
     }
     #endregion
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class MATBIIInterface : MonoBehaviour
 {
@@ -14,15 +15,16 @@ public class MATBIIInterface : MonoBehaviour
 
     [Header("COMM references")]
     [SerializeField] public List<COMMRadio> COMM_radios;
+    [SerializeField] public COMMValidation COMM_Validate;
     [SerializeField] public AudioSource COMM_audio;
 
     [Header("TRACK references")]
-    [SerializeField] public TextMesh TRACK_AutomodeDisplay;
+    [SerializeField] public TextMeshPro TRACK_AutomodeDisplay;
     [SerializeField] public Collider TRACK_targetContainer;
     [SerializeField] public TRACKTarget TRACK_target;
 
     [Header("RESMAN references")]
-    [SerializeField] public List<TextMesh> RESMAN_Tanks;
+    [SerializeField] public List<TextMeshPro> RESMAN_Tanks;
     [SerializeField] public List<RESMANPumpButton> RESMAN_PumpButtons;
 
     // Start is called before the first frame update

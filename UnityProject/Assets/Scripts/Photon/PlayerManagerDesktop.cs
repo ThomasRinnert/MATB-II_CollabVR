@@ -14,11 +14,13 @@ public class PlayerManagerDesktop : PlayerManager, IPunObservable
     {
         if (stream.IsWriting)
         {
-            //...
+            stream.SendNext(this.workload_cog);
+            stream.SendNext(this.workload_phys);
         }
         else
         {
-            //...
+            workload_cog = (int) stream.ReceiveNext();
+            workload_phys = (int) stream.ReceiveNext();
         }
     }
 
@@ -61,6 +63,11 @@ public class PlayerManagerDesktop : PlayerManager, IPunObservable
         {
             cameraTransform.SetParent(transform);
         }
+    }
+
+    void OnDestroy()
+    {
+        if (GameManager.Instance != null) GameManager.Instance.players.Remove(this); 
     }
 
     #if UNITY_5_4_OR_NEWER

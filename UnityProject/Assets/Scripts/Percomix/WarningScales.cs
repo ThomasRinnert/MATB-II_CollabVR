@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WarningScales : ActivityWarning
 {
@@ -14,6 +15,8 @@ public class WarningScales : ActivityWarning
     [SerializeField] SpriteRenderer sprite_2;
     [SerializeField] SpriteRenderer sprite_3;
     MATBIISystem MATBII;
+    public Slider progress;
+    public Slider passive_progress;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +27,9 @@ public class WarningScales : ActivityWarning
     // Update is called once per frame
     void Update()
     {
+        progress.value = (float) MATBIISystem.Instance.getSYSMON_score() / 25.0f;
+        passive_progress.value = ((float) MATBIISystem.Instance.planner.SYSMON_index / (float) MATBIISystem.Instance.planner.planning.SYSMON_Tasks.Count);
+
         if (MATBII.isSYSMON_Scales_active())
         {
             float[] timers = {MATBII.getSYSMON_Scales_timers()[0] + MATBII.getSYSMON_Scales_criticalTimers()[0],

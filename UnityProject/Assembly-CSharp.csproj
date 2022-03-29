@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Demo\Demo.cs" />
      <Compile Include="Assets\Scripts\Interaction\AvatarScale.cs" />
      <Compile Include="Assets\Scripts\Interaction\CursorDriver.cs" />
      <Compile Include="Assets\Scripts\Interaction\CursorTool.cs" />
@@ -88,6 +89,7 @@
      <Compile Include="Assets\Scripts\Percomix\WarningScales.cs" />
      <Compile Include="Assets\Scripts\Percomix\WarningTank.cs" />
      <Compile Include="Assets\Scripts\Percomix\WarningTarget.cs" />
+     <Compile Include="Assets\Scripts\Percomix\XP.cs" />
      <Compile Include="Assets\Scripts\Photon\GameManager.cs" />
      <Compile Include="Assets\Scripts\Photon\Launcher.cs" />
      <Compile Include="Assets\Scripts\Photon\PlayerManager.cs" />
@@ -95,6 +97,7 @@
      <Compile Include="Assets\Scripts\Photon\PlayerManagerVR.cs" />
      <Compile Include="Assets\Scripts\Photon\PlayerNameInputField.cs" />
      <Compile Include="Assets\Scripts\RandomGenerator.cs" />
+     <Compile Include="Assets\test.cs" />
      <None Include="Assets\Demo\3DCharacterDummy\Readme.txt" />
  <Reference Include="Unity.ProBuilder">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>

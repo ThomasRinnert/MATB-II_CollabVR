@@ -15,11 +15,6 @@ public class VRHand : MonoBehaviourPun
 
     public SteamVR_Action_Vector2 direction;
 
-    public SteamVR_Action_Boolean padUp = null;
-    public SteamVR_Action_Boolean padDown = null;
-    public SteamVR_Action_Boolean padLeft = null;
-    public SteamVR_Action_Boolean padRight = null;
-
     private string author;
     private bool caught = false;
     [SerializeField] private Interactive target = null;
@@ -71,6 +66,7 @@ public class VRHand : MonoBehaviourPun
             //PhotonNetwork.SendAllOutgoingCommands () ;
             caught = false ;
             target.Release();
+            target = null ;
         }
     }
 
@@ -80,6 +76,14 @@ public class VRHand : MonoBehaviourPun
             if (target != null) {
                 //target.photonView.RPC ("ShowCatchable", RpcTarget.All) ;
                 //PhotonNetwork.SendAllOutgoingCommands () ;
+            }
+        }
+    }
+
+    void OnTriggerStay (Collider other) {
+        if (! caught) {
+            if (target == null) {
+                target = other.gameObject.GetComponent<Interactive>();
             }
         }
     }

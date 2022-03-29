@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99dc60e6ad096af4a8391620d32a81c4, type: 3}
   m_Name: SamplePlanning
   m_EditorClassIdentifier: 
+  duration: 300
   SYSMON_Tasks:
   - startTime: 0
     parameters:
@@ -21,7 +22,7 @@ MonoBehaviour:
       scale2: 0
       scale3: 0
       scale4: 0
-  - startTime: 5
+  - startTime: 10
     parameters:
       NormallyON: 0
       NormallyOFF: 0
@@ -29,7 +30,7 @@ MonoBehaviour:
       scale2: 1
       scale3: 0
       scale4: 0
-  - startTime: 10
+  - startTime: 20
     parameters:
       NormallyON: 0
       NormallyOFF: 0
@@ -37,7 +38,7 @@ MonoBehaviour:
       scale2: 0
       scale3: 1
       scale4: 0
-  - startTime: 15
+  - startTime: 30
     parameters:
       NormallyON: 0
       NormallyOFF: 0
@@ -45,7 +46,7 @@ MonoBehaviour:
       scale2: 0
       scale3: 0
       scale4: 1
-  - startTime: 20
+  - startTime: 40
     parameters:
       NormallyON: 1
       NormallyOFF: 1

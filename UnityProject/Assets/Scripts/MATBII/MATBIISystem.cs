@@ -48,6 +48,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
 
     private bool SYSMON_TASK_active = false;
     public bool isSYSMON_TASK_active() { return SYSMON_TASK_active; }
+    private bool[] SYSMON_request = {false,false,false,false,false,false};
 
     private bool SYSMON_NormallyON_active = false;
     public bool isSYSMON_NormallyON_active() { return SYSMON_NormallyON_active; }
@@ -118,6 +119,10 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
 
     private bool TRACK_TASK_active = false;
     public bool isTRACK_TASK_active() { return TRACK_TASK_active; }
+    private double TRACK_iterationScore = 0;
+
+    private string TRACK_authors = "";
+    private double [] TRACK_authorContrib = {0.0, 0.0};
 
     private float TRACK_timer = 0.0f;
     public float getTRACK_timer() { return TRACK_timer; }
@@ -191,6 +196,18 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     public bool started = false;
     public bool training = true;
     private RandomGenerator RNG;
+    public TASKPlanner planner;
+
+    // Scoring: 25% for each task, earned by completing perfectly all iterations of a task
+    private double SYSMON_score = 0; public double getSYSMON_score() { return SYSMON_score; }
+    public double SYSMON_scoreIncrement = 1.0;
+    private double COMM_score = 0; public double getCOMM_score() { return COMM_score; }
+    public double COMM_scoreIncrement = 1.0;
+    private double TRACK_score = 0; public double getTRACK_score() { return TRACK_score; }
+    public double TRACK_scoreIncrement = 1.0;
+    private double RESMAN_score = 0; public double getRESMAN_score() { return RESMAN_score; }
+    //public double RESMAN_scoreIncrement = 1.0;
+    public double MATBII_score { get => SYSMON_score + COMM_score + TRACK_score + RESMAN_score; }
 
     // Photon Events code
     public enum PhotonEventCodes : byte
@@ -209,6 +226,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     {
         if (stream.IsWriting)
         {
+            stream.SendNext(started);
             stream.SendNext(elapsedTime);
             stream.SendNext(SYSMON_NormallyON_active);
             stream.SendNext(SYSMON_NormallyON_timer);
@@ -236,9 +254,15 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
             stream.SendNext(RESMAN_tanks[1]);
             stream.SendNext(RESMAN_tanks[2]);
             stream.SendNext(RESMAN_tanks[4]);
+
+            stream.SendNext(SYSMON_score);
+            stream.SendNext(COMM_score);
+            stream.SendNext(TRACK_score);
+            stream.SendNext(RESMAN_score);
         }
         else
         {
+            this.started                   = (bool)   stream.ReceiveNext();
             this.elapsedTime               = (double) stream.ReceiveNext();
             this.SYSMON_NormallyON_active  = (bool)   stream.ReceiveNext();
             this.SYSMON_NormallyON_timer   = (float)  stream.ReceiveNext();
@@ -266,6 +290,11 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
             this.RESMAN_tanks[1]      = (float) stream.ReceiveNext();
             this.RESMAN_tanks[2]      = (float) stream.ReceiveNext();
             this.RESMAN_tanks[4]      = (float) stream.ReceiveNext();
+
+            this.SYSMON_score         = (double) stream.ReceiveNext();
+            this.COMM_score           = (double) stream.ReceiveNext();
+            this.TRACK_score          = (double) stream.ReceiveNext();
+            this.RESMAN_score         = (double) stream.ReceiveNext();
         }
     }
 
@@ -368,7 +397,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
                 {
                     modifiedByUser += COMM_latestModif[i].ToString(strFormat) + " ";
                     modifiedRadios += COMM_radioNames[i].ToString(strFormat) + " ";
-                    modifiedFrequencies += COMM_frequencies[i].ToString(strFormat) + " ";
+                    modifiedFrequencies += COMM_frequencies[i].ToString("000.000", strFormat) + " ";
                 }
             }
             modifiedByUser += "]"; modifiedRadios += "]"; modifiedFrequencies += "]";
@@ -381,7 +410,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
 
             // Failure
             else if (COMM_responseTimer + COMM_completionTimer > COMM_timeLimit // Time limit
-                    || COMM_latestModif[r] == "none"                            // No one changed the target radio
+                  //|| COMM_latestModif[r] == "none"                            // No one changed the target radio
                     || COMM_frequencies[r] != freq)                             // Wrong channel on target radio
             {
                 type = "Radio"; success = false;
@@ -393,6 +422,22 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
                 type = "Radio"; success = true;
             }
 
+            if (!photonView.IsMine) return;
+
+            //if (success) COMM_score += COMM_scoreIncrement * ((COMM_responseTimer + COMM_completionTimer) / COMM_timeLimit);
+            if (success) COMM_score += COMM_scoreIncrement;
+            else
+            {
+                string s1 = freq.ToString("000.000", strFormat);
+                string s2 = COMM_frequencies[r] .ToString("000.000", strFormat);
+                int count = -2;
+                for (int i = 0; i < s2.Length; i++)
+                {
+                    if (s1[i] == s2[i]) count ++;
+                }
+                COMM_score += COMM_scoreIncrement * (((double)count) / 5.0); // with the 7 digits, only five can change, all frequencies start with a 1 and have a '.'
+            }
+            
             photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.COMM, modifiedByUser, type, success,
                 COMM_radioNames[r] + ", " + 
                 freq.ToString("0.000", strFormat) + ", " + 
@@ -475,6 +520,9 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
 
             if (photonView.IsMine)
             {
+                if (author.Contains("Unity")) TRACK_authorContrib[0] += 1;
+                else TRACK_authorContrib[1] += 1;
+                
                 photonView.RPC("TRACK_Move", RpcTarget.All, x, y);
                 PhotonNetwork.SendAllOutgoingCommands();
             }
@@ -514,6 +562,8 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     void Start()
     {
         RNG = GetComponent<RandomGenerator>();
+        planner = GetComponent<TASKPlanner>();
+
         CreateLogFiles();
 
         //COMM_LoadAudioResources();
@@ -662,6 +712,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         if (tasks[0]) SYSMON_normallyON_Start();
         if (tasks[1]) SYSMON_normallyOFF_Start();
         for (int i = 0; i < 4; i++) { if (tasks[2+i]) SYSMON_scale_Start(i,direction[i]); }
+        SYSMON_request = tasks;
     }
 
     [PunRPC]
@@ -696,14 +747,14 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     [PunRPC]
     public void SYSMON_normallyON_Reset()
     {
-        SYSMON_NormallyON_timer = 0.0f;
+        //SYSMON_NormallyON_timer = 0.0f;
         SYSMON_NormallyON_active = false;
         foreach (var i in interfaces)
         {
             i.SYSMON_normallyON_Switch.Restore();
         }
 
-        SYSMON_TASK_active = SYSMON_NormallyON_active || SYSMON_NormallyOFF_active || SYSMON_Scales_active[0] || SYSMON_Scales_active[1] || SYSMON_Scales_active[2] || SYSMON_Scales_active[3];
+        SYSMON_UpdateStatus();
     }
 
     [PunRPC]
@@ -727,14 +778,14 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     [PunRPC]
     public void SYSMON_normallyOFF_Reset()
     {
-        SYSMON_NormallyOFF_timer = 0.0f;
+        //SYSMON_NormallyOFF_timer = 0.0f;
         SYSMON_NormallyOFF_active = false;
         foreach (var i in interfaces)
         {
             i.SYSMON_normallyOFF_Switch.Restore();
         }
 
-        SYSMON_TASK_active = SYSMON_NormallyON_active || SYSMON_NormallyOFF_active || SYSMON_Scales_active[0] || SYSMON_Scales_active[1] || SYSMON_Scales_active[2] || SYSMON_Scales_active[3];
+        SYSMON_UpdateStatus();
     }
 
     [PunRPC]
@@ -759,15 +810,53 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     [PunRPC]
     public void SYSMON_scale_Reset(int scale)
     {
-        SYSMON_Scales_timers[scale] = 0.0f;
-        SYSMON_Scales_criticalTimers[scale] = 0.0f;
+        //SYSMON_Scales_timers[scale] = 0.0f;
+        //SYSMON_Scales_criticalTimers[scale] = 0.0f;
         SYSMON_Scales_active[scale] = false;
         foreach (var i in interfaces)
         {
             i.SYSMON_Scales[scale].ResetPos();
         }
 
+        SYSMON_UpdateStatus();
+    }
+
+    private void SYSMON_UpdateStatus()
+    {
+        bool old_value = SYSMON_TASK_active;
         SYSMON_TASK_active = SYSMON_NormallyON_active || SYSMON_NormallyOFF_active || SYSMON_Scales_active[0] || SYSMON_Scales_active[1] || SYSMON_Scales_active[2] || SYSMON_Scales_active[3];
+        if (old_value && !SYSMON_TASK_active)
+        {
+            float factor = 0.0f; int task_quantity = 0;
+            
+
+            if (SYSMON_request[0])
+            {
+                factor += 1 - (SYSMON_NormallyON_timer / SYSMON_timeLimit);
+                task_quantity += 1;
+            }
+            if (SYSMON_request[1])
+            {
+                factor += 1 - (SYSMON_NormallyOFF_timer / SYSMON_timeLimit);
+                task_quantity += 1;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                if (SYSMON_request[2+i])
+                {
+                    factor += 1 - ((SYSMON_Scales_timers[i] + SYSMON_Scales_criticalTimers[i]) / SYSMON_timeLimit);
+                    task_quantity += 1;
+                }
+            }
+            SYSMON_score += (SYSMON_scoreIncrement) * (factor / task_quantity);
+            SYSMON_NormallyON_timer = 0.0f;
+            SYSMON_NormallyOFF_timer = 0.0f;
+            for (int scale = 0; scale < 4; scale++)
+            {
+                SYSMON_Scales_timers[scale] = 0.0f;
+                SYSMON_Scales_criticalTimers[scale] = 0.0f;
+            }
+        }
     }
     #endregion
 
@@ -877,7 +966,6 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     }
     #endregion
 
-    //Still need to handle a selection tool with tag "Crosshair"
     #region TRACK
     private void UpdateTRACK()
     {
@@ -892,9 +980,11 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
                     break;
                 }
             }
+            TRACK_iterationScore = TRACK_successTimer / TRACK_duration; //Take distance into account
         }
         else
         {
+            TRACK_score += TRACK_scoreIncrement * TRACK_iterationScore;
             photonView.RPC("TRACK_Reset", RpcTarget.All);
             PhotonNetwork.SendAllOutgoingCommands();
         }
@@ -918,6 +1008,9 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         //TRACK_missedTarget = 0;
         TRACK_timer = 0.0f;
         TRACK_successTimer = 0.0f;
+        TRACK_authors = "";
+        TRACK_authorContrib[0] = 0.0;
+        TRACK_authorContrib[1] = 0.0;
 
         if (photonView.IsMine)
         {
@@ -942,9 +1035,11 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         //Disable tracking tool
         //...
 
+        TRACK_authors = "VR_Unity: " + ((100.0 * TRACK_authorContrib[0]) / (TRACK_authorContrib[0] + TRACK_authorContrib[1])).ToString("00.00", strFormat) + "% VR_U: " + ((100.0 * TRACK_authorContrib[1]) / (TRACK_authorContrib[0] + TRACK_authorContrib[1])).ToString("00.00", strFormat) + "%";
+
         if (photonView.IsMine)
         {
-            photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.TRACK, "[ ]", "MANUAL MODE", false, ((TRACK_successTimer * 100.0f) / TRACK_timer).ToString("0.00", strFormat));
+            photonView.RPC("LogEvent", RpcTarget.All, MATBII_TASK.TRACK, TRACK_authors, "MANUAL MODE", false, ((TRACK_successTimer * 100.0f) / TRACK_timer).ToString("0.00", strFormat));
             PhotonNetwork.SendAllOutgoingCommands();
         }
 
@@ -959,6 +1054,9 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         //TRACK_missedTarget = 0;
         TRACK_timer = 0.0f;
         TRACK_successTimer = 0.0f;
+        TRACK_authors = "";
+        TRACK_authorContrib[0] = 0.0;
+        TRACK_authorContrib[1] = 0.0;
     }
 
     [PunRPC]
@@ -1001,12 +1099,14 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         
         // Optimal range
         if (RESMAN_objective - 500 < RESMAN_tanks[(int) RESMAN_Tank.A]
-            && RESMAN_tanks[(int) RESMAN_Tank.A] < RESMAN_objective + 500
-            && RESMAN_objective - 500 < RESMAN_tanks[(int) RESMAN_Tank.B]
-            && RESMAN_tanks[(int) RESMAN_Tank.B] < RESMAN_objective + 500)
-        {
-            RESMAN_optimalTimer += Time.deltaTime;
-        }
+        && RESMAN_tanks[(int) RESMAN_Tank.A] < RESMAN_objective + 500)
+        { RESMAN_optimalTimer += Time.deltaTime * 0.5f; }
+
+        if (RESMAN_objective - 500 < RESMAN_tanks[(int) RESMAN_Tank.B]
+        && RESMAN_tanks[(int) RESMAN_Tank.B] < RESMAN_objective + 500)
+        { RESMAN_optimalTimer += Time.deltaTime * 0.5f; }
+
+        RESMAN_score = (25.0 * RESMAN_optimalTimer) / planner.planning.duration; // / elapsedTime;
 
         // Tanks
         float amout = Time.deltaTime;
@@ -1244,10 +1344,35 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     }
     #endregion
 
+    [ContextMenu("START")]
+    public void StartBattery()
+    {
+        ResetBattery();
+        SYSMON_scoreIncrement = 25.0 / ((float) planner.planning.SYSMON_Tasks.Count);
+        COMM_scoreIncrement = 25.0 / ((float) planner.planning.COMM_Tasks.Count);
+        TRACK_scoreIncrement = 25.0 / ((float) planner.planning.TRACK_Tasks.Count);
+        //RESMAN_scoreIncrement = 25.0 / ((float) planner.planning.RESMAN_Tasks.Count);
+        started = true;
+    }
+
+    [ContextMenu("RESET")]
+    public void ResetBattery()
+    {
+        RESMAN_Refuel();
+        elapsedTime = 0.0f;
+        RESMAN_optimalTimer = 0.0f;
+        SYSMON_score = 0;
+        COMM_score = 0;
+        TRACK_score = 0;
+        RESMAN_score = 0;
+    }
+
     [ContextMenu("DEBUG")]
     public void DEBUG()
     {
         print("DEBUG");
+
+        //interfaces[0].COMM_audio.Play();
 
         /*
         bool[] dir = {true, true, true, true};

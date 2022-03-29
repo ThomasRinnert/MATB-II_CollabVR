@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
-public class TRACKTarget : MonoBehaviourPun
+public class TRACKTarget : MonoBehaviourPun, IPunObservable
 {
     [SerializeField] private Collider upBorder;
     [SerializeField] private Collider downBorder;
@@ -30,6 +30,15 @@ public class TRACKTarget : MonoBehaviourPun
     [SerializeField]
     private float[] distance = new float[100];
     private int dist_Iterator = 0;
+    private float maxDistance = 0.0f;
+    private double taskMeanDistance = 0.0;
+    private int taskMeanDistanceIterator = 0;
+    public double TaskMeanDistance() { return taskMeanDistance / (double) taskMeanDistanceIterator; }
+
+    
+    private Outline outline;
+    private float outlineTimer = 0.0f;
+    private bool outlined = false;
 
     private Rigidbody rb;
     public void Move(Vector3 position, Vector3 direction, float speed)
@@ -43,13 +52,23 @@ public class TRACKTarget : MonoBehaviourPun
     public void Move(float x, float y)
     {
         if (mode == TrackingMode.auto || !photonView.IsMine) return;
-
+        
         //rb.AddForce(new Vector3(x,y,0).normalized * Time.deltaTime, ForceMode.Force);
 
+        outline.enabled = true;
+        outlineTimer = 1.0f;
+        outlined = true;
+
         x *= Mathf.Abs(rightBorder.transform.position.x - leftBorder.transform.position.x) * Time.deltaTime * user_speed;
-        if (transform.position.x + x < leftBorder.transform.position.x || transform.position.x + x > rightBorder.transform.position.x) { x=0; }
+        if (transform.InverseTransformPoint(transform.position + new Vector3(x, 0, 0)).x < transform.InverseTransformPoint(leftBorder.transform.position).x
+         || transform.InverseTransformPoint(transform.position + new Vector3(x, 0, 0)).x > transform.InverseTransformPoint(rightBorder.transform.position).x)
+        { x=0; }
+
         y *= Mathf.Abs(   upBorder.transform.position.y - downBorder.transform.position.y) * Time.deltaTime * user_speed;
-        if (transform.position.y + y >   upBorder.transform.position.y || transform.position.y + y <  downBorder.transform.position.y) { y=0; }
+        if (transform.position.y + y >   upBorder.transform.position.y
+         || transform.position.y + y <  downBorder.transform.position.y)
+        { y=0; }
+        
         transform.Translate(new Vector3(x, y, 0), Space.Self);
     }
 
@@ -59,12 +78,27 @@ public class TRACKTarget : MonoBehaviourPun
         rb = GetComponent<Rigidbody>();
         mode = TrackingMode.auto;
         //PhotonNetwork.SerializationRate = 75;
+        taskMeanDistance = 0.0;
+        taskMeanDistanceIterator = 0;
+        
+        outline = GetComponent<Outline>();
+        outline.enabled = false;
+        outlined = false;
     }
 
     void Update()
     {
-        distance[dist_Iterator] = Distance();
-        dist_Iterator = (dist_Iterator + 1) % distance.Length;
+        if (outlineTimer > 0) outlineTimer -= Time.deltaTime;
+        if (outlineTimer <= 0) {outline.enabled = false; outlined = false;}
+
+        distance[dist_Iterator] = Distance(); dist_Iterator++;
+
+        if (dist_Iterator >= distance.Length)
+        {
+            taskMeanDistance += MeanDistance();
+            taskMeanDistanceIterator++;
+            dist_Iterator = 0;
+        }
         
         if (!photonView.IsMine) return;
 
@@ -133,8 +167,12 @@ public class TRACKTarget : MonoBehaviourPun
 
     public float Distance()
     {
-        return (transform.localPosition - origin).magnitude;
+        float distance = (transform.localPosition - origin).magnitude;
+        if (distance > maxDistance) maxDistance = distance;
+        return distance;
     }
+
+    public float MaxDistance() { return maxDistance; }
 
     public float MeanDistance()
     {
@@ -144,5 +182,24 @@ public class TRACKTarget : MonoBehaviourPun
             sum += distance[i];
         }
         return sum / distance.Length;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(outlined);
+            stream.SendNext(outlineTimer);
+        }
+        else
+        {
+            bool _outlined = (bool) stream.ReceiveNext();
+            this.outlineTimer = (float) stream.ReceiveNext();
+            if(_outlined && _outlined != outlined)
+            {
+                outlined = true;
+                outline.enabled = true;
+            }
+        }
     }
 }

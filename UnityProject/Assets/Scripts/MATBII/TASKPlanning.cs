@@ -29,6 +29,15 @@ public class SYSMON_Parameters : TASKPlanningParameters
     public bool scale3 = true;
     public bool scale4 = true;
     
+    public void randomize()
+    {
+        NormallyON  = UnityEngine.Random.Range(float.MinValue, float.MaxValue) > 0.0f; 
+        NormallyOFF = UnityEngine.Random.Range(float.MinValue, float.MaxValue) > 0.0f; 
+        scale1      = UnityEngine.Random.Range(float.MinValue, float.MaxValue) > 0.0f; 
+        scale2      = UnityEngine.Random.Range(float.MinValue, float.MaxValue) > 0.0f; 
+        scale3      = UnityEngine.Random.Range(float.MinValue, float.MaxValue) > 0.0f; 
+        scale4      = UnityEngine.Random.Range(float.MinValue, float.MaxValue) > 0.0f; 
+    }
 }
 
 [Serializable]
@@ -78,6 +87,8 @@ public class WrkLd_Parameters : TASKPlanningParameters
 [CreateAssetMenu(fileName = "Schedule", menuName = "ScriptableObjects/TASKPlanning", order = 1)]
 public class TASKPlanning : ScriptableObject
 {
+    [Range(0.0f, 600.0f)]
+    public double duration = 60;
     public List<SYSMON_Task> SYSMON_Tasks = new List<SYSMON_Task>();
     public List<COMM_Task> COMM_Tasks = new List<COMM_Task>();
     public List<TRACK_Task> TRACK_Tasks = new List<TRACK_Task>();
@@ -92,6 +103,12 @@ public class TASKPlanning : ScriptableObject
         TRACK_Tasks.Sort((t1,t2)=>t1.startTime.CompareTo(t2.startTime));
         RESMAN_Tasks.Sort((t1,t2)=>t1.startTime.CompareTo(t2.startTime));
         WrkLd_Tasks.Sort((t1,t2)=>t1.startTime.CompareTo(t2.startTime));
+    }
+    
+    [ContextMenu("Randomize SYSMON params")]
+    public void RandomizeSYSMONparams()
+    {
+        foreach (var task in SYSMON_Tasks) { task.parameters.randomize(); }
     }
     
     [ContextMenu("DEBUG")]

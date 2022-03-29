@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LauncherDesktop.unity
     guid: 85ce2d4a49fb7a04e8516b68360b2dfd
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/LauncherVR.unity
     guid: 099131469c0ddc04b9a84831067666c7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MATBII.unity
     guid: a2dfb2a097c69a84cabe16c72fcf96ba
+  - enabled: 1
+    path: Assets/Scenes/MATBIIB2B.unity
+    guid: 56f4d9fccd4ddb24aba5b205b1d42992
   m_configObjects: {}

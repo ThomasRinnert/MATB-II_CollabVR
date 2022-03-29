@@ -927,8 +927,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bccd81e135125440a39cfea9931350b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayersPerRoom: 4
-  SceneToLoad: MATBII
+  maxPlayersPerRoom: 10
+  SceneToLoad: MATBIIB2B
   isVR: 0
   isXP: 0
   controlPanel: {fileID: 574143428}

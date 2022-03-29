@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Photon.Pun;
@@ -9,12 +10,13 @@ public class ExperimentControls : MonoBehaviourPun, IPunObservable
     [Header("Links")]
     [SerializeField] public TASKPlanner planner;
     [SerializeField] public AggregativeUserBoard aggregBoard;
-    [SerializeField] public DistributiveUserBoard selfStatus;
+    [SerializeField] public List<DistributiveUserBoard> selfStatus = new List<DistributiveUserBoard>();
 
     [Header("Parameters")]
     [SerializeField] public Scenario scenario;
     [SerializeField] public string leftplayer;
     [SerializeField] public string rightplayer;
+    [SerializeField] public Dictionary<MATBIISystem.MATBII_TASK, string> taskBinding;
 
     private bool aggreg = false;
     private bool distrib = false;
@@ -110,6 +112,20 @@ public class ExperimentControls : MonoBehaviourPun, IPunObservable
         PhotonNetwork.SendAllOutgoingCommands();
     }
     [PunRPC] public void setRightPlayer(string player) { rightplayer = player; }
+    
+    public void Bind(MATBIISystem.MATBII_TASK task, string player)
+    {
+        this.photonView.RPC("bind", RpcTarget.All, task, player);
+        PhotonNetwork.SendAllOutgoingCommands();
+    }
+    [PunRPC] public void bind(MATBIISystem.MATBII_TASK task, string player) { taskBinding[task] = player; }
+
+    public void ClearBinding()
+    {
+        this.photonView.RPC("clearBinding", RpcTarget.All);
+        PhotonNetwork.SendAllOutgoingCommands();
+    }
+    [PunRPC] public void clearBinding() { taskBinding.Clear(); }
 
     public void GenerateAggregativeBoards()
     {
@@ -118,7 +134,13 @@ public class ExperimentControls : MonoBehaviourPun, IPunObservable
     }
     [PunRPC] public void generateAggregativeBoards()
     {
-        aggregBoard.Generate();
+        //aggregBoard.Generate();
+
+        foreach (var player in GameManager.Instance.players)
+        {
+            var board = player.GetComponentInChildren<AggregativeUserBoard>(true);
+            board.Generate();
+        }
     }
 
     public void ActivateAggregative(bool active)
@@ -128,7 +150,14 @@ public class ExperimentControls : MonoBehaviourPun, IPunObservable
     }
     [PunRPC] public void activateAggregative(bool active)
     {
-        aggregBoard.Activate(active);
+        //aggregBoard.Activate(active);
+        
+        foreach (var player in GameManager.Instance.players)
+        {
+            var board = player.GetComponentInChildren<AggregativeUserBoard>(true);
+            board.Activate(active);
+        }
+        
         aggreg = active;
     }
 
@@ -154,7 +183,10 @@ public class ExperimentControls : MonoBehaviourPun, IPunObservable
     }
     [PunRPC] public void activateSelfStatus(bool active)
     {
-        selfStatus.Activate(active, true);
+        foreach (var board in selfStatus)
+        {
+            board.Activate(active, true);
+        }
         self = active;
     }
 
@@ -165,19 +197,49 @@ public class ExperimentControls : MonoBehaviourPun, IPunObservable
     }
     [PunRPC] public void divideTasks()
     {
-        aggregBoard.DivideTasks(leftplayer, rightplayer);
         foreach (var player in GameManager.Instance.players)
         {
-            var board = player.GetComponentInChildren<ActionHistory>(true);
-            if (player.NickName == leftplayer) { board.divideTasks(true); }
-            if (player.NickName == rightplayer) { board.divideTasks(false); }
+            //aggreg
+            var aggregBoard = player.GetComponentInChildren<AggregativeUserBoard>(true);
+            aggregBoard.DivideTasks(leftplayer, rightplayer);
+            
+            //distrib
+            var board = player.GetComponentInChildren<DistributiveUserBoard>(true);
+            if (player.NickName == leftplayer) { board.GetComponentInChildren<ActionHistory>().divideTasks(true); }
+            if (player.NickName == rightplayer) { board.GetComponentInChildren<ActionHistory>().divideTasks(false); }
         }
-        if (selfStatus.player_manager == null) selfStatus.Init();
-        if (selfStatus.player_manager.NickName == leftplayer)
-            { selfStatus.GetComponentInChildren<ActionHistory>(true).divideTasks(true); }
-        if (selfStatus.player_manager.NickName == rightplayer)
-            { selfStatus.GetComponentInChildren<ActionHistory>(true).divideTasks(false); }
+
+        //self reflection
+        foreach (var board in selfStatus)
+        {
+            if (board.player_manager == null) board.Init();
+            if (board.player_manager.NickName == leftplayer)
+                { board.GetComponentInChildren<ActionHistory>(true).divideTasks(true); }
+            if (board.player_manager.NickName == rightplayer)
+                { board.GetComponentInChildren<ActionHistory>(true).divideTasks(false); }
+        }
         divided = true;
+    }
+
+    public void ClearTaskDivision()
+    {
+        this.photonView.RPC("clearTaskDivision", RpcTarget.All);
+        PhotonNetwork.SendAllOutgoingCommands();
+    }
+    [PunRPC] public void clearTaskDivision()
+    {
+        aggregBoard.clearTaskDivision();
+        foreach (var player in GameManager.Instance.players)
+        {
+            player.GetComponentInChildren<ActionHistory>(true).clearTaskDivision();
+        }
+        foreach (var board in selfStatus)
+        {
+            if (board.player_manager == null) board.Init();
+            board.GetComponentInChildren<ActionHistory>(true).clearTaskDivision();
+        }
+        
+        divided = false;
     }
     
     public void StartExperiment()
@@ -187,7 +249,10 @@ public class ExperimentControls : MonoBehaviourPun, IPunObservable
     }
     [PunRPC] public void startExperiment()
     {
+        ALL_Reset();
+        planner.planningIndex = scenario;
         planner.planning = planner.scenarii[scenario];
+        MATBIISystem.Instance.training = false;
         planner.StartTasks();
     }
 
@@ -310,13 +375,13 @@ public class ExperimentControls : MonoBehaviourPun, IPunObservable
         COMM_Stop();
         TRACK_Stop();
         RESMAN_Stop();
+        MATBIISystem.Instance.started = false;
     }
     public void ALL_Reset()
     {
         ALL_Stop();
         MATBIISystem.Instance.photonView.RPC ("RESMAN_Refuel", RpcTarget.All);
         PhotonNetwork.SendAllOutgoingCommands();
-        MATBIISystem.Instance.started = false;
     }
 }
 
@@ -358,8 +423,11 @@ public class ObjectBuilderEditor : Editor
             script.ActivateSelfStatus(false);
         }
 
+        //Left / Right division
         for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
         {
+            if (PhotonNetwork.PlayerList[p].NickName.Contains("XP")) continue;
+
             GUILayout.BeginHorizontal();
             if(GUILayout.Button("Give left battery to " + PhotonNetwork.PlayerList[p].NickName))
             {
@@ -371,10 +439,41 @@ public class ObjectBuilderEditor : Editor
             }
             GUILayout.EndHorizontal();
         }
+
+        // Task specific division
+        /*
+        for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
+        {
+            if (PhotonNetwork.PlayerList[p].NickName.Contains("XP")) continue;
+            
+            GUILayout.BeginHorizontal();
+            if(GUILayout.Button("Bind SYSMON to " + PhotonNetwork.PlayerList[p].NickName))
+            {
+                script.Bind(MATBIISystem.MATBII_TASK.SYSMON, PhotonNetwork.PlayerList[p].NickName);
+            }
+            if(GUILayout.Button("Bind COMM to " + PhotonNetwork.PlayerList[p].NickName))
+            {
+                script.Bind(MATBIISystem.MATBII_TASK.COMM, PhotonNetwork.PlayerList[p].NickName);
+            }
+            if(GUILayout.Button("Bind TRACK to " + PhotonNetwork.PlayerList[p].NickName))
+            {
+                script.Bind(MATBIISystem.MATBII_TASK.TRACK, PhotonNetwork.PlayerList[p].NickName);
+            }
+            if(GUILayout.Button("Bind RESMAN to " + PhotonNetwork.PlayerList[p].NickName))
+            {
+                script.Bind(MATBIISystem.MATBII_TASK.RESMAN, PhotonNetwork.PlayerList[p].NickName);
+            }
+            GUILayout.EndHorizontal();
+        }
+        */
         
         if(GUILayout.Button("Divide tasks"))
         {
             script.DivideTasks();
+        }
+        if(GUILayout.Button("Clear task division"))
+        {
+            script.ClearTaskDivision();
         }
         if(GUILayout.Button("Start Experiment"))
         {

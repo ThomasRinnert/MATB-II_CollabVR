@@ -26,18 +26,51 @@ MonoBehaviour:
     EnableProtocolFallback: 1
     AuthMode: 0
     EnableLobbyStatistics: 0
-    NetworkLogging: 1
-  DevRegion: eu
-  PunLogging: 2
+    NetworkLogging: 5
+  DevRegion: 
+  PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - activateAggregative
+  - activateDistributive
+  - activateSelfStatus
+  - bind
+  - clearBinding
+  - clearTaskDivision
+  - ClickRpc
+  - COMM_Reset
+  - COMM_SetFrequency
+  - COMM_Start
+  - Cursor_ShowHide
+  - DestroyRpc
   - DestroySpaceship
+  - divideTasks
   - Fire
+  - generateAggregativeBoards
+  - LogEvent
+  - RESMAN_changePump
+  - RESMAN_Refuel
+  - RESMAN_Reset
+  - RESMAN_Start
   - RespawnSpaceship
-  - ChangeSupport
-  - RemoveSupport
+  - setLeftPlayer
+  - setRightPlayer
+  - startExperiment
+  - SYSMON_normallyOFF_Reset
+  - SYSMON_normallyOFF_Start
+  - SYSMON_normallyON_Reset
+  - SYSMON_normallyON_Start
+  - SYSMON_Reset
+  - SYSMON_scale_Reset
+  - SYSMON_scale_Start
+  - SYSMON_Start
+  - TRACK_Move
+  - TRACK_newDirection
+  - TRACK_Reset
+  - TRACK_Start
+  - WrkLd_Start
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

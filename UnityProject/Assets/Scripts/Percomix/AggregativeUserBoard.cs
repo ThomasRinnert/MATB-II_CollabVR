@@ -30,7 +30,8 @@ public class AggregativeUserBoard : MonoBehaviour
             var index = 0;
             for (int p = 0; p < PhotonNetwork.PlayerList.Length /*GameManager.Instance.players.Count*/; p++)
             {
-                if (PhotonNetwork.PlayerList[p].NickName.Contains("XP")) continue;
+                string name = PhotonNetwork.PlayerList[p].NickName;
+                if (name.Contains("XP") || name.Contains("CAM")) continue;
                 
                 GameObject line = Instantiate(AggregativeLinePrefab, panel.transform, false);
                 UserBoard b = line.GetComponent<UserBoard>();
@@ -46,9 +47,11 @@ public class AggregativeUserBoard : MonoBehaviour
     [ContextMenu("ACTIVATE")]
     public void Activate(bool active)
     {
+        PlayerManager pm = GetComponentInParent<PlayerManager>();
         foreach (var panel in panels)
         {
-            panel.SetActive(active);
+            if (pm.NickName.Contains("Cam")) panel.SetActive(false);
+            else panel.SetActive(active);
         }
     }
 
@@ -67,6 +70,17 @@ public class AggregativeUserBoard : MonoBehaviour
                 {
                     board.GetComponentInChildren<ActionHistory>().divideTasks(false);
                 }
+            }
+        }
+    }
+    public void clearTaskDivision()
+    {
+        foreach (var panel in panels)
+        {
+            for (int i = 0; i < panel.transform.childCount; i++)
+            {
+                var board = panel.transform.GetChild(i);
+                board.GetComponentInChildren<ActionHistory>().clearTaskDivision();
             }
         }
     }

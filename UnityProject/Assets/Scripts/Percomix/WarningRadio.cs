@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WarningRadio : ActivityWarning
 {
     [SerializeField] TextMeshPro value;
     [SerializeField] SpriteRenderer sprite;
     MATBIISystem MATBII;
+    public Slider progress;
+    public Slider passive_progress;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +21,9 @@ public class WarningRadio : ActivityWarning
     // Update is called once per frame
     void Update()
     {
+        progress.value = (float) MATBIISystem.Instance.getCOMM_score() / 25.0f;
+        passive_progress.value = ((float) MATBIISystem.Instance.planner.COMM_index / (float) MATBIISystem.Instance.planner.planning.COMM_Tasks.Count);
+
         if (MATBII.isCOMM_TASK_active())
         {
             float timer = MATBII.getCOMM_timer();

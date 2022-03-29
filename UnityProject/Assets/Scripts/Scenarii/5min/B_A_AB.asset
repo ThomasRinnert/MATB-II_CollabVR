@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99dc60e6ad096af4a8391620d32a81c4, type: 3}
+  m_Name: B_A_AB
+  m_EditorClassIdentifier: 
+  duration: 300
+  SYSMON_Tasks:
+  - startTime: 2
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 1
+      scale1: 1
+      scale2: 1
+      scale3: 0
+      scale4: 0
+  - startTime: 32
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 0
+      scale3: 0
+      scale4: 0
+  - startTime: 62
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 0
+      scale1: 1
+      scale2: 0
+      scale3: 1
+      scale4: 1
+  - startTime: 104
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 1
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  - startTime: 126
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 0
+      scale1: 1
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  - startTime: 148
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 1
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  - startTime: 170
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  - startTime: 192
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 0
+      scale3: 0
+      scale4: 0
+  - startTime: 214
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 1
+      scale2: 1
+      scale3: 1
+      scale4: 0
+  - startTime: 236
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 0
+      scale1: 1
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  - startTime: 258
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 1
+      scale2: 1
+      scale3: 0
+      scale4: 1
+  - startTime: 280
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 1
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  COMM_Tasks:
+  - startTime: 10
+  - startTime: 60
+  - startTime: 110
+  - startTime: 210
+  - startTime: 260
+  TRACK_Tasks:
+  - startTime: 10
+  - startTime: 60
+  - startTime: 110
+  - startTime: 210
+  - startTime: 260
+  RESMAN_Tasks:
+  - startTime: 50
+  - startTime: 100
+  - startTime: 150
+  - startTime: 200
+  - startTime: 250
+  WrkLd_Tasks: []

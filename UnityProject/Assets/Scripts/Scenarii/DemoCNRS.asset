@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99dc60e6ad096af4a8391620d32a81c4, type: 3}
+  m_Name: DemoCNRS
+  m_EditorClassIdentifier: 
+  duration: 300
+  SYSMON_Tasks:
+  - startTime: 5
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 0
+      scale1: 0
+      scale2: 0
+      scale3: 0
+      scale4: 1
+  - startTime: 20
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 1
+      scale2: 1
+      scale3: 1
+      scale4: 0
+  - startTime: 35
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 0
+      scale1: 1
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  - startTime: 50
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 0
+      scale1: 1
+      scale2: 0
+      scale3: 1
+      scale4: 0
+  - startTime: 65
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  - startTime: 80
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 0
+      scale1: 0
+      scale2: 1
+      scale3: 1
+      scale4: 0
+  - startTime: 105
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 1
+      scale2: 0
+      scale3: 1
+      scale4: 1
+  - startTime: 120
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 0
+      scale1: 0
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  - startTime: 135
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 1
+      scale1: 1
+      scale2: 0
+      scale3: 1
+      scale4: 0
+  - startTime: 150
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 0
+      scale3: 1
+      scale4: 0
+  - startTime: 165
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 1
+      scale3: 0
+      scale4: 1
+  - startTime: 180
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 0
+      scale1: 1
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  - startTime: 195
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 0
+      scale3: 1
+      scale4: 0
+  - startTime: 210
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 0
+      scale3: 0
+      scale4: 1
+  - startTime: 225
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 0
+      scale1: 1
+      scale2: 0
+      scale3: 0
+      scale4: 1
+  - startTime: 240
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 0
+      scale1: 1
+      scale2: 1
+      scale3: 0
+      scale4: 0
+  - startTime: 255
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 1
+      scale2: 1
+      scale3: 0
+      scale4: 0
+  - startTime: 270
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 0
+      scale1: 0
+      scale2: 0
+      scale3: 1
+      scale4: 0
+  - startTime: 285
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 0
+      scale1: 0
+      scale2: 0
+      scale3: 1
+      scale4: 1
+  COMM_Tasks:
+  - startTime: 0
+  - startTime: 20
+  - startTime: 40
+  - startTime: 60
+  - startTime: 80
+  - startTime: 100
+  - startTime: 120
+  - startTime: 140
+  - startTime: 160
+  - startTime: 180
+  - startTime: 200
+  - startTime: 220
+  - startTime: 240
+  - startTime: 260
+  - startTime: 280
+  TRACK_Tasks:
+  - startTime: 0
+  - startTime: 20
+  - startTime: 40
+  - startTime: 60
+  - startTime: 80
+  - startTime: 100
+  - startTime: 120
+  - startTime: 140
+  - startTime: 160
+  - startTime: 180
+  - startTime: 200
+  - startTime: 220
+  - startTime: 240
+  - startTime: 260
+  - startTime: 280
+  RESMAN_Tasks: []
+  WrkLd_Tasks: []

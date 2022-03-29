@@ -12,7 +12,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     /// </summary>
     [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
     [SerializeField]
-    private byte maxPlayersPerRoom = 4;
+    private byte maxPlayersPerRoom = 10;
 
     [Tooltip("Scene to load as first player")]
     [SerializeField]
@@ -101,9 +101,12 @@ public class Launcher : MonoBehaviourPunCallbacks
         PlayerPrefs.SetString("UserPrefab", isVR ? "VRUser" : "DesktopUser");
         */
 
-        if (isXP) PhotonNetwork.NickName = "XP_" + PhotonNetwork.NickName;
-        else if (isVR) PhotonNetwork.NickName = "VR_" + PhotonNetwork.NickName;
-        else PhotonNetwork.NickName = "Dsktp_" + PhotonNetwork.NickName;
+        if (!PhotonNetwork.NickName.Contains("_"))
+        {
+            if (isXP) PhotonNetwork.NickName = "XP_" + PhotonNetwork.NickName;
+            else if (isVR) PhotonNetwork.NickName = "VR_" + PhotonNetwork.NickName;
+            else PhotonNetwork.NickName = "Dsktp_" + PhotonNetwork.NickName;
+        }
         
         // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
         if (PhotonNetwork.IsConnected)

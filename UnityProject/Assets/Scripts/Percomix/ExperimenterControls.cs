@@ -61,7 +61,7 @@ public class ExperimenterControls : MonoBehaviour
     public void changeScenario(int index) { controls.scenario = (Scenario)index; }
     public void ChangeLeftPlayer(int index) { controls.SetLeftPlayer(PhotonNetwork.PlayerList[index].NickName); }
     public void ChangeRightPlayer(int index) { controls.SetRightPlayer(PhotonNetwork.PlayerList[index].NickName); }
-    public void StartExperiment() { controls.StartExperiment(); }
+    public void StartExperiment() { training.isOn = false; controls.StartExperiment(); }
     public void DivideTasks() { controls.DivideTasks(); }
     public void SYSMON_Start() { controls.SYSMON_Start(new bool[]{L_on.isOn, L_off.isOn, S_0.isOn, S_1.isOn, S_2.isOn, S_3.isOn}); }
     public void SYSMON_Stop() { controls.SYSMON_Stop(); }

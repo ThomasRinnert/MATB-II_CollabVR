@@ -499,6 +499,10 @@ MonoBehaviour:
   elapsedTime: 0
   started: 0
   training: 1
+  planner: {fileID: 0}
+  SYSMON_scoreIncrement: 1
+  COMM_scoreIncrement: 1
+  TRACK_scoreIncrement: 1
 --- !u!114 &1764619956870573993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,6 +516,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planning: {fileID: 11400000, guid: 39c471b9f4d642d4bbddb5ef6a0797fb, type: 2}
+  SYSMON_index: 0
+  COMM_index: 0
+  TRACK_index: 0
+  RESMAN_index: 0
+  WrkLd_index: 0
   Training: {fileID: 11400000, guid: 54b5abef1a3c0924c8686dfd33caf524, type: 2}
   A_B_AB: {fileID: 11400000, guid: 8d0075ec8b0b3554bbc330f8ebb31446, type: 2}
   B_AB_A: {fileID: 11400000, guid: 91108f5c79322ae47acc572490f2f48a, type: 2}
@@ -519,6 +528,7 @@ MonoBehaviour:
   AB_B_A: {fileID: 11400000, guid: a25c80f8c57e8a94cb3a365bb452cfa4, type: 2}
   B_A_AB: {fileID: 11400000, guid: 8d9707130e40e4e458d0fa1e3c760def, type: 2}
   A_AB_B: {fileID: 11400000, guid: 02aad6f6bee281c4fa01d31cbf9be404, type: 2}
+  DemoCNRS: {fileID: 11400000, guid: b37773fb4e76021409e7b0699f26f5f1, type: 2}
 --- !u!114 &5840502977521918823
 MonoBehaviour:
   m_ObjectHideFlags: 0

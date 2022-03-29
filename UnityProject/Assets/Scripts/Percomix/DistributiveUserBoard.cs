@@ -36,6 +36,7 @@ public class DistributiveUserBoard : UserBoard
             if (player_manager != null) player = player_manager.player;
             GetComponentInChildren<UserID>().Init();
         }
+        if (!force && player_manager.photonView.IsMine) active = false;
         if (!force && player_manager.NickName.Contains("XP")) active = false;
         gameObject.SetActive(active);
     }

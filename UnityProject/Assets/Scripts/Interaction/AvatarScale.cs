@@ -30,8 +30,9 @@ public class AvatarScale : MonoBehaviour
         if (!player.photonView.IsMine) return;
 
         action.AddOnStateDownListener(l1, SteamVR_Input_Sources.LeftHand);
-        action.AddOnStateDownListener(r1, SteamVR_Input_Sources.RightHand);
         action.AddOnStateUpListener(l2, SteamVR_Input_Sources.LeftHand);
+
+        action.AddOnStateDownListener(r1, SteamVR_Input_Sources.RightHand);
         action.AddOnStateUpListener(r2, SteamVR_Input_Sources.RightHand);
     }
     
@@ -41,13 +42,15 @@ public class AvatarScale : MonoBehaviour
         
         action.RemoveOnStateDownListener(l1, SteamVR_Input_Sources.LeftHand);
         action.RemoveOnStateDownListener(r1, SteamVR_Input_Sources.RightHand);
+
         action.RemoveOnStateUpListener(l2, SteamVR_Input_Sources.LeftHand);
         action.RemoveOnStateUpListener(r2, SteamVR_Input_Sources.RightHand);
     }
 
     void l1(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) { left  = true; if (left && right) StartCoroutine(Resize(false)); }
-    void r1(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) { right = true; if (left && right) StartCoroutine(Resize(true)); }
     void l2(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) { left  = false; }
+    
+    void r1(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) { right = true; if (left && right) StartCoroutine(Resize(true)); }
     void r2(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource) { right = false; }
 
     IEnumerator Resize(bool upscale)

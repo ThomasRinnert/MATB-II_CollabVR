@@ -11,19 +11,19 @@ public enum Scenario : int
     AB_A_B = 3,
     AB_B_A = 4,
     B_A_AB = 5,
-    A_AB_B = 6
+    A_AB_B = 6,
+    DemoCNRS = 7
 }
 
-public class TASKPlanner : MonoBehaviourPun
+public class TASKPlanner : MonoBehaviourPun, IPunObservable
 {
     MATBIISystem mb2;
 
-    [SerializeField] public TASKPlanning planning;
-    private int SYSMON_index;
-    private int COMM_index;
-    private int TRACK_index;
-    private int RESMAN_index;
-    private int WrkLd_index;
+    public int SYSMON_index;
+    public int COMM_index;
+    public int TRACK_index;
+    public int RESMAN_index;
+    public int WrkLd_index;
 
     [Header("Scenario variants")]
     [SerializeField] public TASKPlanning Training;
@@ -33,7 +33,11 @@ public class TASKPlanner : MonoBehaviourPun
     [SerializeField] public TASKPlanning AB_B_A;
     [SerializeField] public TASKPlanning B_A_AB;
     [SerializeField] public TASKPlanning A_AB_B;
+    [SerializeField] public TASKPlanning DemoCNRS;
+
     public Dictionary<Scenario,TASKPlanning> scenarii;
+    [SerializeField] public Scenario planningIndex = Scenario.Training;
+    [SerializeField] public TASKPlanning planning;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +51,7 @@ public class TASKPlanner : MonoBehaviourPun
         scenarii.Add(Scenario.AB_B_A, AB_B_A);
         scenarii.Add(Scenario.B_A_AB, B_A_AB);
         scenarii.Add(Scenario.A_AB_B, A_AB_B);
+        scenarii.Add(Scenario.DemoCNRS, DemoCNRS);
     }
 
     // Update is called once per frame
@@ -112,18 +117,54 @@ public class TASKPlanner : MonoBehaviourPun
             }
         }
 
-        if (SYSMON_index >= planning.SYSMON_Tasks.Count && COMM_index >= planning.COMM_Tasks.Count && TRACK_index >= planning.TRACK_Tasks.Count && RESMAN_index >= planning.RESMAN_Tasks.Count)
+        //if (SYSMON_index >= planning.SYSMON_Tasks.Count && COMM_index >= planning.COMM_Tasks.Count && TRACK_index >= planning.TRACK_Tasks.Count && RESMAN_index >= planning.RESMAN_Tasks.Count)
+        if (mb2.elapsedTime >= planning.duration
+            && !mb2.isSYSMON_TASK_active()
+            && !mb2.isCOMM_TASK_active()
+            && !mb2.isTRACK_TASK_active()
+            && !mb2.isRESMAN_TASK_active())
         {
-            //mb2.started = false;
+            mb2.started = false;
         }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext((int)planningIndex);
+            stream.SendNext(SYSMON_index);
+            stream.SendNext(COMM_index);
+            stream.SendNext(TRACK_index);
+            stream.SendNext(RESMAN_index);
+            stream.SendNext(WrkLd_index);
+        }
+        else
+        {
+            this.planningIndex = (Scenario)((int) stream.ReceiveNext());
+            this.SYSMON_index = (int) stream.ReceiveNext();
+            this.COMM_index = (int) stream.ReceiveNext();
+            this.TRACK_index = (int) stream.ReceiveNext();
+            this.RESMAN_index = (int) stream.ReceiveNext();
+            this.WrkLd_index = (int) stream.ReceiveNext();
+        }
+    }
+
+    public void resetIndexes()
+    {
+        SYSMON_index = 0;
+        COMM_index = 0;
+        TRACK_index = 0;
+        RESMAN_index = 0;
+        WrkLd_index = 0;
     }
 
     [ContextMenu("FORCE START")]
     public void StartTasks()
     {
-        if(mb2.started) return;
-        mb2.started = true;
-        mb2.elapsedTime = 0.0f;
+        //if(mb2.started) return;
+        resetIndexes();
+        mb2.StartBattery();
     }
     
     /*

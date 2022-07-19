@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     
     [SerializeField]
     public Transform cameraTransform;
+    public Camera playerCamera;
 
     [SerializeField]
     public bool isVR;

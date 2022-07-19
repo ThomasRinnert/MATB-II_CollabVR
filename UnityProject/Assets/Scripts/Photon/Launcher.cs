@@ -123,11 +123,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
     }
 
-
     #endregion
 
     #region MonoBehaviourPunCallbacks Callbacks
-
 
     public override void OnConnectedToMaster()
     {
@@ -143,7 +141,6 @@ public class Launcher : MonoBehaviourPunCallbacks
             isConnecting = false;
         }
     }
-
 
     public override void OnDisconnected(DisconnectCause cause)
     {
@@ -162,7 +159,11 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+        Debug.Log("PUN Joined Room");
+        /*
+        var p = FindObjectOfType<PlayerManager>();
+        if (p != null) Destroy(p);
+        */
 
         // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)

@@ -8,8 +8,8 @@ public class VRUIButton : Interactive
     [Header("Events")]
     [SerializeField] protected UnityEvent clicked;
     
-    private bool pressing = false;
-    public bool isPressed() { return pressing; }
+    private int pressing = 0;
+    public bool isPressed() { return pressing > 0; }
 
     public Outline outline;
 
@@ -29,7 +29,7 @@ public class VRUIButton : Interactive
     {
         outline = GetComponent<Outline>();
         if (outline != null) outline.enabled = false;
-        pressing = false;
+        pressing = 0;
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class VRUIButton : Interactive
     {
         if (other.tag == "LeftHand" || other.tag == "RightHand")
         {
-            pressing = true;
+            pressing++;
             if (outline != null) outline.enabled = true;
         }
     }
@@ -51,14 +51,14 @@ public class VRUIButton : Interactive
     {
         if (other.tag == "LeftHand" || other.tag == "RightHand")
         {
-            pressing = false;
-            if (outline != null) outline.enabled = false;
+            pressing--;
+            if (outline != null) outline.enabled = isPressed();
         }
     }
 
     override public void Click()
     {
-        if (!pressing) return;
+        if (!isPressed()) return;
         clicked.Invoke();
     }
 

@@ -22,21 +22,13 @@ MonoBehaviour:
       scale2: 0
       scale3: 0
       scale4: 0
-  - startTime: 10
+  - startTime: 15
     parameters:
       NormallyON: 0
       NormallyOFF: 0
       scale1: 0
       scale2: 1
       scale3: 0
-      scale4: 0
-  - startTime: 20
-    parameters:
-      NormallyON: 0
-      NormallyOFF: 0
-      scale1: 0
-      scale2: 0
-      scale3: 1
       scale4: 0
   - startTime: 30
     parameters:
@@ -44,9 +36,17 @@ MonoBehaviour:
       NormallyOFF: 0
       scale1: 0
       scale2: 0
+      scale3: 1
+      scale4: 0
+  - startTime: 45
+    parameters:
+      NormallyON: 0
+      NormallyOFF: 0
+      scale1: 0
+      scale2: 0
       scale3: 0
       scale4: 1
-  - startTime: 40
+  - startTime: 60
     parameters:
       NormallyON: 1
       NormallyOFF: 1
@@ -54,7 +54,7 @@ MonoBehaviour:
       scale2: 1
       scale3: 1
       scale4: 1
-  - startTime: 110
+  - startTime: 75
     parameters:
       NormallyON: 0
       NormallyOFF: 1
@@ -62,7 +62,7 @@ MonoBehaviour:
       scale2: 1
       scale3: 1
       scale4: 1
-  - startTime: 150
+  - startTime: 90
     parameters:
       NormallyON: 1
       NormallyOFF: 1
@@ -70,18 +70,31 @@ MonoBehaviour:
       scale2: 1
       scale3: 1
       scale4: 1
-  COMM_Tasks:
-  - startTime: 10
-  - startTime: 60
-  - startTime: 110
-  - startTime: 160
-  TRACK_Tasks:
-  - startTime: 0
-  - startTime: 90
-  - startTime: 180
-  RESMAN_Tasks:
-  - startTime: 10
-  - startTime: 60
+  - startTime: 105
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 1
+      scale3: 1
+      scale4: 1
   - startTime: 120
-  - startTime: 300
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  - startTime: 135
+    parameters:
+      NormallyON: 1
+      NormallyOFF: 1
+      scale1: 0
+      scale2: 1
+      scale3: 1
+      scale4: 1
+  COMM_Tasks: []
+  TRACK_Tasks: []
+  RESMAN_Tasks: []
   WrkLd_Tasks: []

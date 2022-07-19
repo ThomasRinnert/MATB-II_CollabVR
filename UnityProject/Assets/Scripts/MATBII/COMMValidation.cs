@@ -15,15 +15,15 @@ public class COMMValidation : VRUIButton
     new public void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        author = other.GetComponentInParent<Photon.Pun.PhotonView>().Owner;
-
+        var photon = other.GetComponentInParent<Photon.Pun.PhotonView>();
+        if (photon != null) author = photon.Owner;
     }
 
     new public void OnTriggerExit(Collider other)
     {
         base.OnTriggerExit(other);
-        author = other.GetComponentInParent<Photon.Pun.PhotonView>().Owner;
-
+        var photon = other.GetComponentInParent<Photon.Pun.PhotonView>();
+        if (photon != null) author = photon.Owner;
     }
 
     public void Validate()

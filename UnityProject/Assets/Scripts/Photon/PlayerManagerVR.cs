@@ -41,11 +41,11 @@ public class PlayerManagerVR : PlayerManager, IPunObservable
     public SteamVR_Action_Boolean SteamVR_bool = null;
 
     [SerializeField] SteamVR_Behaviour_Pose[] hands;
-    [SerializeField] SteamVR_PlayArea playArea;
+    //[SerializeField] SteamVR_PlayArea playArea;
 
-    [SerializeField] Transform HandLTarget;
-    [SerializeField] Transform HandRTarget;
-    [SerializeField] Transform HeadTarget;
+    [SerializeField] public Transform HandLTarget;
+    [SerializeField] public Transform HandRTarget;
+    [SerializeField] public Transform HeadTarget;
 
     /// <summary>
     /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
@@ -75,12 +75,14 @@ public class PlayerManagerVR : PlayerManager, IPunObservable
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         #endif
 
+        /*
         print(PhotonNetwork.NickName + " stole the cam !");
         if (Camera.main != null) Camera.main.enabled = false;
         Camera cam = GetComponentInChildren<Camera>();
         if(cam == null) cam = Camera.main;
         cameraTransform = cam.transform;
         cam.enabled = true;
+        */
 
         if (photonView.IsMine || !PhotonNetwork.IsConnected)
         {
@@ -88,7 +90,7 @@ public class PlayerManagerVR : PlayerManager, IPunObservable
             {
                 hand.enabled = true;
             }
-            playArea.enabled = true;
+            //playArea.enabled = true;
         }
         if (photonView.IsMine)
         {
@@ -167,10 +169,12 @@ public class PlayerManagerVR : PlayerManager, IPunObservable
             //device.IsPressed(InputHelpers.Button.PrimaryButton, out isPressed); // X button
             if (SteamVR_bool.state)
             {
-                Camera theCamera = (Camera)this.gameObject.GetComponentInChildren (typeof(Camera)) ;
-                theCamera.gameObject.SetActive(false);
-                theCamera.gameObject.SetActive(true);
-                theCamera.enabled = true;
+                var cams = Camera.allCameras;
+                foreach (var cam in cams)
+                {
+                    cam.enabled = false;
+                }
+                playerCamera.enabled = true;
             }
             /* NAVIGATION ?
             // translation

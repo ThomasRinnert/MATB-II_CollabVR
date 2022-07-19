@@ -97,4 +97,32 @@ public class VRHand : MonoBehaviourPun
             }
         }
     }
+
+    void OnCollisionEnter (Collision other) {
+        if (! caught) {
+            target = other.gameObject.GetComponent<Interactive>();
+            if (target != null) {
+                //target.photonView.RPC ("ShowCatchable", RpcTarget.All) ;
+                //PhotonNetwork.SendAllOutgoingCommands () ;
+            }
+        }
+    }
+
+    void OnCollisionStay (Collision other) {
+        if (! caught) {
+            if (target == null) {
+                target = other.gameObject.GetComponent<Interactive>();
+            }
+        }
+    }
+
+    void OnCollisionExit (Collision other) {
+        if (! caught) {
+            if (target != null) {
+                //target.photonView.RPC ("HideCatchable", RpcTarget.All) ;
+                //PhotonNetwork.SendAllOutgoingCommands () ;
+                target = null ;
+            }
+        }
+    }
 }

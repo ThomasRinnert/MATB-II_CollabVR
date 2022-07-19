@@ -27,6 +27,69 @@ TagManager:
   - Slider8
   - Slider9
   - Slider10
+  - FxTemporaire
+  - projectile
+  - NASA-MATB
+  - RESMANTaskSection
+  - TRACKTaskSection
+  - COMM
+  - TurnOnTankEToTankB
+  - TurnOnTankFToTankB
+  - TurnOnTankCToTankA
+  - TurnOnTankBToTankA
+  - TRACKBackground
+  - SYSMONScalesTaskSection
+  - Auto
+  - COMMBorder
+  - RESMANBackground
+  - NAV1
+  - SCALES
+  - SYSMONvisuals
+  - COMMBackground
+  - TurnOnTankFToTankE
+  - TurnOnTankDToTankA
+  - TargetController
+  - TurnOnTankAToTankB
+  - TurnOnTankDToTankC
+  - Target
+  - NAV1MainSlider
+  - NAV2MainSlider
+  - COMM2MainSlider
+  - COM1MainChannelSlider
+  - COMM2SubSlider
+  - NAV2SubSlider
+  - SYSMONBackground
+  - NAV1SubChannelSlider
+  - SYSMON_Right
+  - SYSMON_Left
+  - COM1SubChannelSlider
+  - Scale1
+  - MaxHeight
+  - Scale4
+  - SCALESBackground
+  - NAV1SubChannel
+  - OutOfBounds
+  - Scale3
+  - OutOfLowerBounds
+  - SYSMONScalesBorder
+  - TankB
+  - SYSMONLightBorder
+  - Scale2
+  - SCALEControlBackground
+  - MinHeight
+  - NAV2SubChannel
+  - TankE
+  - COM2SubChannel
+  - NAV2MainChannel
+  - TankC
+  - COM1SubChannel
+  - OutOfUpperBounds
+  - TankA
+  - COM2MainChannel
+  - NAV1MainChannel
+  - COM1MainChannel
+  - RESMANBorder
+  - Slider
   layers:
   - Default
   - TransparentFX

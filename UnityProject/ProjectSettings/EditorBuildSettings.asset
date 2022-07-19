@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MATBII.unity
     guid: a2dfb2a097c69a84cabe16c72fcf96ba
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MATBIIB2B.unity
     guid: 56f4d9fccd4ddb24aba5b205b1d42992
+  - enabled: 1
+    path: Assets/Scenes/MATBIITeam.unity
+    guid: b3261f0bdeedcd24d94485e429719f7b
   m_configObjects: {}

@@ -1,28 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
+using Valve.VR;
 
 public class Demo : MonoBehaviour
 {
-    [SerializeField]
-    AudioSource audioSource;
 
-    // Start is called before the first frame update
-    void Start()
+    [ContextMenu("Demo1")]
+    public void Demo1()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    [ContextMenu("DEMO")]
-    public void demo()
-    {
-        audioSource.Play();
-        print("DEMO");
     }
 }

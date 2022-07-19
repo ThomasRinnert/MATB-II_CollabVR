@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2018_4_30;UNITY_2018_4;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_4_6;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;PHOTON_UNITY_NETWORKING;PUN_2_0_OR_NEWER;PUN_2_OR_NEWER;PUN_2_19_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2018_4_30;UNITY_2018_4;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_4_6;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;PHOTON_UNITY_NETWORKING;PUN_2_0_OR_NEWER;PUN_2_OR_NEWER;PUN_2_19_OR_NEWER;PROBUILDER_EXPERIMENTAL_FEATURES;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -53,10 +53,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\SteamVR\OpenVRUnityXRPackage\Editor\OpenVRPackageInstaller.cs" />
-     <Compile Include="Assets\SteamVR\OpenVRUnityXRPackage\Editor\OpenVRSimpleJSON.cs" />
+     <Compile Include="Assets\Scripts\Editor\CustomEditorUtils.cs" />
  <Reference Include="Unity.ProBuilder">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Polybrush">
+ <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.Polybrush.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Polybrush.Editor">
+ <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.Polybrush.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder.Editor">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
@@ -334,6 +339,9 @@
  <Reference Include="Newtonsoft.Json">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Assets/Plugins/Photon/PhotonUnityNetworking/Code/Editor/Newtonsoft.Json.dll</HintPath>
  </Reference>
+ <Reference Include="Valve.Newtonsoft.Json">
+ <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -351,9 +359,6 @@
  </Reference>
  <Reference Include="UnityStore">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.xiaomi@1.0.3/UnityStore.dll</HintPath>
- </Reference>
- <Reference Include="Valve.Newtonsoft.Json">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.30f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -727,18 +732,28 @@
       <Project>{7D3E7855-8BBE-4CED-5845-01D710E159C4}</Project>      <Name>PhotonUnityNetworking.Demos</Name>    </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Utilities.csproj">
       <Project>{E22F84C8-3590-C8D0-D2F8-DA6F114C3588}</Project>      <Name>PhotonUnityNetworking.Utilities</Name>    </ProjectReference>
+    <ProjectReference Include="SteamVR_Actions.csproj">
+      <Project>{52CECDB8-64E8-3610-8C12-A51A0AE95D2F}</Project>      <Name>SteamVR_Actions</Name>    </ProjectReference>
     <ProjectReference Include="PhotonWebSocket.csproj">
       <Project>{0B9C5957-38D9-F49E-AFDF-CC2FA5811D3C}</Project>      <Name>PhotonWebSocket</Name>    </ProjectReference>
     <ProjectReference Include="PhotonRealtime.csproj">
       <Project>{C4CA595F-4D68-D9EB-7AE4-D7E624A6B09B}</Project>      <Name>PhotonRealtime</Name>    </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.csproj">
       <Project>{BFA5D871-8BEF-57FB-E600-611E1C7E7FAB}</Project>      <Name>PhotonUnityNetworking</Name>    </ProjectReference>
+    <ProjectReference Include="SteamVR_Input_Editor.csproj">
+      <Project>{E55603EE-2C4A-1B6C-48D0-0A91E2349DDB}</Project>      <Name>SteamVR_Input_Editor</Name>    </ProjectReference>
+    <ProjectReference Include="SteamVR_Editor.csproj">
+      <Project>{0E0E6492-BD73-31D9-9AA2-CC54D24E2D5B}</Project>      <Name>SteamVR_Editor</Name>    </ProjectReference>
     <ProjectReference Include="PhotonChat.csproj">
       <Project>{55B9F3F6-FD0F-F88F-1D57-75C4B44A7D3A}</Project>      <Name>PhotonChat</Name>    </ProjectReference>
+    <ProjectReference Include="SteamVR.csproj">
+      <Project>{48056EC0-A5E2-FB28-EDE5-E1C4C969D946}</Project>      <Name>SteamVR</Name>    </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Utilities.Culling.Editor.csproj">
       <Project>{FB1F6483-A0B3-125E-5712-366CE1397994}</Project>      <Name>PhotonUnityNetworking.Utilities.Culling.Editor</Name>    </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
       <Project>{2D7C586E-15FE-EA56-22FD-8E5D5CCA4143}</Project>      <Name>PhotonUnityNetworking.Editor</Name>    </ProjectReference>
+    <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
+      <Project>{25101626-072C-CD22-42FA-FBC7127529E9}</Project>      <Name>SteamVR_Windows_EditorHelper</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

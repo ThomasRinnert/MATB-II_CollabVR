@@ -29,7 +29,7 @@ public class COMMSlider : Interactive
     override public void Release()
     {
         clicked = false;
-        ComputeFrequency(author.NickName);
+        ComputeFrequency(author != null ? author.NickName : "LocalUser");
     }
 
     private Photon.Realtime.Player author = null;
@@ -46,7 +46,7 @@ public class COMMSlider : Interactive
     {
         if(!clicked || author != PhotonNetwork.LocalPlayer) return;
         this.transform.Translate(interactor.position.x - this.transform.position.x, 0, 0);
-        ComputeFrequency(author.NickName);
+        ComputeFrequency(author != null ? author.NickName : "LocalUser");
     }
 
     public void OnTriggerEnter(Collider other)
@@ -59,7 +59,8 @@ public class COMMSlider : Interactive
         {
             pressing = true;
             interactor = other.transform;
-            author = other.GetComponentInParent<Photon.Pun.PhotonView>().Owner;
+            var photon = other.GetComponentInParent<Photon.Pun.PhotonView>();
+            if (photon != null) author = photon.Owner;
             outline.enabled = true;
         }
     }

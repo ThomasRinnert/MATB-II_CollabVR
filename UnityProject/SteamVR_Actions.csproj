@@ -285,6 +285,9 @@
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.30f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.Android.Extensions">
+ <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.30f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.30f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
@@ -311,12 +314,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.analytics@3.2.3/Editor/Unity.Analytics.Tracker.dll</HintPath>
- </Reference>
- <Reference Include="ChannelPurchase">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.xiaomi@1.0.3/ChannelPurchase.dll</HintPath>
- </Reference>
- <Reference Include="UnityStore">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.xiaomi@1.0.3/UnityStore.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.30f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

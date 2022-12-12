@@ -54,9 +54,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Demo\Demo.cs" />
+     <Compile Include="Assets\Demo\test.cs" />
+     <Compile Include="Assets\Demo\testTMP.cs" />
      <Compile Include="Assets\Scripts\CameraFacing.cs" />
+     <Compile Include="Assets\Scripts\ErrorFunction.cs" />
      <Compile Include="Assets\Scripts\Floating.cs" />
-     <Compile Include="Assets\Scripts\IdleAnimations.cs" />
      <Compile Include="Assets\Scripts\Interaction\AvatarScale.cs" />
      <Compile Include="Assets\Scripts\Interaction\CursorDriver.cs" />
      <Compile Include="Assets\Scripts\Interaction\CursorTool.cs" />
@@ -86,13 +88,21 @@
      <Compile Include="Assets\Scripts\Percomix\AggregativeUserLine.cs" />
      <Compile Include="Assets\Scripts\Percomix\DistributiveUserBoard.cs" />
      <Compile Include="Assets\Scripts\Percomix\ExperimentControls.cs" />
+     <Compile Include="Assets\Scripts\Percomix\ExperimentControlsMATBIITeam.cs" />
      <Compile Include="Assets\Scripts\Percomix\ExperimenterControls.cs" />
+     <Compile Include="Assets\Scripts\Percomix\IdleAnimations.cs" />
      <Compile Include="Assets\Scripts\Percomix\MvmtRecords.cs" />
      <Compile Include="Assets\Scripts\Percomix\Operator.cs" />
+     <Compile Include="Assets\Scripts\Percomix\OperatorStatusPanel.cs" />
      <Compile Include="Assets\Scripts\Percomix\Recorder.cs" />
      <Compile Include="Assets\Scripts\Percomix\Replayer.cs" />
+     <Compile Include="Assets\Scripts\Percomix\StressOverTime.cs" />
+     <Compile Include="Assets\Scripts\Percomix\StressOverTimeGraph.cs" />
      <Compile Include="Assets\Scripts\Percomix\TaskArtifact.cs" />
+     <Compile Include="Assets\Scripts\Percomix\TaskHistory.cs" />
+     <Compile Include="Assets\Scripts\Percomix\TaskQueueDisplay.cs" />
      <Compile Include="Assets\Scripts\Percomix\TaskReceiver.cs" />
+     <Compile Include="Assets\Scripts\Percomix\TaskSpawning.cs" />
      <Compile Include="Assets\Scripts\Percomix\UserBoard.cs" />
      <Compile Include="Assets\Scripts\Percomix\UserID.cs" />
      <Compile Include="Assets\Scripts\Percomix\WarningLights.cs" />
@@ -108,10 +118,8 @@
      <Compile Include="Assets\Scripts\Photon\PlayerManagerVR.cs" />
      <Compile Include="Assets\Scripts\Photon\PlayerNameInputField.cs" />
      <Compile Include="Assets\Scripts\RandomGenerator.cs" />
-     <Compile Include="Assets\Scripts\TaskHistory.cs" />
-     <Compile Include="Assets\Scripts\TaskQueueDisplay.cs" />
-     <Compile Include="Assets\Scripts\TaskSpawning.cs" />
-     <Compile Include="Assets\test.cs" />
+     <Compile Include="Assets\Scripts\Scenarii\TaskSchedule\TaskSchedule.cs" />
+     <Compile Include="Assets\Scripts\TakePhoto.cs" />
      <None Include="Assets\Demo\3DCharacterDummy\Readme.txt" />
  <Reference Include="Unity.ProBuilder">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
@@ -143,14 +151,8 @@
  <Reference Include="Unity.CollabProxy.Editor">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Editor">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Editor.dll</HintPath>
- </Reference>
  <Reference Include="Unity.ProBuilder.AddOns.Editor">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
- </Reference>
- <Reference Include="XiaomiSupport">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/XiaomiSupport.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
@@ -370,12 +372,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.analytics@3.2.3/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="ChannelPurchase">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.xiaomi@1.0.3/ChannelPurchase.dll</HintPath>
- </Reference>
- <Reference Include="UnityStore">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.xiaomi@1.0.3/UnityStore.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.30f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

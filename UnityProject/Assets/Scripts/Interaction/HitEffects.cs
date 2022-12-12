@@ -24,6 +24,7 @@ public class HitEffects : MonoBehaviour
         if (collider.GetComponent<TaskReceiver>() != null)
         {
             GameObject spawned = GameObject.Instantiate(spawnObjectOnCollision);
+            spawned.transform.SetParent(collider.transform, true);
             spawned.transform.position = this.transform.position;
             Rigidbody[] rbs = spawned.transform.GetComponentsInChildren<Rigidbody>();
             foreach (var r in rbs) { r.AddForce(rb.velocity, ForceMode.VelocityChange); }

@@ -53,6 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Plugins\GpuGraph\Scripts\GraphManager.cs" />
+     <Compile Include="Assets\Plugins\GpuGraph\Scripts\Test\GpuGraphTest.cs" />
      <Compile Include="Assets\Plugins\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs" />
      <Compile Include="Assets\Plugins\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
      <Compile Include="Assets\Plugins\Photon\PhotonChat\Demos\Common\TextButtonTransition.cs" />
@@ -271,6 +273,7 @@
      <None Include="Assets\Plugins\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\Plugins\GpuGraph\ReadMe.txt" />
      <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\Plugins\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
      <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
@@ -283,6 +286,7 @@
      <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\Plugins\Photon\PhotonUnityNetworking\changelog.txt" />
+     <None Include="Assets\Plugins\GpuGraph\Shaders\GPUGraph.shader" />
      <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
  <Reference Include="Unity.ProBuilder">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
@@ -314,14 +318,8 @@
  <Reference Include="Unity.CollabProxy.Editor">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Editor">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Editor.dll</HintPath>
- </Reference>
  <Reference Include="Unity.ProBuilder.AddOns.Editor">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
- </Reference>
- <Reference Include="XiaomiSupport">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/XiaomiSupport.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
@@ -541,12 +539,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.analytics@3.2.3/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="ChannelPurchase">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.xiaomi@1.0.3/ChannelPurchase.dll</HintPath>
- </Reference>
- <Reference Include="UnityStore">
- <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/PackageCache/com.unity.xiaomi@1.0.3/UnityStore.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.30f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

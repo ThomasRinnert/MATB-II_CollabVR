@@ -22,7 +22,7 @@ public class FindWithTag : EditorWindow
   public static void FindGameObjecWithTag()
   {
     editorWindow = EditorWindow.GetWindow(typeof(FindWithTag));
-    editorWindow.title = "FindWithTag";
+    editorWindow.titleContent = new GUIContent("FindWithTag");
     editorWindow.minSize = new Vector2(400, 400);
     editorWindow.maxSize = new Vector2(400, 400);
   }

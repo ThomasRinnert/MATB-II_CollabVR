@@ -39,6 +39,19 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
         TRACK = 2,
         RESMAN = 3
     }
+    public static string MATBII_TASK_ToString(MATBII_TASK task)
+    {
+        string str = "";
+        switch (task)
+        {
+            case MATBII_TASK.SYSMON: str = "SYSMON"; break;
+            case MATBII_TASK.COMM: str = "COMM"; break;
+            case MATBII_TASK.TRACK: str = "TRACK"; break;
+            case MATBII_TASK.RESMAN: str = "RESMAN"; break;
+            default: break;
+        }
+        return str;
+    }
 
     #region SYSMON_Attributes
     [Header("SYSMON")]
@@ -633,25 +646,7 @@ public class MATBIISystem : MonoBehaviourPun, IPunObservable, IOnEventCallback
     [PunRPC]
     private void LogEvent(MATBII_TASK tag, string userID, string eventID, bool succes, string data)
     {
-        string task = "";
-        switch (tag)
-        {
-            case MATBII_TASK.SYSMON:
-                task = "SYSMON";
-                break;
-            case MATBII_TASK.COMM:
-                task = "COMM";
-                break;
-            case MATBII_TASK.TRACK:
-                task = "TRACK";
-                break;
-            case MATBII_TASK.RESMAN:
-                task = "RESMAN";
-                break;
-            default:
-                break;
-        }
-
+        string task = MATBII_TASK_ToString(tag);
         string time = elapsedTime.ToString("0.0", strFormat);
         string text = time + ", " + userID + ", " + task + ", " + eventID + ", " + succes + ", " + data + '\n';
         File.AppendAllText(logSessionFolder + task + "_" + sessionID + ".csv", text);

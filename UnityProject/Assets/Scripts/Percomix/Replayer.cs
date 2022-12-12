@@ -23,18 +23,22 @@ public class Replayer : MonoBehaviour
     }
 
     [Header("Object Bindings")]
-    [SerializeField] public Transform head;
-    [SerializeField] public Transform handL;
-    [SerializeField] public Transform handR;
-    [SerializeField] public MvmtRecords defaultRecords;
+    public Transform head;
+    public Transform head_bone;
+    public Transform handL;
+    public Transform handL_bone;
+    public Transform handR;
+    public Transform handR_bone;
+    public MvmtRecords defaultRecords;
+    public Operator op;
 
     [Header("Attributes")]
-    [SerializeField] public ReplaySource source = ReplaySource.DefaultRecords;
-    [SerializeField] public MATBIISystem.MATBII_TASK TASK = MATBIISystem.MATBII_TASK.RESMAN;
-    [SerializeField] public int ID = 0;
-    [SerializeField] [Range(0.0f, 2.0f)] public float interpolationTime = 1.0f;
-    [SerializeField] [Range(0.0f, 20.0f)] public float duration = 10.0f;
-    [SerializeField] public ReplayState state = ReplayState.Uninitialized;
+    public ReplaySource source = ReplaySource.DefaultRecords;
+    public MATBIISystem.MATBII_TASK TASK = MATBIISystem.MATBII_TASK.RESMAN;
+    public int ID = 0;
+    [Range(0.0f, 2.0f)] public float interpolationTime = 1.0f;
+    [Range(0.0f, 20.0f)] public float duration = 10.0f;
+    public ReplayState state = ReplayState.Uninitialized;
     
     // Internal attributes
     private MvmtRecord record;
@@ -42,23 +46,22 @@ public class Replayer : MonoBehaviour
     private string[] lines = null;
     private CultureInfo ci;
     private int index;
+    private int increment;
     private Coroutine replay;
     private System.DateTime startTime;
     private System.TimeSpan elapsedTime;
-    private System.DateTime startStep;
-    private System.TimeSpan elapsedTimeStep;
     
     public delegate void OnReplayEnded(MATBIISystem.MATBII_TASK task);
     OnReplayEnded onReplayEnded;
 
+    void Start()
+    {
+        if (op == null) op = GetComponent<Operator>();
+    }
+
     public float getProgress()
     {
-        float progress = 0.0f;
-
-        //progress = (float)elapsedTime.TotalSeconds / duration;
-        progress = (float)index / (float)record.Head_pos.Count;
-
-        return progress;
+        return (record != null) ? (float)index / (float)record.Head_pos.Count : 0;
     }
     
     public void Play(MATBIISystem.MATBII_TASK _TASK, ReplaySource _source = ReplaySource.DefaultRecords, int _ID = -1, OnReplayEnded _callback = null)
@@ -188,12 +191,12 @@ public class Replayer : MonoBehaviour
     [ContextMenu("Stop")]
     public void Stop()
     {
+        state = ReplayState.Stopped;
         if (replay != null)
         {
             StopCoroutine(replay);
             replay = null;
         }
-        state = ReplayState.Stopped;
         if (onReplayEnded != null) onReplayEnded(TASK);
         onReplayEnded = null;
         index = 0;
@@ -201,9 +204,12 @@ public class Replayer : MonoBehaviour
 
     private IEnumerator DefaultReplaying()
     {
-        float r = 0;
-        startTime = System.DateTime.UtcNow;
-        elapsedTime = System.DateTime.UtcNow - startTime;
+        head.position = head_bone.position;
+        head.rotation = head_bone.rotation;
+        handL.position = handL_bone.position;
+        handL.rotation = handL_bone.rotation;
+        handR.position = handR_bone.position;
+        handR.rotation = handR_bone.rotation;
 
         Vector3 head_pos = head.localPosition;
         Quaternion head_rot = head.localRotation;
@@ -212,6 +218,10 @@ public class Replayer : MonoBehaviour
         Vector3 handR_pos = handR.localPosition;
         Quaternion handR_rot = handR.localRotation;
 
+        float r = 0;
+        startTime = System.DateTime.UtcNow;
+        elapsedTime = System.DateTime.UtcNow - startTime;
+        
         while(state == ReplayState.Playing)
         {
             r = (float)(elapsedTime.TotalSeconds) / interpolationTime;
@@ -231,12 +241,18 @@ public class Replayer : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f);
         }
 
-        elapsedTime = System.DateTime.UtcNow - startTime;
-        float timeStep = (duration - (float)(elapsedTime.TotalSeconds)) / record.Head_pos.Count;
+        float timeStep = 0.0f; increment = 0;
+        while (timeStep < 0.03)
+        {
+            increment++;
+            elapsedTime = System.DateTime.UtcNow - startTime;
+            timeStep = ((duration / op.speed) - (float)(elapsedTime.TotalSeconds)) / (record.Head_pos.Count / increment);
+        }
 
-        System.DateTime startStep = System.DateTime.UtcNow;
         while(state == ReplayState.Playing)
         {
+            elapsedTime = System.DateTime.UtcNow - startTime;
+
             head.localPosition = record.Head_pos[index];
             head.localRotation = record.Head_rot[index];
             
@@ -246,20 +262,11 @@ public class Replayer : MonoBehaviour
             handR.localPosition = record.HandR_pos[index];
             handR.localRotation = record.HandR_rot[index];
 
-            index++;
-            if(index >= record.Head_pos.Count - 1) Stop();
+            index += increment;
+            if(index >= record.Head_pos.Count - 1) { Stop(); }
             
-
-            // TODO : understand how Unity messes with time
-            elapsedTimeStep = System.DateTime.UtcNow - startStep;
-            //print("elapsedTimeStep: " + elapsedTimeStep + " | timestep = " + timeStep);
-            startStep = System.DateTime.UtcNow;
-            yield return new WaitForSecondsRealtime(timeStep - (float)(elapsedTimeStep.TotalSeconds));
-            //print("Waited: " + (System.DateTime.UtcNow - startStep) + " | " + (timeStep - (float)(elapsedTimeStep.TotalSeconds)));
-            elapsedTime = System.DateTime.UtcNow - startTime;
-            // TODO : understand how Unity messes with time
+            yield return new WaitForSecondsRealtime(timeStep - 0.01f);
         }
-        Stop();
     }
 
     private IEnumerator CSVReplaying()

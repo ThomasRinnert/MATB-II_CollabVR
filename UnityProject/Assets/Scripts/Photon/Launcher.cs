@@ -2,6 +2,7 @@
 using UnityEngine.XR;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEditor;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -176,5 +177,22 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 
     #endregion
-
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(Launcher)), CanEditMultipleObjects]
+public class LauncherEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        Launcher script = (Launcher)target;
+
+        if(GUILayout.Button("Connect"))
+        {
+            script.Connect();
+        }
+    }
+}
+#endif

@@ -1,0 +1,163 @@
+fileFormatVersion: 2
+guid: eed7ff044e968eb46bc4dbaabeadd19d
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: collision_0_Head
+    100002: collision_0_Hip
+    100004: collision_0_Neck
+    100006: collision_0_Pelvis
+    100008: collision_0_r_wrist
+    100010: collision_0_RBicep
+    100012: collision_0_RElbow
+    100014: collision_0_RForeArm
+    100016: collision_0_RShoulder
+    100018: collision_0_Tibia
+    100020: collision_0_torso
+    100022: //RootNode
+    400000: collision_0_Head
+    400002: collision_0_Hip
+    400004: collision_0_Neck
+    400006: collision_0_Pelvis
+    400008: collision_0_r_wrist
+    400010: collision_0_RBicep
+    400012: collision_0_RElbow
+    400014: collision_0_RForeArm
+    400016: collision_0_RShoulder
+    400018: collision_0_Tibia
+    400020: collision_0_torso
+    400022: //RootNode
+    2100000: No Name
+    2300000: collision_0_Head
+    2300002: collision_0_Hip
+    2300004: collision_0_Neck
+    2300006: collision_0_Pelvis
+    2300008: collision_0_r_wrist
+    2300010: collision_0_RBicep
+    2300012: collision_0_RElbow
+    2300014: collision_0_RForeArm
+    2300016: collision_0_RShoulder
+    2300018: collision_0_Tibia
+    2300020: collision_0_torso
+    3300000: collision_0_Head
+    3300002: collision_0_Hip
+    3300004: collision_0_Neck
+    3300006: collision_0_Pelvis
+    3300008: collision_0_r_wrist
+    3300010: collision_0_RBicep
+    3300012: collision_0_RElbow
+    3300014: collision_0_RForeArm
+    3300016: collision_0_RShoulder
+    3300018: collision_0_Tibia
+    3300020: collision_0_torso
+    4300000: collision_0_Tibia
+    4300002: collision_0_Pelvis
+    4300004: collision_0_Hip
+    4300006: collision_0_torso
+    4300008: collision_0_Neck
+    4300010: collision_0_Head
+    4300012: collision_0_RShoulder
+    4300014: collision_0_RBicep
+    4300016: collision_0_RElbow
+    4300018: collision_0_RForeArm
+    4300020: collision_0_r_wrist
+    7400000: collision_0_torso|Action
+    7400002: collision_0_torso|collision_0_HipAction
+    7400004: collision_0_torso|collision_0_PelvisAction
+    7400006: collision_0_torso|collision_0_TibiaAction
+    7400008: collision_0_torso|collision_0_torsoAction
+    7400010: collision_0_torso|collision_0_torsoAction.001
+    7400012: collision_0_torso|HipPitchAction
+    7400014: collision_0_torso|HipRollAction
+    7400016: collision_0_torso|RElbowRollAction.003
+    7400018: collision_0_torso|RElbowYawAction.002
+    7400020: collision_0_torso|RShoulderRollAction.002
+    7400022: collision_0_torso|RWristYawAction
+    7400024: collision_0_torso|TorsoAction.002
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

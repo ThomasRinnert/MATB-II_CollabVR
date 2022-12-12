@@ -1,0 +1,278 @@
+fileFormatVersion: 2
+guid: 3c52d46a26a0861408f6b74bbd2c3b80
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: base_footprint
+    100002: HeadPitch
+    100004: HeadPitch 1
+    100006: HeadPitch_end
+    100008: HeadYaw
+    100010: HeadYaw 1
+    100012: HipPitch
+    100014: HipPitch 1
+    100016: HipRoll
+    100018: HipRoll 1
+    100020: KneePitch
+    100022: KneePitch 1
+    100024: LShoulderPitch
+    100026: LShoulderPitch.001
+    100028: LShoulderPitch.001_end
+    100030: //RootNode
+    100032: RElbow
+    100034: RElbowRoll
+    100036: RElbowYaw
+    100038: RShoulder
+    100040: RShoulderPitch
+    100042: RShoulderRoll
+    100044: RWristYaw
+    100046: RWristYaw 1
+    100048: RWristYaw_end
+    100050: Tibia
+    100052: Torso
+    100054: WheelB
+    100056: WheelB_end
+    100058: WheelFL
+    100060: WheelFL_end
+    100062: WhellFR
+    100064: WhellFR_end
+    400000: base_footprint
+    400002: HeadPitch
+    400004: HeadPitch 1
+    400006: HeadPitch_end
+    400008: HeadYaw
+    400010: HeadYaw 1
+    400012: HipPitch
+    400014: HipPitch 1
+    400016: HipRoll
+    400018: HipRoll 1
+    400020: KneePitch
+    400022: KneePitch 1
+    400024: LShoulderPitch
+    400026: LShoulderPitch.001
+    400028: LShoulderPitch.001_end
+    400030: //RootNode
+    400032: RElbow
+    400034: RElbowRoll
+    400036: RElbowYaw
+    400038: RShoulder
+    400040: RShoulderPitch
+    400042: RShoulderRoll
+    400044: RWristYaw
+    400046: RWristYaw 1
+    400048: RWristYaw_end
+    400050: Tibia
+    400052: Torso
+    400054: WheelB
+    400056: WheelB_end
+    400058: WheelFL
+    400060: WheelFL_end
+    400062: WhellFR
+    400064: WhellFR_end
+    2100000: shiny_white.015
+    2100002: milky_white.042
+    2100004: milky_white.043
+    2100006: shiny_white.017
+    2100008: shiny_white.016
+    2100010: milky_white.044
+    2100012: shiny_white.018
+    2100014: transparent.002
+    2100016: milky_white.120
+    2100018: shiny_white.036
+    2100020: shiny_white.067
+    2100022: shiny_white.068
+    2100024: milky_white.172
+    2100026: shiny_white.069
+    2100028: milky_white.173
+    2100030: shiny_white.020
+    2100032: face_tex.001
+    2100034: milky_white.041
+    2100036: ear_tex.001
+    2100038: shiny_white.014
+    2300000: HeadPitch 1
+    2300002: HeadYaw 1
+    2300004: HipPitch
+    2300006: HipRoll
+    2300008: KneePitch
+    2300010: RElbowRoll
+    2300012: RElbowYaw
+    2300014: RShoulderPitch
+    2300016: RShoulderRoll
+    2300018: RWristYaw 1
+    2300020: Torso
+    3300000: HeadPitch 1
+    3300002: HeadYaw 1
+    3300004: HipPitch
+    3300006: HipRoll
+    3300008: KneePitch
+    3300010: RElbowRoll
+    3300012: RElbowYaw
+    3300014: RShoulderPitch
+    3300016: RShoulderRoll
+    3300018: RWristYaw 1
+    3300020: Torso
+    4300000: KneePitch
+    4300002: HipPitch
+    4300004: HipRoll
+    4300006: Torso
+    4300008: RShoulderRoll
+    4300010: RShoulderPitch
+    4300012: RElbowRoll
+    4300014: RElbowYaw
+    4300016: RWristYaw
+    4300018: HeadYaw
+    4300020: HeadPitch
+    7400000: HipPitch|Action
+    7400002: HipPitch|collision_0_HipAction
+    7400004: HipPitch|collision_0_PelvisAction
+    7400006: HipPitch|collision_0_TibiaAction
+    7400008: HipPitch|collision_0_torsoAction
+    7400010: HipPitch|collision_0_torsoAction.001
+    7400012: HipPitch|HipPitchAction
+    7400014: HipPitch|HipRollAction
+    7400016: HipPitch|RElbowRollAction.003
+    7400018: HipPitch|RElbowYawAction.002
+    7400020: HipPitch|RShoulderRollAction.002
+    7400022: HipPitch|RWristYawAction
+    7400024: HipPitch|TorsoAction.002
+    7400026: Torso|Action
+    7400028: Torso|collision_0_HipAction
+    7400030: Torso|collision_0_PelvisAction
+    7400032: Torso|collision_0_TibiaAction
+    7400034: Torso|collision_0_torsoAction
+    7400036: Torso|collision_0_torsoAction.001
+    7400038: Torso|HipPitchAction
+    7400040: Torso|HipRollAction
+    7400042: Torso|RElbowRollAction.003
+    7400044: Torso|RElbowYawAction.002
+    7400046: Torso|RShoulderRollAction.002
+    7400048: Torso|RWristYawAction
+    7400050: Torso|TorsoAction.002
+    7400052: RShoulderPitch|Action
+    7400054: RShoulderPitch|collision_0_HipAction
+    7400056: RShoulderPitch|collision_0_PelvisAction
+    7400058: RShoulderPitch|collision_0_TibiaAction
+    7400060: RShoulderPitch|collision_0_torsoAction
+    7400062: RShoulderPitch|collision_0_torsoAction.001
+    7400064: RShoulderPitch|HipPitchAction
+    7400066: RShoulderPitch|HipRollAction
+    7400068: RShoulderPitch|RElbowRollAction.003
+    7400070: RShoulderPitch|RElbowYawAction.002
+    7400072: RShoulderPitch|RShoulderRollAction.002
+    7400074: RShoulderPitch|RWristYawAction
+    7400076: RShoulderPitch|TorsoAction.002
+    7400078: pepper_armature|Action
+    7400080: pepper_armature|collision_0_HipAction
+    7400082: pepper_armature|collision_0_PelvisAction
+    7400084: pepper_armature|collision_0_TibiaAction
+    7400086: pepper_armature|collision_0_torsoAction
+    7400088: pepper_armature|collision_0_torsoAction.001
+    7400090: pepper_armature|HipPitchAction
+    7400092: pepper_armature|HipRollAction
+    7400094: pepper_armature|pepper_armature.001|pepper_armature|pepper_armature.001|pep
+    7400096: pepper_armature|pepper_armature.001|pepper_armature|pepper_armature.001|pep.001
+    7400098: pepper_armature|pepper_armature.001|pepper_armature|pepper_armature.001|pep.002
+    7400100: pepper_armature|pepper_armature.001|pepper_armature|pepper_armature.001|pep.003
+    7400102: pepper_armature|pepper_armature.001|pepper_armature|pepper_armature.001|pepper_
+    7400104: pepper_armature|pepper_armature.001|pepper_armature|RElbowRollAction.003|pe
+    7400106: pepper_armature|pepper_armature.001|pepper_armature|RElbowRollAction.003|pepper
+    7400108: pepper_armature|pepper_armature.001|pepper_armature|RElbowYawAction.002|pep
+    7400110: pepper_armature|pepper_armature.001|pepper_armature|RElbowYawAction.002|pepper_
+    7400112: pepper_armature|pepper_armature.001|pepper_armature|RShoulderRollAction.002
+    7400114: pepper_armature|pepper_armature.001|pepper_armature|RShoulderRollAction.002|pep
+    7400116: pepper_armature|pepper_armature.001|pepper_armature|RWristYawAction|pepper_
+    7400118: pepper_armature|pepper_armature.001|pepper_armature|RWristYawAction|pepper_arma
+    7400120: pepper_armature|pepper_armature.001|pepper_armature|TorsoAction.002|pepper_
+    7400122: pepper_armature|pepper_armature.001|pepper_armature|TorsoAction.002|pepper_arma
+    7400124: pepper_armature|RElbowRollAction.003
+    7400126: pepper_armature|RElbowYawAction.002
+    7400128: pepper_armature|RShoulderRollAction.002
+    7400130: pepper_armature|RWristYawAction
+    7400132: pepper_armature|TorsoAction.002
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

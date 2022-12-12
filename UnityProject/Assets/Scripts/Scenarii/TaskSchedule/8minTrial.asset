@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 561470b006bc56844a732517a148f694, type: 3}
+  m_Name: 8minTrial
+  m_EditorClassIdentifier: 
+  IncomingTasks:
+  - time: 0
+    numberOfTask: 10
+  - time: 15
+    numberOfTask: 5
+  - time: 30
+    numberOfTask: 5
+  - time: 60
+    numberOfTask: 20
+  - time: 90
+    numberOfTask: 10
+  - time: 120
+    numberOfTask: 10
+  - time: 150
+    numberOfTask: 10
+  - time: 180
+    numberOfTask: 15
+  - time: 210
+    numberOfTask: 15
+  - time: 240
+    numberOfTask: 10
+  - time: 270
+    numberOfTask: 15
+  - time: 300
+    numberOfTask: 7
+  - time: 330
+    numberOfTask: 7
+  - time: 360
+    numberOfTask: 7
+  - time: 390
+    numberOfTask: 7
+  - time: 420
+    numberOfTask: 7

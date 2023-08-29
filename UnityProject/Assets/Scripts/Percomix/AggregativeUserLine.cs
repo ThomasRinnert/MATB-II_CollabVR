@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class AggregativeUserLine : UserBoard
 {
-    
+    private void Start() {
+        //player_manager = GetComponentInParent<PlayerManager>();
+    }
 }

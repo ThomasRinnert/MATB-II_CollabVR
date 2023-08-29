@@ -28,15 +28,16 @@ public class AggregativeUserBoard : MonoBehaviour
                 Destroy(panel.transform.GetChild(i).gameObject);
             }
             var index = 0;
-            for (int p = 0; p < PhotonNetwork.PlayerList.Length /*GameManager.Instance.players.Count*/; p++)
+            for (int p = 0; p < GameManager.Instance.players.Count /*GameManager.Instance.players.Count*/; p++)
             {
-                string name = PhotonNetwork.PlayerList[p].NickName;
+                string name = GameManager.Instance.players[p].NickName;
                 if (name.Contains("XP") || name.Contains("CAM")) continue;
                 
                 GameObject line = Instantiate(AggregativeLinePrefab, panel.transform, false);
                 UserBoard b = line.GetComponent<UserBoard>();
-                Photon.Realtime.Player player = PhotonNetwork.PlayerList[p];
+                Photon.Realtime.Player player = GameManager.Instance.players[p].player;
                 b.player = player;
+                b.player_manager =  GameManager.Instance.players[p];
                 line.GetComponentInChildren<UserID>().Init();
                 line.transform.localPosition = new Vector3(0, -index, 0);
                 index++;
@@ -62,11 +63,11 @@ public class AggregativeUserBoard : MonoBehaviour
             for (int i = 0; i < panel.transform.childCount; i++)
             {
                 var board = panel.transform.GetChild(i);
-                if(board.GetComponent<UserBoard>().player.NickName == leftPlayer)
+                if(board.GetComponent<UserBoard>().player_manager.NickName == leftPlayer)
                 {
                     board.GetComponentInChildren<ActionHistory>().divideTasks(true);
                 }
-                if(board.GetComponent<UserBoard>().player.NickName == rightPlayer)
+                if(board.GetComponent<UserBoard>().player_manager.NickName == rightPlayer)
                 {
                     board.GetComponentInChildren<ActionHistory>().divideTasks(false);
                 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RootMotion.FinalIK;
 using UnityEngine.UI;
+using UnityEditor;
 using System;
 
 [RequireComponent(typeof(Replayer))]
@@ -30,14 +31,22 @@ public class Operator : MonoBehaviour
         return ErrorFunction.erf((x - 0.65) / 0.2) * 0.5 + 0.5;
     }
     
-    [Range(0.0f, 1.0f)] [Tooltip("Amount of stress gained from each task")] 
+    [Range(0.0f, 1.0f)] [Tooltip("Amount of stress gained from each task")]
     public float stress_unit = 0.2f;
-    [Range(0.0f, 1.0f)] [Tooltip("Slope of the stress cooldown function")] 
+    [Range(0.0f, 1.0f)] [Tooltip("Slope of the stress cooldown function")]
     public float stress_cooldownRate = 0.001f;
+
+    [Range(0.0f, 1.0f)] [Tooltip("Threshold between very low and low levels of stress")] 
+    public float stress_VLLThreshold = 0.4f;
     [Range(0.0f, 1.0f)] [Tooltip("Threshold between low and medium levels of stress")] 
     public float stress_LMThreshold = 0.4f;
     [Range(0.0f, 1.0f)] [Tooltip("Threshold between medium and high levels of stress")] 
     public float stress_MHThreshold = 0.7f;
+    [Range(0.0f, 1.0f)] [Tooltip("Threshold between high and very high levels of stress")] 
+    public float stress_HVHThreshold = 0.7f;
+
+    //orange: new Color(1.0f, 0.64f, 0.0f)
+    public static List<Color> stressColors = new List<Color>(5){Color.red, Color.red, Color.yellow, Color.green, Color.green};
     
     /*
     [Range(0.0f, 100.0f)] [Tooltip("Sample size (seconds)")]
@@ -48,7 +57,8 @@ public class Operator : MonoBehaviour
     
     [Range(0.0f, 1.0f)] [Tooltip("Stress level")]
     public float stress = 0.0f;
-    public enum StressLevel { Low, Medium, High }
+    public float predictedStress = 0.0f;
+    public enum StressLevel { VLow, Low, Medium, High, VHigh }
     public class StressRecord
     {
         public StressLevel level;
@@ -57,8 +67,16 @@ public class Operator : MonoBehaviour
     }
     public List<(float, float)> stressOverTime = new List<(float, float)>(); // (stress, deltaTime)
     public StressLevel stressLevel = StressLevel.Low;
+    public StressLevel predictedStressLevel { get {
+        if (predictedStress < stress_VLLThreshold) return StressLevel.VLow;
+        else if (stress_VLLThreshold < predictedStress && predictedStress < stress_LMThreshold) return StressLevel.Low;
+        else if (stress_LMThreshold < predictedStress && predictedStress < stress_MHThreshold) return StressLevel.Medium;
+        else if (stress_MHThreshold < predictedStress && predictedStress < stress_HVHThreshold) return StressLevel.High;
+        else if (stress_HVHThreshold < predictedStress) return StressLevel.VHigh;
+        else return StressLevel.VLow;
+    }}
     public List<StressRecord> stressRecords = new List<StressRecord>();
-    public void ResetStress() {stress = 0; stressLevel = StressLevel.Low; stressOverTime.Clear(); stressRecords.Clear(); GetComponentInChildren<StressOverTimeGraph>(true).ResetGraph(); }
+    public void ResetStress() { stress = 0; stressLevel = StressLevel.VLow; stressOverTime.Clear(); stressRecords.Clear(); GetComponentInChildren<StressOverTimeGraph>(true).ResetGraph(); }
     
     [Range(0.0f, 1.0f)] [Tooltip("Proportion of the time window passed working")]
     [SerializeField] public float timeWorkedRatio = 0.0f;
@@ -102,6 +120,8 @@ public class Operator : MonoBehaviour
 
         if (canvas == null) canvas = GetComponentInChildren<Canvas>();
         if (outline == null) outline = GetComponentInChildren<Outline>();
+
+        if (GameManager.Instance != null) GameManager.Instance.players.Add(GetComponent<PlayerManager>());
     }
 
     void Start()
@@ -150,9 +170,11 @@ public class Operator : MonoBehaviour
 
     void Update()
     {
-        if (control.isRunning()) ProcessTimeWorking();
-
-        if (control.isRunning()) ProcessStress();
+        if(control != null)
+        {
+            if (control.isRunning()) ProcessTimeWorking();
+            if (control.isRunning()) ProcessStress();
+        }
 
         // Task chainning
         if (tasksQueue.Count > 0 && replayer.state != Replayer.ReplayState.Playing && replayer.state != Replayer.ReplayState.Paused)
@@ -222,6 +244,11 @@ public class Operator : MonoBehaviour
         return score;
     }
 
+    public float getMaxScore()
+    {
+        return (float) tasksDone.Count;
+    }
+
     public float getScoreAvg()
     {
         return (tasksDone.Count > 0) ? getScore() / (float)(tasksDone.Count) : 0.0f;
@@ -285,31 +312,90 @@ public class Operator : MonoBehaviour
 
     void ProcessStress()
     {
-        float stress_chargerate = replayer.state == Replayer.ReplayState.Playing ? stress_unit / 10.0f : 0.0f; // one unit over 10 seconds of task
-        stress = Mathf.Min( Mathf.Max( (stress + ( stress_chargerate * speed - stress_cooldownRate ) * Time.deltaTime), 0), 1.0f);
+        // one unit over 10 seconds of task
+        float stress_chargerate = replayer.state == Replayer.ReplayState.Playing ? stress_unit / 10.0f : 0.0f;
 
+        // current stress
+        stress = Mathf.Min( Mathf.Max( (stress + ( stress_chargerate * speed - stress_cooldownRate ) * Time.deltaTime), 0), 1.0f);
         stressOverTime.Add((stress, Time.deltaTime));
 
-        if (stressLevel == StressLevel.Low && stress > stress_LMThreshold)
+        // change level of stress
+        if (stressLevel != StressLevelFromFloat(stress))
         {
             RecordStress();
-            stressLevel = StressLevel.Medium;
+            stressLevel = StressLevelFromFloat(stress);
         }
-        else if (stressLevel == StressLevel.Medium && stress > stress_MHThreshold)
+        /*
+        switch (stressLevel)
         {
-            RecordStress();
-            stressLevel = StressLevel.High;
+        case StressLevel.VLow:
+            if(stress > stress_VLLThreshold)
+            {
+                RecordStress();
+                stressLevel = StressLevel.Low;
+            }
+            break;
+        case StressLevel.Low:
+            if(stress < stress_VLLThreshold)
+            {
+                RecordStress();
+                stressLevel = StressLevel.VLow;
+            }
+            else if(stress > stress_LMThreshold)
+            {
+                RecordStress();
+                stressLevel = StressLevel.Medium;
+            }
+            break;
+        case StressLevel.Medium:
+            if(stress < stress_LMThreshold)
+            {
+                RecordStress();
+                stressLevel = StressLevel.Low;
+            }
+            else if(stress > stress_MHThreshold)
+            {
+                RecordStress();
+                stressLevel = StressLevel.High;
+            }
+            break;
+        case StressLevel.High:
+            if(stress < stress_MHThreshold)
+            {
+                RecordStress();
+                stressLevel = StressLevel.Medium;
+            }
+            else if(stress > stress_HVHThreshold)
+            {
+                RecordStress();
+                stressLevel = StressLevel.VHigh;
+            }
+            break;
+        case StressLevel.VHigh:
+            if(stress < stress_HVHThreshold)
+            {
+                RecordStress();
+                stressLevel = StressLevel.High;
+            }
+            break;
         }
-        else if (stressLevel == StressLevel.High && stress < stress_MHThreshold)
+        */
+
+        // prediction of stress
+        float workTimeLeft = 0.0f;
+        if (replayer.state == Replayer.ReplayState.Playing)
         {
-            RecordStress();
-            stressLevel = StressLevel.Medium;
+            workTimeLeft = (float)(replayer.duration / speed) * (1.0f - replayer.getProgress()); // not replay.duration but currentTask.duration from the task queue
+            if (tasksQueue.Count > 0)
+            {
+                foreach (var task in tasksQueue)
+                {
+                    workTimeLeft += task.duration() / speed;
+                }
+            }
         }
-        else if (stressLevel == StressLevel.Medium && stress < stress_LMThreshold)
-        {
-            RecordStress();
-            stressLevel = StressLevel.Low;
-        }
+        predictedStress = stress + ( stress_chargerate * speed * workTimeLeft - stress_cooldownRate * workTimeLeft);
+        predictedStress = Mathf.Min( Mathf.Max( predictedStress, 0), 1.0f);
     }
 
     void RecordStress()
@@ -330,16 +416,66 @@ public class Operator : MonoBehaviour
 
         stressOverTime.Clear();
     }
+
+    public float StressFromTask(MATBIISystem.MATBII_TASK task)
+    {
+        return ((stress_unit / 10.0f) * speed - stress_cooldownRate ) * task.duration() / speed;
+    }
+
+    public StressLevel StressLevelFromFloat(float s)
+    {
+        if (s < stress_VLLThreshold) return StressLevel.VLow;
+        else if (stress_VLLThreshold < s && s < stress_LMThreshold) return StressLevel.Low;
+        else if (stress_LMThreshold < s && s < stress_MHThreshold) return StressLevel.Medium;
+        else if (stress_MHThreshold < s && s < stress_HVHThreshold) return StressLevel.High;
+        else if (stress_HVHThreshold < s) return StressLevel.VHigh;
+        else return StressLevel.VLow;
+    }
 }
+
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(Operator)), CanEditMultipleObjects]
+public class OperatorEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        Operator script = (Operator)target;
+
+        GUILayout.BeginVertical();
+            if(GUILayout.Button("Add SYSMON")) { script.GiveTask(MATBIISystem.MATBII_TASK.SYSMON); }
+            if(GUILayout.Button("Add COMM"))   { script.GiveTask(MATBIISystem.MATBII_TASK.COMM);   }
+            if(GUILayout.Button("Add TRACK"))  { script.GiveTask(MATBIISystem.MATBII_TASK.TRACK);  }
+            if(GUILayout.Button("Add RESMAN")) { script.GiveTask(MATBIISystem.MATBII_TASK.RESMAN); }
+            if(GUILayout.Button("Clear Task")) { script.ResetTaskQueue(); script.replayer.Stop();  }
+        GUILayout.EndVertical();
+
+        DrawDefaultInspector();
+    }
+}
+#endif
 
 public static class StressEnumExtension
 {
     public static string String(this Operator.StressLevel lvl)
     {
         string level = "ERROR";
-        if (lvl == Operator.StressLevel.Low) level = "LOW";
+        if (lvl == Operator.StressLevel.VLow) level = "VERY LOW";
+        else if (lvl == Operator.StressLevel.Low) level = "LOW";
         else if (lvl == Operator.StressLevel.Medium) level = "MEDIUM";
         else if (lvl == Operator.StressLevel.High) level = "HIGH";
+        else if (lvl == Operator.StressLevel.VHigh) level = "VERY HIGH";
         return level;
+    }
+
+    public static Color Color(this Operator.StressLevel lvl)
+    {
+        Color c = new Color();
+        if (lvl == Operator.StressLevel.VLow) c = Operator.stressColors[4];
+        else if (lvl == Operator.StressLevel.Low) c = Operator.stressColors[3];
+        else if (lvl == Operator.StressLevel.Medium) c = Operator.stressColors[2];
+        else if (lvl == Operator.StressLevel.High) c = Operator.stressColors[1];
+        else if (lvl == Operator.StressLevel.VHigh) c = Operator.stressColors[0];
+        return c;
     }
 }

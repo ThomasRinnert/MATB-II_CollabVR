@@ -90,12 +90,14 @@
      <Compile Include="Assets\Scripts\Percomix\ExperimentControls.cs" />
      <Compile Include="Assets\Scripts\Percomix\ExperimentControlsMATBIITeam.cs" />
      <Compile Include="Assets\Scripts\Percomix\ExperimenterControls.cs" />
+     <Compile Include="Assets\Scripts\Percomix\ExperimentProgress.cs" />
      <Compile Include="Assets\Scripts\Percomix\IdleAnimations.cs" />
      <Compile Include="Assets\Scripts\Percomix\MvmtRecords.cs" />
      <Compile Include="Assets\Scripts\Percomix\Operator.cs" />
      <Compile Include="Assets\Scripts\Percomix\OperatorStatusPanel.cs" />
      <Compile Include="Assets\Scripts\Percomix\Recorder.cs" />
      <Compile Include="Assets\Scripts\Percomix\Replayer.cs" />
+     <Compile Include="Assets\Scripts\Percomix\StressHalo.cs" />
      <Compile Include="Assets\Scripts\Percomix\StressOverTime.cs" />
      <Compile Include="Assets\Scripts\Percomix\StressOverTimeGraph.cs" />
      <Compile Include="Assets\Scripts\Percomix\TaskArtifact.cs" />
@@ -120,6 +122,7 @@
      <Compile Include="Assets\Scripts\RandomGenerator.cs" />
      <Compile Include="Assets\Scripts\Scenarii\TaskSchedule\TaskSchedule.cs" />
      <Compile Include="Assets\Scripts\TakePhoto.cs" />
+     <None Include="Assets\Materials\CustomShader.shader" />
      <None Include="Assets\Demo\3DCharacterDummy\Readme.txt" />
  <Reference Include="Unity.ProBuilder">
  <HintPath>C:/Users/Thomas Rinnert/Documents/Percomix/MATB-II-VR/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>

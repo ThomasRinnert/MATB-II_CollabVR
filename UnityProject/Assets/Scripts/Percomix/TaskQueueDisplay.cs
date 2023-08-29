@@ -8,6 +8,8 @@ public class TaskQueueDisplay : MonoBehaviour
 {
     [SerializeField] Operator op;
 
+    [SerializeField] GameObject RestPanel;
+
     [Header("SYSMON")]
     [SerializeField] GameObject SYSMON_root = null;
     [SerializeField] TextMeshPro SYSMON_count = null;
@@ -69,11 +71,18 @@ public class TaskQueueDisplay : MonoBehaviour
         if (op.TRACK_todo  <= 0 && TRACK_root.activeSelf)  TRACK_root.SetActive(false); 
         if (op.COMM_todo   <= 0 && COMM_root.activeSelf)   COMM_root.SetActive(false); 
         if (op.RESMAN_todo <= 0 && RESMAN_root.activeSelf) RESMAN_root.SetActive(false);
-        if (op.SYSMON_todo <= 0 && op.TRACK_todo <= 0 && op.COMM_todo <= 0 && op.RESMAN_todo <= 0 && AllTasks_root.activeSelf) AllTasks_root.SetActive(false);
+
+        if (op.SYSMON_todo <= 0 && op.TRACK_todo <= 0 && op.COMM_todo <= 0 && op.RESMAN_todo <= 0)
+        {
+            if (AllTasks_root.activeSelf) AllTasks_root.SetActive(false);
+            RestPanel.SetActive(true);
+        }
+        else RestPanel.SetActive(false);
 
         if (SYSMON_root.activeSelf)
         {
             SYSMON_count.text = op.SYSMON_todo.ToString();
+            ///*
             if (SYSMON_cubes.childCount < op.SYSMON_todo)
             {
                 GameObject go = Instantiate(SYSMON_cubePrefab);
@@ -87,6 +96,7 @@ public class TaskQueueDisplay : MonoBehaviour
             {
                 Destroy(SYSMON_cubes.GetChild(SYSMON_cubes.childCount -1).gameObject);
             }
+            //*/
 
             if (op.replayer.TASK == MATBIISystem.MATBII_TASK.SYSMON)
             {
@@ -106,6 +116,7 @@ public class TaskQueueDisplay : MonoBehaviour
         if (TRACK_root.activeSelf)
         {
             TRACK_count.text = op.TRACK_todo.ToString();
+            ///*
             if (TRACK_cubes.childCount < op.TRACK_todo)
             {
                 GameObject go = Instantiate(TRACK_cubePrefab);
@@ -119,6 +130,7 @@ public class TaskQueueDisplay : MonoBehaviour
             {
                 Destroy(TRACK_cubes.GetChild(TRACK_cubes.childCount -1).gameObject);
             }
+            //*/
 
             if (op.replayer.TASK == MATBIISystem.MATBII_TASK.TRACK)
             {
@@ -138,6 +150,7 @@ public class TaskQueueDisplay : MonoBehaviour
         if (COMM_root.activeSelf)
         {
             COMM_count.text = op.COMM_todo.ToString();
+            ///*
             if (COMM_cubes.childCount < op.COMM_todo)
             {
                 GameObject go = Instantiate(COMM_cubePrefab);
@@ -151,6 +164,7 @@ public class TaskQueueDisplay : MonoBehaviour
             {
                 Destroy(COMM_cubes.GetChild(COMM_cubes.childCount -1).gameObject);
             }
+            //*/
 
             if (op.replayer.TASK == MATBIISystem.MATBII_TASK.COMM)
             {
@@ -170,6 +184,7 @@ public class TaskQueueDisplay : MonoBehaviour
         if (RESMAN_root.activeSelf)
         {
             RESMAN_count.text = op.RESMAN_todo.ToString();
+            ///*
             if (RESMAN_cubes.childCount < op.RESMAN_todo)
             {
                 GameObject go = Instantiate(RESMAN_cubePrefab);
@@ -183,6 +198,7 @@ public class TaskQueueDisplay : MonoBehaviour
             {
                 Destroy(RESMAN_cubes.GetChild(RESMAN_cubes.childCount -1).gameObject);
             }
+            //*/
 
             if (op.replayer.TASK == MATBIISystem.MATBII_TASK.RESMAN)
             {

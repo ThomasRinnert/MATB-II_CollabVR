@@ -25,9 +25,11 @@ public class StressOverTime : MonoBehaviour
     void Update()
     {
         string level = "ERROR"; string color = "white";
-        if      (op.stressLevel == Operator.StressLevel.High)   {level = "HIGH";   color = ColorUtility.ToHtmlStringRGBA(graph.colors[0]);}
-        else if (op.stressLevel == Operator.StressLevel.Medium) {level = "MEDIUM"; color = ColorUtility.ToHtmlStringRGBA(graph.colors[1]);}
-        else if (op.stressLevel == Operator.StressLevel.Low)    {level = "LOW";    color = ColorUtility.ToHtmlStringRGBA(graph.colors[2]);}
+        if      (op.stressLevel == Operator.StressLevel.VHigh)  {level = "VERY HIGH"; color = ColorUtility.ToHtmlStringRGBA(graph.colors[0]);}
+        else if (op.stressLevel == Operator.StressLevel.High)   {level = "HIGH";      color = ColorUtility.ToHtmlStringRGBA(graph.colors[1]);}
+        else if (op.stressLevel == Operator.StressLevel.Medium) {level = "MEDIUM";    color = ColorUtility.ToHtmlStringRGBA(graph.colors[2]);}
+        else if (op.stressLevel == Operator.StressLevel.Low)    {level = "LOW";       color = ColorUtility.ToHtmlStringRGBA(graph.colors[3]);}
+        else if (op.stressLevel == Operator.StressLevel.VLow)   {level = "VERY LOW";  color = ColorUtility.ToHtmlStringRGBA(graph.colors[4]);}
 
         float duration = 0.0f;
         for (int i = 0; i < op.stressOverTime.Count; i++)
@@ -48,13 +50,6 @@ public class StressOverTime : MonoBehaviour
         {
             Operator.StressRecord record = op.stressRecords[op.stressRecords.Count-1-i];
 
-            /*
-            level = "ERROR";
-            if (record.level == Operator.StressLevel.Low) level = "LOW";
-            else if (record.level == Operator.StressLevel.Medium) level = "MEDIUM";
-            else if (record.level == Operator.StressLevel.High) level = "HIGH";
-            */
-            
             history += "\nWas " + record.level.String() + /*" (Avg: " + (record.average * 100).ToString("##0'%)'") + */" for " + record.duration.ToString("##0's'") + " before that";
         }
 

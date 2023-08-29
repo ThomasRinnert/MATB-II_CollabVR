@@ -224,7 +224,7 @@ MonoBehaviour:
         m_MethodName: set_material
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 50c4299a3ebbf3e4e879228dac91f67f,
+          m_ObjectArgument: {fileID: 2100000, guid: 75d669b560eff1247b52f613a540cb7a,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
         m_MethodName: set_material
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: cda652b555d7b4b47bb7ec138baa28e5,
+          m_ObjectArgument: {fileID: 2100000, guid: 6003e1658c99b994e9c8c10eba60f001,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
@@ -340,7 +340,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cda652b555d7b4b47bb7ec138baa28e5, type: 2}
+  - {fileID: 2100000, guid: 6003e1658c99b994e9c8c10eba60f001, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

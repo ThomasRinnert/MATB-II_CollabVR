@@ -1248,6 +1248,8 @@ MonoBehaviour:
     type: 3}
   VRPrefab: {fileID: 3490104607153154075, guid: 216ff2c3d7872264886ca67c2d33a75f,
     type: 3}
+  BotPrefab: {fileID: 7611342437666162775, guid: 1255e1a56f7be704696c61c31c91d1af,
+    type: 3}
   spawnOffset: {x: 0, y: 0, z: 0}
   players: []
 --- !u!4 &482175438
@@ -4301,4 +4303,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e7ffcf54dea1346b3cb4a25728abd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio_clip: {fileID: 8300000, guid: e628d84fcb44a0d40a2e7ebd6fe33da3, type: 3}
+  op: {fileID: 0}
+  SYSMON_meanTime: 0
+  SYSMON_minTime: 1000
+  SYSMON_maxTime: 0
+  TRACK_meanTime: 0
+  TRACK_minTime: 1000
+  TRACK_maxTime: 0
+  COMM_meanTime: 0
+  COMM_minTime: 1000
+  COMM_maxTime: 0
+  RESMAN_meanTime: 0
+  RESMAN_minTime: 1000
+  RESMAN_maxTime: 0

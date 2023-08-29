@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     [Tooltip("The prefab to use for representing a VR user")]
     public GameObject VRPrefab;
 
+    [Tooltip("The prefab to use for representing a Bot")]
+    public GameObject BotPrefab;
+
     [SerializeField]
     public Vector3 spawnOffset = new Vector3(0f, 0f, 0f);
 
@@ -89,5 +92,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
+    }
+
+    [ContextMenu("AddBot")]
+    public void AddBot()
+    {
+        GameObject player = PhotonNetwork.Instantiate(BotPrefab.name, spawnOffset, Quaternion.identity, 0);
+        player.name = "Bot";
     }
 }

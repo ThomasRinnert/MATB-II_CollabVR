@@ -5,18 +5,38 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public class ExperimentControlsMATBIITeam : MonoBehaviour
+public static class ConditionEnumExtension
 {
-    [SerializeField] string condition {get{
+    public static string String(this ExperimentControlsMATBIITeam.Condition c)
+    {
+        /*
         string cond = "";
         if (Symbolic) {cond += "Symbolic";} if (Literal) {cond += "Literal";}
         if (Stress) {cond += "Stress";} if (!Stress && (Literal || Symbolic)) {cond += "NoStress";}
         if (!Symbolic && !Literal && !Stress) {cond += "NoCue";}
         return cond;
-    }}
+        */
+        switch (c)
+        {
+            case ExperimentControlsMATBIITeam.Condition.C0: return "C0";
+            case ExperimentControlsMATBIITeam.Condition.C1: return "3cNP"; // 3 colors - no prediction
+            case ExperimentControlsMATBIITeam.Condition.C2: return "5cNP"; // 5 colors - no prediction
+            case ExperimentControlsMATBIITeam.Condition.C3: return "3cWP"; // 3 colors - with prediction
+            case ExperimentControlsMATBIITeam.Condition.C4: return "5cWP"; // 5 colors - with prediction
+            default: return "UnknownCondition";
+        }
+    }
+}
+
+public class ExperimentControlsMATBIITeam : MonoBehaviour
+{
     [SerializeField] int sessionID = -1;
     [SerializeField] int trialID = -1;
-    public enum ScenarioType { OneBatch, InitialTraining, TrialTraining, Trial, Ininite }
+    
+    public enum Condition { C0, C1, C2, C3, C4 }
+    public Condition condition = Condition.C0;
+
+    public enum ScenarioType { OneBatch, InitialTraining, TrialTraining, Trial, Infinite }
     public ScenarioType scenario = ScenarioType.OneBatch;
 
     /* TODO
@@ -49,6 +69,63 @@ public class ExperimentControlsMATBIITeam : MonoBehaviour
     }
     #endregion
 
+    #region ConditionSelection
+    public void changeCondition(Condition c)
+    {
+        condition = c;
+        switch(c)
+        {
+            case Condition.C0:
+            case Condition.C1:
+                foreach (var op in operators)
+                {
+                    StressHalo halo = op.GetComponentInChildren<StressHalo>();
+                    op.stress_VLLThreshold = 0.33f;
+                    op.stress_LMThreshold = 0.33f;
+                    op.stress_MHThreshold = 0.66f;
+                    op.stress_HVHThreshold = 0.66f;
+                    if (halo != null) { halo.ShowPrediction(false); }
+                }
+                break;
+            case Condition.C2:
+                foreach (var op in operators)
+                {
+                    StressHalo halo = op.GetComponentInChildren<StressHalo>();
+                    op.stress_VLLThreshold = 0.2f;
+                    op.stress_LMThreshold = 0.4f;
+                    op.stress_MHThreshold = 0.6f;
+                    op.stress_HVHThreshold = 0.8f;
+                    if (halo != null) { halo.ShowPrediction(false); }
+                }
+                break;
+            case Condition.C3:
+                foreach (var op in operators)
+                {
+                    StressHalo halo = op.GetComponentInChildren<StressHalo>();
+                    op.stress_VLLThreshold = 0.33f;
+                    op.stress_LMThreshold = 0.33f;
+                    op.stress_MHThreshold = 0.66f;
+                    op.stress_HVHThreshold = 0.66f;
+                    if (halo != null) { halo.ShowPrediction(true); }
+                }
+                break;
+            case Condition.C4:
+                foreach (var op in operators)
+                {
+                    StressHalo halo = op.GetComponentInChildren<StressHalo>();
+                    op.stress_VLLThreshold = 0.2f;
+                    op.stress_LMThreshold = 0.4f;
+                    op.stress_MHThreshold = 0.6f;
+                    op.stress_HVHThreshold = 0.8f;
+                    if (halo != null) { halo.ShowPrediction(true); }
+                }
+                break;
+            default: break;
+        }
+    }
+
+    #endregion
+
     #region LiteralSymbolic
     bool Literal  = false; public bool getLiteral()  { return Literal;  }
     bool Symbolic = false; public bool getSymbolic() { return Symbolic; }
@@ -71,6 +148,7 @@ public class ExperimentControlsMATBIITeam : MonoBehaviour
         {
             panel.ShowSymbolic(b);
         }
+        if(!b) { GraphManager.Graph.ResetAll(); }
     }
     #endregion
 
@@ -95,10 +173,7 @@ public class ExperimentControlsMATBIITeam : MonoBehaviour
     public float elapsedSeconds = 0.0f;
 
     TimeSpan taskAssignTime; public TimeSpan getTaskAssignTime() { return taskAssignTime; }
-    bool leftHand  = false; public bool setLeftHand(bool b)  { leftHand = b;  return taskAssigning; }
-    bool rightHand = false; public bool setRightHand(bool b) { rightHand = b; return taskAssigning; }
-    bool taskAssigning {get {return leftHand || rightHand;}}
-
+    
     void InitTime()
     {
         startTime = DateTime.UtcNow;
@@ -141,21 +216,21 @@ public class ExperimentControlsMATBIITeam : MonoBehaviour
 
     private bool createLogFiles()
     {
-        logFile = logDirectory + "participant_" + sessionID.ToString() + "_trial_" + trialID.ToString() + "_condition_" + condition + "_OpStatus.csv";
+        logFile = logDirectory + "participant_" + sessionID.ToString() + "_trial_" + trialID.ToString() + "_condition_" + condition.String() + "_OpStatus.csv";
         if (File.Exists(logFile))
         {
             Debug.LogError(("Logfile for session " + sessionID
                         + ", trial " + trialID
-                        + " and condition " + condition + " already exists !"));
+                        + " and condition " + condition.String() + " already exists !"));
             return false;
         }
 
-        logFileTasks = logDirectory + "participant_" + sessionID.ToString() + "_trial_" + trialID.ToString() + "_condition_" + condition + "_TskAssignment.csv";
+        logFileTasks = logDirectory + "participant_" + sessionID.ToString() + "_trial_" + trialID.ToString() + "_condition_" + condition.String() + "_TskAssignment.csv";
         if (File.Exists(logFileTasks))
         {
             Debug.LogError(("Logfile for task assignment of session " + sessionID
                         + ", trial " + trialID
-                        + " and condition " + condition + " already exists !"));
+                        + " and condition " + condition.String() + " already exists !"));
             return false;
         }
 
@@ -305,7 +380,7 @@ public class ExperimentControlsMATBIITeam : MonoBehaviour
                 spawner.schedule = TrialTraining; break;
             case ExperimentControlsMATBIITeam.ScenarioType.Trial:
                 spawner.schedule = Trial; break;
-            case ExperimentControlsMATBIITeam.ScenarioType.Ininite:
+            case ExperimentControlsMATBIITeam.ScenarioType.Infinite:
             default: spawner.schedule = null; break;
         }
 
@@ -359,9 +434,9 @@ public class ExperimentControlsMATBIITeam : MonoBehaviour
     void Start()
     {
         Bind();
-        ShowLiteral(false);
-        ShowSymbolic(false);
-        ShowStress(false);
+        //ShowLiteral(false);
+        //ShowSymbolic(false);
+        //ShowStress(false);
     }
 
     void FixedUpdate()
@@ -374,6 +449,47 @@ public class ExperimentControlsMATBIITeam : MonoBehaviour
         if (lastFrame) Interrupt();
     }
     #endregion
+
+    #region Interaction
+    private bool leftHand = false; public bool LeftHand() { return leftHand; }
+    private MATBIISystem.MATBII_TASK leftTask = MATBIISystem.MATBII_TASK.SYSMON;
+    public MATBIISystem.MATBII_TASK LeftTask() { return leftTask; }
+    public bool setLeftHand(bool b, MATBIISystem.MATBII_TASK task)
+    {
+        leftHand = b;
+        leftTask = task;
+        return taskAssigning;
+    }
+    private bool rightHand = false; public bool RightHand() { return rightHand; }
+    private MATBIISystem.MATBII_TASK rightTask = MATBIISystem.MATBII_TASK.SYSMON;
+    public MATBIISystem.MATBII_TASK RightTask() { return rightTask; }
+    public bool setRightHand(bool b, MATBIISystem.MATBII_TASK task)
+    {
+        rightHand = b;
+        rightTask = task;
+        return taskAssigning;
+    }
+    public bool taskAssigning {get {return leftHand || rightHand;}}
+    #endregion
+
+    public float getTeamScore()
+    {
+        float score = 0f;
+        for (int i = 0; i < 6; i++)
+        {
+            score += operators[i].getScore();
+        }
+        return score;
+    }
+    public float getMaxScore()
+    {
+        float score = 0f;
+        for (int i = 0; i < 6; i++)
+        {
+            score += operators[i].getMaxScore();
+        }
+        return score;
+    }
 }
 
 public static class RandomExtension
@@ -401,7 +517,7 @@ public class ExperimentControlsMATBIITeamEditor : Editor
     {
         ExperimentControlsMATBIITeam script = (ExperimentControlsMATBIITeam)target;
 
-        if(Application.isPlaying && script.isRunning() && script.scenario != ExperimentControlsMATBIITeam.ScenarioType.Ininite)
+        if(Application.isPlaying && script.isRunning() && script.scenario != ExperimentControlsMATBIITeam.ScenarioType.Infinite)
         {
             int index = script.getSpawner().index;
             int count = script.getSpawner().schedule.IncomingTasks.Count;
@@ -411,6 +527,7 @@ public class ExperimentControlsMATBIITeamEditor : Editor
         int higherLogID = script.checkExistingLogs();
         GUILayout.Label(higherLogID > -1 ? "Found logs for sessions up to: " + higherLogID.ToString() : "No logs found");
 
+        /*
         GUILayout.BeginHorizontal();
         if(GUILayout.Button("No Cue" + (!script.getLiteral() && !script.getSymbolic() && !script.getStress() ? " (active)" : "")))
         {
@@ -424,6 +541,7 @@ public class ExperimentControlsMATBIITeamEditor : Editor
             script.ShowLiteral(true);
         }
         GUILayout.EndHorizontal();
+        */
 
         GUILayout.BeginHorizontal();
         if(GUILayout.Button("Literal" + (script.getLiteral() && !script.getSymbolic() ? " (active)" : "")))
@@ -450,6 +568,51 @@ public class ExperimentControlsMATBIITeamEditor : Editor
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
+            GUILayout.BeginVertical();
+                if(GUILayout.Button("C0"))
+                {
+                    script.changeCondition(ExperimentControlsMATBIITeam.Condition.C0);
+                }
+                GUILayout.Label("3 Colors");
+                GUILayout.Label("5 Colors");
+            GUILayout.EndVertical();
+            GUILayout.BeginVertical();
+                GUILayout.Label("Without Prediction");
+                if(GUILayout.Button("C1" + (script.condition == ExperimentControlsMATBIITeam.Condition.C1 ? " (active)" : "")))
+                {
+                    script.changeCondition(ExperimentControlsMATBIITeam.Condition.C1);
+                }
+                if(GUILayout.Button("C2" + (script.condition == ExperimentControlsMATBIITeam.Condition.C2 ? " (active)" : "")))
+                {
+                    script.changeCondition(ExperimentControlsMATBIITeam.Condition.C2);
+                }
+            GUILayout.EndVertical();
+            GUILayout.BeginVertical();
+                GUILayout.Label("With Prediction");
+                if(GUILayout.Button("C3" + (script.condition == ExperimentControlsMATBIITeam.Condition.C3 ? " (active)" : "")))
+                {
+                    script.changeCondition(ExperimentControlsMATBIITeam.Condition.C3);
+                }
+                if(GUILayout.Button("C4" + (script.condition == ExperimentControlsMATBIITeam.Condition.C4 ? " (active)" : "")))
+                {
+                    script.changeCondition(ExperimentControlsMATBIITeam.Condition.C4);
+                }
+            GUILayout.EndVertical();
+        GUILayout.EndHorizontal();
+
+        if(GUILayout.Button("Trial / One batch"))
+        {
+            if (script.scenario != ExperimentControlsMATBIITeam.ScenarioType.Trial)
+            {
+                script.scenario = ExperimentControlsMATBIITeam.ScenarioType.Trial;
+            }
+            else
+            {
+                script.scenario = ExperimentControlsMATBIITeam.ScenarioType.OneBatch;
+            }
+        }
+
+        GUILayout.BeginHorizontal();
         if(GUILayout.Button("Start"))
         {
             script.StartTrial();
@@ -466,17 +629,6 @@ public class ExperimentControlsMATBIITeamEditor : Editor
             }
         }
         GUILayout.EndHorizontal();
-        if(GUILayout.Button("Trial / One batch"))
-        {
-            if (script.scenario != ExperimentControlsMATBIITeam.ScenarioType.Trial)
-            {
-                script.scenario = ExperimentControlsMATBIITeam.ScenarioType.Trial;
-            }
-            else
-            {
-                script.scenario = ExperimentControlsMATBIITeam.ScenarioType.OneBatch;
-            }
-        }
 
         DrawDefaultInspector();
     }

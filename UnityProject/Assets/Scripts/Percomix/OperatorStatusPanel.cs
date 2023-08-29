@@ -19,7 +19,8 @@ public class OperatorStatusPanel : MonoBehaviour
             if (child.tag == "Literal") child.gameObject.SetActive(b);
         }
 
-        GetComponentInChildren<TaskHistory>(true).gameObject.SetActive((Symbolic || Literal));        GetComponentInChildren<TaskQueueDisplay>(true).gameObject.SetActive((Symbolic || Literal));
+        //GetComponentInChildren<TaskHistory>(true).gameObject.SetActive((Symbolic || Literal));
+        GetComponentInChildren<TaskQueueDisplay>(true).gameObject.SetActive((Symbolic || Literal));
     }
 
     public void ToggleSymbolic() { ShowSymbolic(!Symbolic); }
@@ -32,7 +33,8 @@ public class OperatorStatusPanel : MonoBehaviour
             if (child.tag == "Symbolic") child.gameObject.SetActive(b);
         }
 
-        GetComponentInChildren<TaskHistory>(true).gameObject.SetActive((Symbolic || Literal));        GetComponentInChildren<TaskQueueDisplay>(true).gameObject.SetActive((Symbolic || Literal));
+        //GetComponentInChildren<TaskHistory>(true).gameObject.SetActive((Symbolic || Literal));
+        GetComponentInChildren<TaskQueueDisplay>(true).gameObject.SetActive((Symbolic || Literal));
     }
 
     public void ToggleStress() { ShowStress(!stress); }

@@ -1,0 +1,218 @@
+Time (s),Event type,Data
+0.008,Task Created,10
+4.877,Task Assigned,Op2: SYSMON
+6.455,Task Assigned,Op3: TRACK
+7.257,Task Assigned,Op4: TRACK
+8.223,Task Assigned,Op5: COMM
+12.881,Task Assigned,Op3: RESMAN
+15.014,Task Created,5
+15.098,Task Assigned,Op0: RESMAN
+18.280,Task Assigned,Op1: COMM
+22.090,Task Assigned,Op4: SYSMON
+24.816,Task Assigned,Op2: RESMAN
+29.412,Task Assigned,Op5: RESMAN
+30.018,Task Created,5
+36.162,Task Assigned,Op1: COMM
+39.089,Task Assigned,Op0: RESMAN
+43.237,Task Assigned,Op5: RESMAN
+45.425,Task Assigned,Op4: SYSMON
+49.544,Task Assigned,Op2: SYSMON
+55.708,Task Assigned,Op0: TRACK
+59.755,Task Assigned,Op5: RESMAN
+60.017,Task Created,20
+64.431,Task Assigned,Op2: SYSMON
+66.982,Task Assigned,Op4: COMM
+71.435,Task Assigned,Op1: RESMAN
+75.101,Task Assigned,Op2: SYSMON
+77.869,Task Assigned,Op3: COMM
+82.079,Task Assigned,Op5: TRACK
+84.518,Task Assigned,Op4: RESMAN
+87.235,Task Assigned,Op2: SYSMON
+90.022,Task Created,10
+90.452,Task Assigned,Op1: COMM
+93.121,Task Assigned,Op0: COMM
+95.252,Task Assigned,Op3: TRACK
+100.664,Task Assigned,Op5: RESMAN
+103.893,Task Assigned,Op4: COMM
+105.515,Task Assigned,Op2: SYSMON
+108.340,Task Missed,COMM
+108.712,Task Assigned,Op1: RESMAN
+116.449,Task Assigned,Op4: RESMAN
+118.190,Task Assigned,Op2: COMM
+120.003,Task Created,10
+121.214,Task Missed,RESMAN
+122.007,Task Assigned,Op1: COMM
+123.374,Task Missed,TRACK
+126.257,Task Missed,RESMAN
+126.862,Task Assigned,Op3: RESMAN
+129.041,Task Assigned,Op5: TRACK
+131.085,Task Missed,TRACK
+133.721,Task Assigned,Op1: SYSMON
+135.618,Task Assigned,Op0: RESMAN
+138.876,Task Assigned,Op2: RESMAN
+140.923,Task Missed,SYSMON
+142.472,Task Assigned,Op3: TRACK
+144.310,Task Assigned,Op4: SYSMON
+146.628,Task Assigned,Op5: SYSMON
+149.372,Task Assigned,Op4: SYSMON
+150.002,Task Created,10
+155.589,Task Assigned,Op0: RESMAN
+156.615,Task Missed,RESMAN
+159.285,Task Assigned,Op2: COMM
+161.125,Task Assigned,Op1: COMM
+162.702,Task Assigned,Op3: RESMAN
+170.072,Task Assigned,Op5: COMM
+171.906,Task Assigned,Op4: SYSMON
+174.262,Task Assigned,Op2: COMM
+175.978,Task Missed,RESMAN
+176.863,Task Assigned,Op1: SYSMON
+176.903,Task Assigned,Op1: SYSMON
+179.082,Task Assigned,Op3: RESMAN
+180.059,Task Created,15
+184.467,Task Assigned,Op0: TRACK
+185.953,Task Missed,COMM
+186.436,Task Assigned,Op1: SYSMON
+188.390,Task Assigned,Op2: COMM
+190.407,Task Missed,SYSMON
+191.076,Task Assigned,Op4: COMM
+193.611,Task Assigned,Op5: RESMAN
+193.727,Task Missed,COMM
+198.276,Task Assigned,Op0: RESMAN
+203.158,Task Assigned,Op3: COMM
+204.858,Task Assigned,Op4: COMM
+207.481,Task Assigned,Op2: SYSMON
+210.019,Task Created,15
+213.693,Task Assigned,Op0: RESMAN
+216.451,Task Missed,COMM
+216.796,Task Assigned,Op1: COMM
+219.377,Task Assigned,Op3: SYSMON
+221.187,Task Assigned,Op4: SYSMON
+222.799,Task Assigned,Op5: SYSMON
+224.667,Task Missed,SYSMON
+240.005,Task Created,10
+242.710,Task Missed,RESMAN
+243.388,Task Missed,COMM
+243.442,Task Assigned,Op3: COMM
+243.535,Task Missed,COMM
+245.236,Task Assigned,Op2: SYSMON
+248.033,Task Assigned,Op5: RESMAN
+250.756,Task Assigned,Op1: SYSMON
+253.734,Task Assigned,Op0: COMM
+255.700,Task Missed,TRACK
+256.778,Task Assigned,Op2: SYSMON
+259.059,Task Assigned,Op3: COMM
+263.501,Task Assigned,Op4: SYSMON
+265.502,Task Assigned,Op5: COMM
+267.330,Task Assigned,Op4: COMM
+270.004,Task Created,15
+270.286,Task Assigned,Op1: SYSMON
+271.342,Task Missed,TRACK
+271.514,Task Missed,COMM
+272.149,Task Missed,RESMAN
+272.222,Task Missed,COMM
+272.246,Task Missed,SYSMON
+272.638,Task Missed,COMM
+272.878,Task Missed,SYSMON
+274.675,Task Assigned,Op2: TRACK
+276.784,Task Assigned,Op3: RESMAN
+277.152,Task Missed,SYSMON
+277.943,Task Missed,COMM
+280.160,Task Assigned,Op5: COMM
+283.397,Task Assigned,Op0: TRACK
+286.604,Task Assigned,Op1: RESMAN
+288.539,Task Assigned,Op2: COMM
+291.569,Task Assigned,Op4: SYSMON
+291.632,Task Missed,COMM
+293.164,Task Assigned,Op3: COMM
+297.231,Task Assigned,Op5: SYSMON
+298.726,Task Assigned,Op4: COMM
+300.012,Task Created,7
+300.227,Task Assigned,Op4: COMM
+304.264,Task Assigned,Op0: SYSMON
+310.064,Task Assigned,Op0: SYSMON
+312.031,Task Missed,RESMAN
+314.158,Task Assigned,Op1: COMM
+317.271,Task Assigned,Op2: COMM
+319.407,Task Assigned,Op3: COMM
+322.688,Task Assigned,Op3: SYSMON
+324.676,Task Assigned,Op1: RESMAN
+327.901,Task Assigned,Op4: COMM
+330.011,Task Created,7
+330.187,Task Assigned,Op5: RESMAN
+331.264,Task Missed,TRACK
+331.905,Task Missed,TRACK
+333.133,Task Assigned,Op2: COMM
+334.324,Task Missed,TRACK
+334.694,Task Missed,TRACK
+336.776,Task Assigned,Op3: RESMAN
+336.948,Task Missed,TRACK
+343.299,Task Assigned,Op0: COMM
+347.551,Task Assigned,Op4: TRACK
+349.531,Task Assigned,Op5: RESMAN
+351.357,Task Assigned,Op2: RESMAN
+356.949,Task Assigned,Op1: COMM
+358.989,Task Missed,TRACK
+360.015,Task Created,7
+360.311,Task Missed,TRACK
+361.698,Task Missed,RESMAN
+364.814,Task Assigned,Op0: TRACK
+367.666,Task Assigned,Op1: TRACK
+373.298,Task Assigned,Op3: COMM
+375.148,Task Assigned,Op5: RESMAN
+379.052,Task Assigned,Op2: SYSMON
+383.730,Task Assigned,Op0: SYSMON
+387.158,Task Assigned,Op3: SYSMON
+390.000,Task Created,7
+390.781,Task Assigned,Op4: RESMAN
+394.897,Task Assigned,Op1: SYSMON
+397.052,Task Assigned,Op2: SYSMON
+399.440,Task Assigned,Op3: COMM
+400.699,Task Assigned,Op4: SYSMON
+402.572,Task Assigned,Op5: COMM
+405.124,Task Assigned,Op2: RESMAN
+411.261,Task Missed,TRACK
+412.331,Task Assigned,Op1: COMM
+414.840,Task Assigned,Op0: TRACK
+416.374,Task Missed,RESMAN
+417.469,Task Assigned,Op3: SYSMON
+419.700,Task Assigned,Op4: RESMAN
+420.022,Task Created,7
+422.096,Task Assigned,Op5: TRACK
+428.055,Task Assigned,Op1: COMM
+432.020,Task Assigned,Op2: RESMAN
+438.004,Task Assigned,Op5: TRACK
+440.120,Task Assigned,Op3: TRACK
+442.584,Task Assigned,Op0: RESMAN
+449.405,Task Assigned,Op1: TRACK
+451.126,Task Assigned,Op3: SYSMON
+452.870,Task Assigned,Op4: TRACK
+456.510,Task Assigned,Op2: SYSMON
+460.242,Task Assigned,Op0: TRACK
+468.536,Task Assigned,Op5: SYSMON
+476.326,Task Assigned,Op1: RESMAN
+479.375,Task Assigned,Op2: SYSMON
+487.339,Task Assigned,Op3: COMM
+490.144,Task Assigned,Op4: RESMAN
+491.762,Task Assigned,Op5: TRACK
+494.646,Task Assigned,Op0: RESMAN
+496.640,Task Assigned,Op3: TRACK
+498.929,Task Assigned,Op2: TRACK
+500.739,Task Assigned,Op1: RESMAN
+507.979,Task Assigned,Op0: TRACK
+512.776,Task Assigned,Op4: RESMAN
+514.389,Task Assigned,Op5: TRACK
+522.043,Task Assigned,Op2: RESMAN
+525.021,Task Assigned,Op3: TRACK
+528.755,Task Assigned,Op1: TRACK
+531.014,Task Assigned,Op0: TRACK
+532.961,Task Assigned,Op4: TRACK
+535.121,Task Assigned,Op5: TRACK
+540.490,Task Assigned,Op2: RESMAN
+550.315,Task Assigned,Op0: RESMAN
+553.464,Task Missed,RESMAN
+555.379,Task Assigned,Op3: RESMAN
+557.068,Task Assigned,Op1: TRACK
+559.127,Task Assigned,Op4: TRACK
+565.421,Task Assigned,Op2: TRACK
+569.540,Task Assigned,Op5: RESMAN
+End of Trial

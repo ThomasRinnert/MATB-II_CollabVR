@@ -23,11 +23,11 @@ public class TaskArtifact : MonoBehaviour
     {
         if(hand.handType == Valve.VR.SteamVR_Input_Sources.LeftHand)
         {
-            ExperimentControlsMATBIITeam.Instance.setLeftHand(b);
+            ExperimentControlsMATBIITeam.Instance.setLeftHand(b, task);
         }
         if(hand.handType == Valve.VR.SteamVR_Input_Sources.RightHand)
         {
-            ExperimentControlsMATBIITeam.Instance.setRightHand(b);
+            ExperimentControlsMATBIITeam.Instance.setRightHand(b, task);
         }
     }
 }

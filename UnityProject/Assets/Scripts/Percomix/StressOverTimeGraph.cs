@@ -11,7 +11,7 @@ public class StressOverTimeGraph : MonoBehaviour
     private Image MHThresholdBar = null;
     private Image LMThresholdBar = null;
 
-    public List<Color> colors = new List<Color>(3){Color.red, Color.yellow, Color.green};
+    public List<Color> colors = new List<Color>(5){Color.red, /*orange:*/ new Color(1.0f, 0.64f, 0.0f), Color.yellow, Color.green, Color.blue};
 
     private Color color = Color.gray;
     private int count = 0;
@@ -33,6 +33,7 @@ public class StressOverTimeGraph : MonoBehaviour
 
     void Update()
     {
+        if (op.control == null) return;
         if (!op.control.isRunning()) return;
         if(Camera.main.gameObject.GetComponent<GraphManager>() == null)
         {
@@ -54,6 +55,7 @@ public class StressOverTimeGraph : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (op.control == null) return;
         if (!op.control.isRunning()) return;
         count++;
         if(GraphManager.Graph != null && count > 10) // aproximatively every .21s
@@ -61,9 +63,9 @@ public class StressOverTimeGraph : MonoBehaviour
             count = 0;
             graphID = "Stress_Over_Time_" + op.ID;
 
-            if(op.stress_MHThreshold < op.stress && color != colors[0]) color = colors[0];
-            if(op.stress_LMThreshold < op.stress && op.stress < op.stress_MHThreshold && color != colors[1]) color = colors[1];
-            if(op.stress < op.stress_LMThreshold && color != colors[2]) color = colors[2];
+            if(op.stress_MHThreshold < op.stress && color != colors[1]) color = colors[1];
+            if(op.stress_LMThreshold < op.stress && op.stress < op.stress_MHThreshold && color != colors[2]) color = colors[2];
+            if(op.stress < op.stress_LMThreshold && color != colors[4]) color = colors[4];
 
             GraphManager.Graph.Plot(graphID, op.stress, color, new GraphManager.Matrix4x4Wrapper(transform.position, transform.rotation, transform.localScale));
             

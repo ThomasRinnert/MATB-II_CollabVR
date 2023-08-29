@@ -424,18 +424,18 @@ public class ObjectBuilderEditor : Editor
         }
 
         //Left / Right division
-        for (int p = 0; p < PhotonNetwork.PlayerList.Length; p++)
+        for (int p = 0; p < GameManager.Instance.players.Count; p++)
         {
-            if (PhotonNetwork.PlayerList[p].NickName.Contains("XP")) continue;
+            if (GameManager.Instance.players[p].NickName.Contains("XP")) continue;
 
             GUILayout.BeginHorizontal();
-            if(GUILayout.Button("Give left battery to " + PhotonNetwork.PlayerList[p].NickName))
+            if(GUILayout.Button("Give left battery to " + GameManager.Instance.players[p].NickName))
             {
-                script.setLeftPlayer(PhotonNetwork.PlayerList[p].NickName);
+                script.setLeftPlayer(GameManager.Instance.players[p].NickName);
             }
-            if(GUILayout.Button("Give right battery to " + PhotonNetwork.PlayerList[p].NickName))
+            if(GUILayout.Button("Give right battery to " + GameManager.Instance.players[p].NickName))
             {
-                script.setRightPlayer(PhotonNetwork.PlayerList[p].NickName);
+                script.setRightPlayer(GameManager.Instance.players[p].NickName);
             }
             GUILayout.EndHorizontal();
         }

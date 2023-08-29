@@ -54,6 +54,11 @@ public class Replayer : MonoBehaviour
     public delegate void OnReplayEnded(MATBIISystem.MATBII_TASK task);
     OnReplayEnded onReplayEnded;
 
+    public static float SYSMON_duration = 7.0f;
+    public static float COMM_duration = 7.0f;
+    public static float TRACK_duration = 13.0f;
+    public static float RESMAN_duration = 13.0f;
+
     void Start()
     {
         if (op == null) op = GetComponent<Operator>();
@@ -91,6 +96,7 @@ public class Replayer : MonoBehaviour
         source = _source;
         TASK = _TASK;
         ID = _ID;
+        duration = _TASK.duration();
         onReplayEnded += _callback;
 
         Load();
@@ -222,6 +228,7 @@ public class Replayer : MonoBehaviour
         startTime = System.DateTime.UtcNow;
         elapsedTime = System.DateTime.UtcNow - startTime;
         
+        // Interpolation from previous pose to initial replay pose
         while(state == ReplayState.Playing)
         {
             r = (float)(elapsedTime.TotalSeconds) / interpolationTime;
@@ -295,6 +302,19 @@ public class Replayer : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f);
         }
         Stop();
+    }
+}
+
+public static class MATBII_TASKExtension
+{
+    public static float duration(this MATBIISystem.MATBII_TASK task)
+    {
+        float duration = 0.0f;
+        if (task == MATBIISystem.MATBII_TASK.COMM) duration = Replayer.COMM_duration;
+        else if (task == MATBIISystem.MATBII_TASK.TRACK) duration = Replayer.TRACK_duration;
+        else if (task == MATBIISystem.MATBII_TASK.RESMAN) duration = Replayer.RESMAN_duration;
+        else if (task == MATBIISystem.MATBII_TASK.SYSMON) duration = Replayer.SYSMON_duration;
+        return duration;
     }
 }
 

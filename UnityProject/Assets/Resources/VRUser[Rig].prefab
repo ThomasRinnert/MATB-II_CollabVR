@@ -1338,8 +1338,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce171ff119bb284fbff352baadc3f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideName: 
   cameraTransform: {fileID: 3486175733111313913}
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 3470122804907965859}
   isVR: 0
   workload_cog: 0
   workload_phys: 0

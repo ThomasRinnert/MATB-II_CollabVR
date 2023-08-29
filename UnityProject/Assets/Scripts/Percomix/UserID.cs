@@ -17,7 +17,7 @@ public class UserID : MonoBehaviourPun
     {
         UserBoard board = GetComponentsInParent<UserBoard>(true)[0];
         if (board == null) return;
-        if (board.player == null) return;
-        textID.text = board.player.NickName;
+        if (board.player_manager == null) return;
+        textID.text = board.player_manager.NickName;
     }
 }

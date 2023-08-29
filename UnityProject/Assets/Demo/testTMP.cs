@@ -6,7 +6,6 @@ using UnityEngine;
 public class testTMP : MonoBehaviour
 {
     [SerializeField] GameObject obj;
-    GameObject HeadYaw; float w = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -17,34 +16,19 @@ public class testTMP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(HeadYaw != null)
-        {
-            w += Time.deltaTime;
-            HeadYaw.transform.rotation = Quaternion.Euler(0,Mathf.Sin(w)*45,0);
-        }
-        else if (w != 0.0f)
-        {
-            w = 0.0f;
-        }
+
     }
 
-    public void Spawn()
+    public void Function1()
     {
-        Instantiate(obj, new Vector3(Random.Range(-0.2f, 0.2f),2,Random.Range(-0.2f, 0.2f)), Quaternion.identity);
+        Renderer r = GetComponent<Renderer>();
+        r.material.SetColor("_EmissionColor", Color.green);
     }
     
-    public void SayNoToDrugs()
+    public void Function2()
     {
-        if (HeadYaw == null)
-        {
-            HeadYaw = GameObject.Find("HeadYaw");
-        }
-        else
-        {
-            HeadYaw.transform.rotation = Quaternion.identity;
-            w = 0.0f;
-            HeadYaw = null;
-        }
+        Renderer r = GetComponent<Renderer>();
+        r.material.SetColor("_EmissionColor", Color.red);
     }
 }
 
@@ -56,14 +40,14 @@ public class testTMPEditor : Editor
     {
         testTMP script = (testTMP)target;
 
-        if(GUILayout.Button("Spawn"))
+        if(GUILayout.Button("Function1"))
         {
-            script.Spawn();
+            script.Function1();
         }
 
-        if(GUILayout.Button("SayNoToDrugs"))
+        if(GUILayout.Button("Function2"))
         {
-            script.SayNoToDrugs();
+            script.Function2();
         }
 
         DrawDefaultInspector();
